@@ -1,0 +1,42 @@
+<form>
+
+<p>add <input type="text" ng-model="city.name">
+		<input type="button" value="add" ng-click="submit(city)">
+</p>
+<p>find <input type="text" ng-model="serch"></p>
+
+<table>
+
+<tr>
+	<th>No</th>
+	<th ng-click="sort('id')">ID</th>
+    <th ng-click="sort('name')">city</th>
+</tr>
+
+  <tr ng-repeat="city in cities | orderBy: order | filter: serch " >
+  	<td>{{ $index + 1 }}</td>
+  	<td>{{ city.id }}</td>
+    <td>{{ city.name | uppercase }}</td>
+    <td>
+		<div>
+			<input type="button" value="Edit" ng-click="onActionEdit(city)"/>
+			<input type="button" value="Delete" ng-click="deleteItem(city)"/>
+		</div>
+	</td>
+  </tr>
+</table>
+    <!--<style>-->
+    <!--table, th , td {-->
+    <!--border: 1px solid grey;-->
+    <!--border-collapse: collapse;-->
+    <!--padding: 5px;-->
+    <!--}-->
+    <!--table tr:nth-child(odd) {-->
+    <!--background-color: #f1f1f1;-->
+    <!--}-->
+    <!--table tr:nth-child(even) {-->
+    <!--background-color: #ffffff;-->
+    <!--}-->
+    <!--</style>-->
+
+</form>

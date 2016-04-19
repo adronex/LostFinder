@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+
+<table>
+<thead>
+<tr>
+	<td>No</td>
+	<td>ID</td>
+    <td>first name</td>
+    <td>last name</td>
+    <td>city</td>
+  </tr>
+</thead>
+  <tr ng-repeat="a in accounts | orderBy: 'person.city.name' ">
+  	<td>{{ $index + 1 }}</td>
+  	<td>{{ a.id }}</td>
+    <td>{{ a.person.first_name }}</td>
+    <td>{{ a.person.last_name  }}</td>
+    <td>{{ a.person.city.name | uppercase }}</td>
+  </tr>
+</table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+.idea
+target
+*.iml
+
+node_modules
+bower-components
+/sonar-project.properties
