@@ -18,10 +18,5 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         .when('/cities', {
             templateUrl: '../layout/cities.html',
             controller: 'citiesController'
-        })
-        .otherwise({
-            redirectTo: '/phones'
-
         });
-
 }]);
