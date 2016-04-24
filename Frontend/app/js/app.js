@@ -3,7 +3,8 @@
  */
 
 'use strict';
-var app = angular.module('lostfinder', ['ngRoute', 'lostfinder.services', 'lostfinder.directives']);
+var app = angular.module('lostfinder', ['ngRoute', 'lostfinder.services', 'lostfinder.directives',
+                                        'accountsController', 'citiesController']);
 
 var services = angular.module('ngRoute.services', []);
 var directives = angular.module('ngRoute.directives', []);
@@ -18,5 +19,6 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         .when('/cities', {
             templateUrl: '../layout/cities.html',
             controller: 'citiesController'
-        });
+        })
+        .otherwise('/');
 }]);
