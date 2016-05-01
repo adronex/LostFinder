@@ -11,9 +11,10 @@ import java.util.Set;
 @Entity
 @Table(name = "post")
 public class Post extends IdEntity {
+
     //todo: ??
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "posts")
-    private Set<Account> accounts;
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "posts")
+//    private Set<Account> accounts;
 
     @ManyToMany
     @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),

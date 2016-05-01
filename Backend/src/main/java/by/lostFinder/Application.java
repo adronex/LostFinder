@@ -25,9 +25,6 @@ public class Application {
     public SimpleService<Account> accountService(){return new SimpleServiceImpl<Account>() {}; }
 
     @Bean
-    public NamedService<City> cityService(){return new NamedServiceImpl<City>() {}; }
-
-    @Bean
     public NamedService<Contact> contactService(){return new NamedServiceImpl<Contact>() {}; }
 
     @Bean

@@ -26,14 +26,13 @@ DROP TABLE IF EXISTS `account`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `account` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `LOGIN` varchar(20) NOT NULL,
-  `PASSWORD` varchar(45) NOT NULL,
-  `EMAIL` varchar(45) NOT NULL,
+  `LOGIN` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `PASSWORD` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `EMAIL` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `LOGIN_UNIQUE` (`LOGIN`),
-  UNIQUE KEY `EMAIL_UNIQUE` (`EMAIL`),
-  CONSTRAINT `FK_ACCOUNT_PERSON` FOREIGN KEY (`ID`) REFERENCES `person` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `EMAIL_UNIQUE` (`EMAIL`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,32 +41,36 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (1,'admin','123456','shalaleyla@lol.com'),(2,'user','12345678','sosisya@sos.com'),(4,'user2','123','asdf@asdf.asdf');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `city`
+-- Table structure for table `account_post`
 --
 
-DROP TABLE IF EXISTS `city`;
+DROP TABLE IF EXISTS `account_post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `city` (
+CREATE TABLE `account_post` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(45) NOT NULL,
+  `ID_ACCOUNT` int(11) NOT NULL,
+  `ID_POST` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `NAME_UNIQUE` (`NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `ID_POST_UNIQUE` (`ID_POST`),
+  KEY `FK_ACCOUNTPOST_ACCOUNT_idx` (`ID_ACCOUNT`),
+  CONSTRAINT `FK_ACCOUNTPOST_ACCOUNT` FOREIGN KEY (`ID_ACCOUNT`) REFERENCES `account` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ACCOUNTPOST_POST` FOREIGN KEY (`ID_POST`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `city`
+-- Dumping data for table `account_post`
 --
 
-LOCK TABLES `city` WRITE;
-/*!40000 ALTER TABLE `city` DISABLE KEYS */;
-INSERT INTO `city` VALUES (3,'Pindostaniya'),(1,'Russia'),(2,'USSR');
-/*!40000 ALTER TABLE `city` ENABLE KEYS */;
+LOCK TABLES `account_post` WRITE;
+/*!40000 ALTER TABLE `account_post` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -81,13 +84,13 @@ CREATE TABLE `contact` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ID_CONTACT_TYPE` int(11) NOT NULL,
   `ID_PERSON` int(11) NOT NULL,
-  `NAME` varchar(45) NOT NULL,
+  `NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_CONTACT_PERSON_idx` (`ID_PERSON`),
   KEY `FK_CONTACT_CONTACTTYPE_idx` (`ID_CONTACT_TYPE`),
   CONSTRAINT `FK_CONTACT_CONTACTTYPE` FOREIGN KEY (`ID_CONTACT_TYPE`) REFERENCES `contact_type` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CONTACT_PERSON` FOREIGN KEY (`ID_PERSON`) REFERENCES `person` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +99,7 @@ CREATE TABLE `contact` (
 
 LOCK TABLES `contact` WRITE;
 /*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (1,2,1,'qwe');
 /*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,10 +112,10 @@ DROP TABLE IF EXISTS `contact_type`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contact_type` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(45) NOT NULL,
+  `NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NAME_UNIQUE` (`NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +124,33 @@ CREATE TABLE `contact_type` (
 
 LOCK TABLES `contact_type` WRITE;
 /*!40000 ALTER TABLE `contact_type` DISABLE KEYS */;
+INSERT INTO `contact_type` VALUES (2,'facebook'),(4,'home'),(5,'mail'),(3,'mobile'),(1,'vkontakte');
 /*!40000 ALTER TABLE `contact_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hashtag`
+--
+
+DROP TABLE IF EXISTS `hashtag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hashtag` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `NAME_UNIQUE` (`NAME`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hashtag`
+--
+
+LOCK TABLES `hashtag` WRITE;
+/*!40000 ALTER TABLE `hashtag` DISABLE KEYS */;
+INSERT INTO `hashtag` VALUES (1,'голова'),(3,'кот'),(5,'кошелёк'),(4,'собака'),(2,'трусы');
+/*!40000 ALTER TABLE `hashtag` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -132,13 +162,12 @@ DROP TABLE IF EXISTS `person`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `person` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `FIRST_NAME` varchar(45) DEFAULT NULL,
-  `LAST_NAME` varchar(45) DEFAULT NULL,
-  `ID_CITY` int(11) DEFAULT NULL,
+  `FIRST_NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `LAST_NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `CITY` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_PERSON_CITY_idx` (`ID_CITY`),
-  CONSTRAINT `FK_PERSON_CITY` FOREIGN KEY (`ID_CITY`) REFERENCES `city` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_PERSON_ACCOUNT` FOREIGN KEY (`ID`) REFERENCES `account` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +176,89 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` VALUES (1,'shala','leyla',NULL),(2,'pisya','sosisya',NULL),(4,'asdf','zxcv',NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post`
+--
+
+DROP TABLE IF EXISTS `post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_POST_TYPE` int(11) NOT NULL,
+  `DESCRIPTION` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_POST_POSTTYPE_idx` (`ID_POST_TYPE`),
+  CONSTRAINT `FK_POST_POSTTYPE` FOREIGN KEY (`ID_POST_TYPE`) REFERENCES `post_type` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post`
+--
+
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,1,'find some wallet');
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post_hashtag`
+--
+
+DROP TABLE IF EXISTS `post_hashtag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post_hashtag` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_POST` int(11) NOT NULL,
+  `ID_HASHTAG` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_POSTHASHTAG_HASHTAG_idx` (`ID_HASHTAG`),
+  KEY `FK_POSTHASHTAG_POST_idx` (`ID_POST`),
+  CONSTRAINT `FK_POSTHASHTAG_HASHTAG` FOREIGN KEY (`ID_HASHTAG`) REFERENCES `hashtag` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_POSTHASHTAG_POST` FOREIGN KEY (`ID_POST`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_hashtag`
+--
+
+LOCK TABLES `post_hashtag` WRITE;
+/*!40000 ALTER TABLE `post_hashtag` DISABLE KEYS */;
+INSERT INTO `post_hashtag` VALUES (1,1,1);
+/*!40000 ALTER TABLE `post_hashtag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post_type`
+--
+
+DROP TABLE IF EXISTS `post_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post_type` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `NAME_UNIQUE` (`NAME`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_type`
+--
+
+LOCK TABLES `post_type` WRITE;
+/*!40000 ALTER TABLE `post_type` DISABLE KEYS */;
+INSERT INTO `post_type` VALUES (1,'Нашел'),(2,'Потерял'),(3,'Украли');
+/*!40000 ALTER TABLE `post_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -159,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-27  0:30:30
+-- Dump completed on 2016-05-01 17:05:13

@@ -15,12 +15,11 @@ public class Person extends IdEntity {
 //    @OneToOne(mappedBy = "person", fetch = FetchType.EAGER)
 //    private Account account;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_city")
-    private City city;
-
     @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     private Set<Contact> contacts;
+
+    @Column(name = "city")
+    private String city;
 
     @Column(name = "first_name")
     private String first_name;
@@ -52,11 +51,11 @@ public class Person extends IdEntity {
         this.last_name = last_name;
     }
 
-    public City getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
