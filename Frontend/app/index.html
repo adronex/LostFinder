@@ -2,16 +2,55 @@
 <html lang="en" ng-app="lostfinder">
 <head>
     <meta charset="UTF-8">
-    <title>LostFinder</title>
+    <title>Poshuk</title>
+
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+    <script src="properties/globalProperties.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/citiesController.js"></script>
-    <script src="js/accountsController.js"></script>
+    <script src="js/controllers/dictionaryController.js"></script>
+    <script src="js/controllers/accountsController.js"></script>
+
+    <script src="js/services/dictionaryService.js"></script>
+
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-<header><p>lost finder</p></header>
-<div ng-view id="centerContent" class="pageCentered"></div>
+
+
+<nav class="w3-sidenav w3-light-grey w3-card-4 w3-animate-left" style="display:none">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-large w3-dark-grey">Close &times;</a>
+    <a href="#/" class="w3-padding">Home</a>
+    <a href="#/accounts" class="w3-padding">Accounts list</a>
+    <a href="#/dictionaries" class="w3-padding">Dictionaries</a>
+</nav>
+
+<div id="main">
+    <header class="w3-container w3-teal">
+        <span class="w3-opennav w3-xlarge" onclick="w3_open()">&#9776;</span>
+        <span>Poshuk</span>
+    </header>
+
+    <div ng-view class="w3-container"></div>
+</div>
+
+<script>
+    function w3_open() {
+        document.getElementById("main").style.marginLeft = "15%";
+        document.getElementsByClassName("w3-sidenav")[0].style.width = "15%";
+        document.getElementsByClassName("w3-sidenav")[0].style.display = "block";
+        document.getElementsByClassName("w3-opennav")[0].style.display = 'none';
+    }
+    function w3_close() {
+        document.getElementById("main").style.marginLeft = "0%";
+        document.getElementsByClassName("w3-sidenav")[0].style.display = "none";
+        document.getElementsByClassName("w3-opennav")[0].style.display = "inline-block";
+    }
+</script>
+
 </body>
 </html>

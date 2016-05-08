@@ -1,0 +1,27 @@
+header {
+    font-size: 20pt;
+}
+
+.hideItem {
+    transition: all linear 0.2s;
+    height: auto;
+}
+
+.ng-hide {
+    opacity: 0;
+}
+
+table {
+    width: auto;
+}
+
+#regForm {
+    width: 50%;
+    border-collapse: separate;
+    border: none;
+    border-spacing: 10px 3px;
+}
+
+form {
+    display: block;
+}

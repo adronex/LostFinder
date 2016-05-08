@@ -1,44 +1,95 @@
-<!--<!DOCTYPE html>
-<html>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<div>
+    <br>
+    <button class="w3-btn w3-green w3-ripple" ng-click="newAccount()">&#9998; Create New User</button>
+    <form name="accountForm" ng-hide="hideForm" class="hideItem">
+        <div ng-switch="editMode">
+            <h3 ng-switch-when="newAcc">Create New User:</h3>
+            <h3 ng-switch-when="editAcc">Edit Account:</h3>
+        </div>
+        <table id="regForm">
+            <tr>
+                <td>
+                    <label>First Name:</label>
+                    <input class="w3-input w3-border" type="text" ng-model="editAcc.person.first_name"
+                           placeholder="First Name">
+                </td>
+                <td>
+                    <label>Last Name:</label>
+                    <input class="w3-input w3-border" type="text" ng-model="editAcc.person.last_name"
+                           placeholder="Last Name">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>City:</label>
+                    <input class="w3-input w3-border" type="text" ng-model="editAcc.person.city"
+                           placeholder="City">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Login:</label>
+                    <input class="w3-input w3-border" type="login" ng-model="editAcc.login" placeholder="Login">
+                </td>
+                <td>
+                    <label>Email:</label>
+                    <input name="email" class="w3-input w3-border" type="email" ng-model="editAcc.email"
+                           placeholder="Email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Password:</label>
+                    <input class="w3-input w3-border" type="password" ng-model="editAcc.password"
+                           placeholder="Password">
+                </td>
+                <td>
+                    <label>Repeat:</label>
+                    <input class="w3-input w3-border" type="password" ng-model="confirmPass"
+                           placeholder="Repeat Password">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <button class="w3-btn w3-green w3-ripple"
+                ng-disabled="error || incomplete || (accountForm.email.$dirty && accountForm.email.$invalid)"
+                ng-click="onSaveChanges()">&#10004;
+            Save Changes
+        </button>
+        <button class="w3-btn w3-dark-grey w3-ripple" ng-click="onEditCancel()">Cancel</button>
+    </form>
 
-<style>
-table, th , td {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
-}
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-  background-color: #ffffff;
-}
-</style>
-
-<body>
-
-<div ng-app="myApp" ng-controller="customersCtrl"> -->
-
-<form>
-    <div>
-<table>
-<thead>
-<tr>
-	<td>No</td>
-	<td>ID</td>
-    <td>first name</td>
-    <td>last name</td>
-    <td>city</td>
-  </tr>
-</thead>
-  <tr ng-repeat="a in accounts | orderBy: 'person.city.name' ">
-  	<td>{{ $index + 1 }}</td>
-  	<td>{{ a.id }}</td>
-    <td>{{ a.person.first_name }}</td>
-    <td>{{ a.person.last_name  }}</td>
-    <td>{{ a.person.city.name | uppercase }}</td>
-  </tr>
-</table>
-    </div>
-</form>
+    <form ng-init="loadAccounts()">
+        <h3>Accounts List</h3>
+        <table class="w3-table w3-bordered w3-striped w3-border">
+            <thead>
+            <tr class="w3-teal">
+                <th>No</th>
+                <th>Id</th>
+                <th>Login</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>City</th>
+                <th>Email</th>
+                <th>Posts</th>
+                <th>Control</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="account in accounts">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ account.id }}</td>
+                <td>{{ account.login }}</td>
+                <td>{{ account.person.first_name }}</td>
+                <td>{{ account.person.last_name }}</td>
+                <td>{{ account.person.city }}</td>
+                <td>{{ account.email }}</td>
+                <td>{{ (account.posts).length }}</td>
+                <td>
+                    <button class="w3-btn w3-blue w3-ripple" ng-click="onActionEdit(account)">&#9998; Edit</button>
+                    <button class="w3-btn w3-dark-grey w3-ripple" ng-click="onActionDelete(account)">&#10006; Delete
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
