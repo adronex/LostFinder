@@ -1,19 +1,17 @@
 package by.lostFinder.controllers;
 
 import by.lostFinder.entities.Account;
-import by.lostFinder.services.SimpleService;
+import by.lostFinder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/accounts")
-public class AccountController extends GenericController<Account, SimpleService<Account>> {
+public class AccountController extends GenericController<Account, AccountService> {
     @Autowired
-    protected AccountController(@Qualifier("accountService") SimpleService<Account> service){
+    protected AccountController(AccountService service){
         super(service);
     }
-
 }
 

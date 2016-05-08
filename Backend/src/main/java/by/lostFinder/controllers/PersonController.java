@@ -1,9 +1,8 @@
 package by.lostFinder.controllers;
 
 import by.lostFinder.entities.Person;
-import by.lostFinder.services.SimpleService;
+import by.lostFinder.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/persons")
-public class PersonController extends GenericController<Person, SimpleService<Person>> {
+public class PersonController extends GenericController<Person, PersonService> {
     @Autowired
-    protected PersonController(@Qualifier("personService")SimpleService<Person> service){
+    protected PersonController(PersonService service){
         super(service);
     }
 }

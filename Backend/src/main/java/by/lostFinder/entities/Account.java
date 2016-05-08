@@ -16,7 +16,8 @@ public class Account extends IdEntity{
     private Set<Post> posts;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
+    @JoinColumn(name = "person_id")
     private Person person;
 
     @Column(name = "login")
@@ -64,7 +65,15 @@ public class Account extends IdEntity{
         return posts;
     }
 
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
     public Person getPerson() {
         return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

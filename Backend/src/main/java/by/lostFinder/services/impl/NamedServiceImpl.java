@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
  * Created by М on 14.03.2016.
  */
 @Service
-public abstract class NamedServiceImpl<E extends NamedEntity> extends SimpleServiceImpl<E> implements NamedService<E> {
+public abstract class NamedServiceImpl<E extends NamedEntity, R extends NamedRepository<E>> extends SimpleServiceImpl<E, R> implements NamedService<E> {
 
     @Autowired
-    private NamedRepository<E> repository;
+    private R repository;
 
     @Override
     public E getByName(String name) {

@@ -32,7 +32,7 @@ CREATE TABLE `account` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `LOGIN_UNIQUE` (`LOGIN`),
   UNIQUE KEY `EMAIL_UNIQUE` (`EMAIL`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +115,7 @@ CREATE TABLE `contact_type` (
   `NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NAME_UNIQUE` (`NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +140,7 @@ CREATE TABLE `hashtag` (
   `NAME` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NAME_UNIQUE` (`NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +167,7 @@ CREATE TABLE `person` (
   `CITY` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `FK_PERSON_ACCOUNT` FOREIGN KEY (`ID`) REFERENCES `account` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +176,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'shala','leyla',NULL),(2,'pisya','sosisya',NULL),(4,'asdf','zxcv',NULL);
+INSERT INTO `person` VALUES (1,'shala','leyla','Minsk'),(2,'pisya','sosisya','Gomel'),(4,'asdf','zxcv','Brest');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-01 17:05:13
+-- Dump completed on 2016-05-08 14:34:16

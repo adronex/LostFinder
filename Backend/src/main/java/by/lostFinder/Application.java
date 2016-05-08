@@ -2,6 +2,8 @@ package by.lostFinder;
 
 
 import by.lostFinder.entities.*;
+import by.lostFinder.repositories.superRepositories.NamedRepository;
+import by.lostFinder.repositories.superRepositories.SimpleRepository;
 import by.lostFinder.services.NamedService;
 import by.lostFinder.services.SimpleService;
 import by.lostFinder.services.impl.NamedServiceImpl;
@@ -22,24 +24,24 @@ public class Application {
     }
 
     @Bean
-    public SimpleService<Account> accountService(){return new SimpleServiceImpl<Account>() {}; }
+    public SimpleService<Account> accountService(){return new SimpleServiceImpl<Account, SimpleRepository<Account>>() {}; }
 
     @Bean
-    public NamedService<Contact> contactService(){return new NamedServiceImpl<Contact>() {}; }
+    public NamedService<Contact> contactService(){return new NamedServiceImpl<Contact, NamedRepository<Contact>>() {}; }
 
     @Bean
-    public NamedService<ContactType> contactTypeService(){return new NamedServiceImpl<ContactType>() {}; }
+    public NamedService<ContactType> contactTypeService(){return new NamedServiceImpl<ContactType, NamedRepository<ContactType>>() {}; }
 
     @Bean
-    public NamedService<HashTag> hashTagService(){return new NamedServiceImpl<HashTag>() {}; }
+    public NamedService<HashTag> hashTagService(){return new NamedServiceImpl<HashTag, NamedRepository<HashTag>>() {}; }
 
     @Bean
-    public SimpleService<Person> personService(){return new SimpleServiceImpl<Person>() {}; }
+    public SimpleService<Person> personService(){return new SimpleServiceImpl<Person, SimpleRepository<Person>>() {}; }
 
     @Bean
-    public SimpleService<Post> postService(){return new SimpleServiceImpl<Post>() {}; }
+    public SimpleService<Post> postService(){return new SimpleServiceImpl<Post, SimpleRepository<Post>>() {}; }
 
     @Bean
-    public NamedService<PostType> postTypeService(){return new NamedServiceImpl<PostType>() {}; }
+    public NamedService<PostType> postTypeService(){return new NamedServiceImpl<PostType, NamedRepository<PostType>>() {}; }
 }
 

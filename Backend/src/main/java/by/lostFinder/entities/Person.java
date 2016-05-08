@@ -12,6 +12,7 @@ import java.util.Set;
 @Table(name = "person")
 public class Person extends IdEntity {
 
+//    @JsonIgnore
 //    @OneToOne(mappedBy = "person", fetch = FetchType.EAGER)
 //    private Account account;
 
@@ -66,4 +67,12 @@ public class Person extends IdEntity {
     public void setContacts(Set<Contact> contacts) {
         this.contacts = contacts;
     }
+
+//    public Account getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 }
