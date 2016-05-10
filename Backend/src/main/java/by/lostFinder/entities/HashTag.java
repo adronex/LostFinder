@@ -1,26 +1,52 @@
 package by.lostFinder.entities;
 
-import by.lostFinder.entities.superEntity.NamedEntity;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import java.util.Set;
+import javax.persistence.*;
 
 /**
  * Created by М on 08.03.2016.
  */
 @Entity
 @Table(name = "hashtag")
-public class HashTag extends NamedEntity {
+public class HashTag {
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "hashTags")
-    private Set<Post> posts;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    protected long id;
+
+    @Column(name = "name")
+    protected String name;
+
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "hashTags")
+//    private Set<Post> posts;
 
     public HashTag(String name){
-        super(name);
+        this.name = name;
     }
 
     public HashTag(){}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+//    public Set<Post> getPosts() {
+//        return posts;
+//    }
+//
+//    public void setPosts(Set<Post> posts) {
+//        this.posts = posts;
+//    }
 }

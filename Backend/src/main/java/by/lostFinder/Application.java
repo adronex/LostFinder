@@ -6,6 +6,7 @@ import by.lostFinder.repositories.superRepositories.NamedRepository;
 import by.lostFinder.repositories.superRepositories.SimpleRepository;
 import by.lostFinder.services.NamedService;
 import by.lostFinder.services.SimpleService;
+import by.lostFinder.services.impl.AccountServiceImpl;
 import by.lostFinder.services.impl.NamedServiceImpl;
 import by.lostFinder.services.impl.SimpleServiceImpl;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +25,7 @@ public class Application {
     }
 
     @Bean
-    public SimpleService<Account> accountService(){return new SimpleServiceImpl<Account, SimpleRepository<Account>>() {}; }
+    public SimpleService<Account> accountService(){return new AccountServiceImpl() {}; }
 
     @Bean
     public NamedService<Contact> contactService(){return new NamedServiceImpl<Contact, NamedRepository<Contact>>() {}; }

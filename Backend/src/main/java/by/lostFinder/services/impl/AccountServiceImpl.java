@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl extends SimpleServiceImpl<Account, AccountRepository> implements AccountService {
 
     @Override
+    public Account save(Account entity) {
+        entity.getPerson().setAccount(entity);
+        return repository.saveAndFlush(entity);
+    }
+
+    @Override
     public Account getAccountByLogin(String login) {
         return repository.findByLoginIgnoreCase(login);
     }

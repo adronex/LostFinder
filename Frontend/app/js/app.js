@@ -26,17 +26,17 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'accountsController',
             uri: '/accounts/'
         })
-        .when('/postTypes', {
+        .when('/dictionaries/postTypes', {
             templateUrl: '../layout/dictionaryTable.html',
             controller: 'dictionaryController',
             uri: '/postTypes/'
         })
-        .when('/hashTags', {
+        .when('/dictionaries/hashTags', {
             templateUrl: '../layout/dictionaryTable.html',
             controller: 'dictionaryController',
             uri: '/hashTags/'
         })
-        .when('/contactTypes', {
+        .when('/dictionaries/contactTypes', {
             templateUrl: '../layout/dictionaryTable.html',
             controller: 'dictionaryController',
             uri: '/contactTypes/'

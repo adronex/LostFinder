@@ -1,6 +1,6 @@
 package by.lostFinder.entities;
 
-import by.lostFinder.entities.superEntity.IdEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,11 +10,18 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "person")
-public class Person extends IdEntity {
+public class Person {
 
-//    @JsonIgnore
-//    @OneToOne(mappedBy = "person", fetch = FetchType.EAGER)
-//    private Account account;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "account_id")
+    protected long id;
+
+    @JsonIgnore
+    @MapsId
+    @OneToOne(mappedBy = "person")
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     private Set<Contact> contacts;
@@ -35,6 +42,14 @@ public class Person extends IdEntity {
     }
 
     public Person(){}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getFirst_name() {
         return first_name;
@@ -68,11 +83,11 @@ public class Person extends IdEntity {
         this.contacts = contacts;
     }
 
-//    public Account getAccount() {
-//        return account;
-//    }
-//
-//    public void setAccount(Account account) {
-//        this.account = account;
-//    }
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

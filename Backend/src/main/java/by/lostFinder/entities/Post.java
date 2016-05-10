@@ -1,25 +1,27 @@
 package by.lostFinder.entities;
 
-import by.lostFinder.entities.superEntity.IdEntity;
-
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by М on 08.03.2016.
  */
 @Entity
 @Table(name = "post")
-public class Post extends IdEntity {
+public class Post {
 
     //todo: ??
 //    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "posts")
 //    private Set<Account> accounts;
 
-    @ManyToMany
-    @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
-                                      inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
-    private Set<HashTag> hashTags;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    protected long id;
+
+//    @ManyToMany
+//    @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
+//                                      inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
+//    private Set<HashTag> hashTags;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_post_type")
@@ -34,13 +36,21 @@ public class Post extends IdEntity {
 
     public Post(){}
 
-    public Set<HashTag> getHashTags() {
-        return hashTags;
+    public long getId() {
+        return id;
     }
 
-    public void setHashTags(Set<HashTag> hashTags) {
-        this.hashTags = hashTags;
+    public void setId(long id) {
+        this.id = id;
     }
+
+//    public Set<HashTag> getHashTags() {
+//        return hashTags;
+//    }
+//
+//    public void setHashTags(Set<HashTag> hashTags) {
+//        this.hashTags = hashTags;
+//    }
 
     public PostType getPostType() {
         return postType;

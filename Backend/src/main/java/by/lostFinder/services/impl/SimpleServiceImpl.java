@@ -12,7 +12,7 @@ import java.util.List;
  * Created by М on 14.03.2016.
  */
 @Service
-public abstract class SimpleServiceImpl<E extends IdEntity, R extends SimpleRepository<E>> implements SimpleService<E>{
+public abstract class SimpleServiceImpl<E, R extends SimpleRepository<E>> implements SimpleService<E>{
 
     @Autowired
     protected R repository;

@@ -1,7 +1,5 @@
 package by.lostFinder.entities;
 
-import by.lostFinder.entities.superEntity.NamedEntity;
-
 import javax.persistence.*;
 
 /**
@@ -9,7 +7,15 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "contact")
-public class Contact extends NamedEntity {
+public class Contact {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    protected long id;
+
+    @Column(name = "name")
+    protected String name;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_contact_type")
@@ -20,10 +26,26 @@ public class Contact extends NamedEntity {
     private Person person;
 
     public Contact(String name){
-        super(name);
+        this.name = name;
     }
 
     public Contact(){}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public ContactType getContactType() {
         return contactType;

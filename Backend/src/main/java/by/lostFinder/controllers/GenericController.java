@@ -1,6 +1,5 @@
 package by.lostFinder.controllers;
 
-import by.lostFinder.entities.superEntity.IdEntity;
 import by.lostFinder.services.SimpleService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +16,7 @@ import java.util.List;
  * Created by М on 14.03.2016.
  */
 @MappedSuperclass
-public abstract class GenericController<E extends IdEntity, S extends SimpleService<E>> implements Filter {
+public abstract class GenericController<E, S extends SimpleService<E>> implements Filter {
 
     protected S service;
 

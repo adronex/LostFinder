@@ -1,23 +1,25 @@
 package by.lostFinder.entities;
 
-import by.lostFinder.entities.superEntity.IdEntity;
-
 import javax.persistence.*;
 import java.util.Set;
 
 
 @Entity
 @Table(name = "account")
-public class Account extends IdEntity{
+public class Account {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    protected long id;
 
     @ManyToMany
     @JoinTable(name = "ACCOUNT_POST", joinColumns = @JoinColumn(name = "ID_ACCOUNT"),
                                       inverseJoinColumns = @JoinColumn(name = "ID_POST"))
     private Set<Post> posts;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-    //@PrimaryKeyJoinColumn
-    @JoinColumn(name = "person_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "person_account_id")
     private Person person;
 
     @Column(name = "login")
@@ -36,6 +38,15 @@ public class Account extends IdEntity{
     }
 
     public Account (){}
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
