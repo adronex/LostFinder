@@ -26,20 +26,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'accountsController',
             uri: '/accounts/'
         })
-        .when('/dictionaries/postTypes', {
-            templateUrl: '../layout/dictionaryTable.html',
-            controller: 'dictionaryController',
-            uri: '/postTypes/'
-        })
         .when('/dictionaries/hashTags', {
             templateUrl: '../layout/dictionaryTable.html',
             controller: 'dictionaryController',
             uri: '/hashTags/'
-        })
-        .when('/dictionaries/contactTypes', {
-            templateUrl: '../layout/dictionaryTable.html',
-            controller: 'dictionaryController',
-            uri: '/contactTypes/'
         })
         .otherwise('/');
 }]);

@@ -10,19 +10,19 @@
             <tr>
                 <td>
                     <label>First Name:</label>
-                    <input class="w3-input w3-border" type="text" ng-model="editAcc.person.first_name"
+                    <input class="w3-input w3-border" type="text" ng-model="editAcc.accountDetail.first_name"
                            placeholder="First Name">
                 </td>
                 <td>
                     <label>Last Name:</label>
-                    <input class="w3-input w3-border" type="text" ng-model="editAcc.person.last_name"
+                    <input class="w3-input w3-border" type="text" ng-model="editAcc.accountDetail.last_name"
                            placeholder="Last Name">
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>City:</label>
-                    <input class="w3-input w3-border" type="text" ng-model="editAcc.person.city"
+                    <input class="w3-input w3-border" type="text" ng-model="editAcc.accountDetail.city"
                            placeholder="City">
                 </td>
             </tr>
@@ -79,9 +79,9 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ account.id }}</td>
                 <td>{{ account.login }}</td>
-                <td>{{ account.person.first_name }}</td>
-                <td>{{ account.person.last_name }}</td>
-                <td>{{ account.person.city }}</td>
+                <td>{{ account.accountDetail.first_name }}</td>
+                <td>{{ account.accountDetail.last_name }}</td>
+                <td>{{ account.accountDetail.city }}</td>
                 <td>{{ account.email }}</td>
                 <td>{{ (account.posts).length }}</td>
                 <td>

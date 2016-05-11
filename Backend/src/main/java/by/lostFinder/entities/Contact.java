@@ -12,18 +12,14 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    protected long id;
+    private long id;
 
     @Column(name = "name")
     protected String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_contact_type")
-    private ContactType contactType;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_person")
-    private Person person;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    private AccountDetail accountDetail;
 
     public Contact(String name){
         this.name = name;
@@ -47,11 +43,11 @@ public class Contact {
         this.id = id;
     }
 
-    public ContactType getContactType() {
-        return contactType;
+    public AccountDetail getAccountDetail() {
+        return accountDetail;
     }
 
-    public void setContactType(ContactType contactType) {
-        this.contactType = contactType;
+    public void setAccountDetail(AccountDetail accountDetail) {
+        this.accountDetail = accountDetail;
     }
 }

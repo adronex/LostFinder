@@ -1,6 +1,9 @@
 package by.lostFinder.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by М on 08.03.2016.
@@ -9,26 +12,26 @@ import javax.persistence.*;
 @Table(name = "post")
 public class Post {
 
-    //todo: ??
-//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "posts")
-//    private Set<Account> accounts;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "posts")
+    private Set<Account> accounts;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    protected long id;
+    private long id;
 
-//    @ManyToMany
-//    @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
-//                                      inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
-//    private Set<HashTag> hashTags;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_post_type")
-    private PostType postType;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany
+    @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
+                                      inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
+    private Set<HashTag> hashTags;
+
 
     public Post(String description){
         this.description = description;
@@ -44,20 +47,12 @@ public class Post {
         this.id = id;
     }
 
-//    public Set<HashTag> getHashTags() {
-//        return hashTags;
-//    }
-//
-//    public void setHashTags(Set<HashTag> hashTags) {
-//        this.hashTags = hashTags;
-//    }
-
-    public PostType getPostType() {
-        return postType;
+    public Set<HashTag> getHashTags() {
+        return hashTags;
     }
 
-    public void setPostType(PostType postType) {
-        this.postType = postType;
+    public void setHashTags(Set<HashTag> hashTags) {
+        this.hashTags = hashTags;
     }
 
     public String getDescription() {
@@ -66,5 +61,13 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
     }
 }

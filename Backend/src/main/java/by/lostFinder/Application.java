@@ -31,18 +31,12 @@ public class Application {
     public NamedService<Contact> contactService(){return new NamedServiceImpl<Contact, NamedRepository<Contact>>() {}; }
 
     @Bean
-    public NamedService<ContactType> contactTypeService(){return new NamedServiceImpl<ContactType, NamedRepository<ContactType>>() {}; }
-
-    @Bean
     public NamedService<HashTag> hashTagService(){return new NamedServiceImpl<HashTag, NamedRepository<HashTag>>() {}; }
 
     @Bean
-    public SimpleService<Person> personService(){return new SimpleServiceImpl<Person, SimpleRepository<Person>>() {}; }
+    public SimpleService<AccountDetail> accountDetailService(){return new SimpleServiceImpl<AccountDetail, SimpleRepository<AccountDetail>>() {}; }
 
     @Bean
     public SimpleService<Post> postService(){return new SimpleServiceImpl<Post, SimpleRepository<Post>>() {}; }
-
-    @Bean
-    public NamedService<PostType> postTypeService(){return new NamedServiceImpl<PostType, NamedRepository<PostType>>() {}; }
 }
 

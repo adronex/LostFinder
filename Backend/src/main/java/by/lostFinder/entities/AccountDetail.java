@@ -9,21 +9,21 @@ import java.util.Set;
  * Created by М on 07.03.2016.
  */
 @Entity
-@Table(name = "person")
-public class Person {
+@Table(name = "account_detail")
+public class AccountDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "account_id")
-    protected long id;
+    private long id;
 
     @JsonIgnore
     @MapsId
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "accountDetail")
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "accountDetail")
     private Set<Contact> contacts;
 
     @Column(name = "city")
@@ -36,12 +36,12 @@ public class Person {
     private String last_name;
 
 
-    public Person(String first_name, String last_name){
+    public AccountDetail(String first_name, String last_name){
         this.first_name = first_name;
         this.last_name = last_name;
     }
 
-    public Person(){}
+    public AccountDetail(){}
 
     public long getId() {
         return id;

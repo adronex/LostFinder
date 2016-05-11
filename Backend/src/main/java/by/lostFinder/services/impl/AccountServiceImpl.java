@@ -10,7 +10,7 @@ public class AccountServiceImpl extends SimpleServiceImpl<Account, AccountReposi
 
     @Override
     public Account save(Account entity) {
-        entity.getPerson().setAccount(entity);
+        entity.getAccountDetail().setAccount(entity);
         return repository.saveAndFlush(entity);
     }
 

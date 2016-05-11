@@ -1,7 +1,7 @@
 package by.lostFinder.controllers;
 
-import by.lostFinder.entities.ContactType;
-import by.lostFinder.services.NamedService;
+import by.lostFinder.entities.AccountDetail;
+import by.lostFinder.services.SimpleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by М on 15.03.2016.
  */
 @RestController
-@RequestMapping("/contactTypes")
-public class ContactTypeController extends GenericController<ContactType, NamedService<ContactType>> {
+@RequestMapping("/accountDetail")
+public class AccountDetailController extends GenericController<AccountDetail, SimpleService<AccountDetail>> {
     @Autowired
-    protected ContactTypeController(@Qualifier("contactTypeService") NamedService<ContactType> service){
+    protected AccountDetailController(@Qualifier("accountDetailService") SimpleService<AccountDetail> service){
         super(service);
     }
 }

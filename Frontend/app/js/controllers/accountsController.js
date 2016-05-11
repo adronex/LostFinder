@@ -15,7 +15,7 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
         login: '',
         email: '',
         password: '',
-        person: {
+        accountDetail: {
             first_name: '',
             last_name: '',
             city: ''
@@ -25,7 +25,7 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
     $scope.confirmPass = '';
 
     $scope.editMode = '';
-    $scope.error = false; // useful
+    $scope.error = false;
     $scope.incomplete = false;
     $scope.hideForm = true;
 
@@ -44,8 +44,8 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
 
     $scope.$watch('editAcc.password',function() {$scope.test();});
     $scope.$watch('confirmPass',function() {$scope.test();});
-    $scope.$watch('editAcc.person.first_name', function() {$scope.test();});
-    $scope.$watch('editAcc.person.last_name', function() {$scope.test();});
+    $scope.$watch('editAcc.accountDetail.first_name', function() {$scope.test();});
+    $scope.$watch('editAcc.accountDetail.last_name', function() {$scope.test();});
 
     //todo: simplify
     $scope.test = function() {
@@ -58,8 +58,8 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
         $scope.incomplete = false;
 
         //todo: change
-        if ($scope.editAcc && (!$scope.editAcc.person.first_name.length ||
-            !$scope.editAcc.person.last_name.length ||
+        if ($scope.editAcc && (!$scope.editAcc.accountDetail.first_name.length ||
+            !$scope.editAcc.accountDetail.last_name.length ||
             !$scope.editAcc.password.length || !$scope.confirmPass.length)) {
             $scope.incomplete = true;
         }
@@ -75,6 +75,8 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
 
     $scope.onActionDelete = function(itemForDelete) {
         dictionaryService.deleteItem($scope.uri, itemForDelete).success(function(data){
+            clearForm();
+            $scope.hideForm = true;
             $scope.loadAccounts();
         })
     };

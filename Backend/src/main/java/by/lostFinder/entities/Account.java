@@ -11,7 +11,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    protected long id;
+    private long id;
 
     @ManyToMany
     @JoinTable(name = "ACCOUNT_POST", joinColumns = @JoinColumn(name = "ID_ACCOUNT"),
@@ -19,8 +19,8 @@ public class Account {
     private Set<Post> posts;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "person_account_id")
-    private Person person;
+    @PrimaryKeyJoinColumn(name = "id")
+    private AccountDetail accountDetail;
 
     @Column(name = "login")
     private String login;
@@ -38,7 +38,6 @@ public class Account {
     }
 
     public Account (){}
-
 
     public long getId() {
         return id;
@@ -80,11 +79,11 @@ public class Account {
         this.posts = posts;
     }
 
-    public Person getPerson() {
-        return person;
+    public AccountDetail getAccountDetail() {
+        return accountDetail;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setAccountDetail(AccountDetail accountDetail) {
+        this.accountDetail = accountDetail;
     }
 }
