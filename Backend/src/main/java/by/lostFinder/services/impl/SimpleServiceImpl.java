@@ -36,4 +36,5 @@ public abstract class SimpleServiceImpl<E, R extends SimpleRepository<E>> implem
     public List<E> getAll() {
         return repository.findAll();
     }
+
 }

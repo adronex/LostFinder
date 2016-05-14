@@ -25,3 +25,33 @@ table {
 form {
     display: block;
 }
+
+#hashTagsInput {
+    border: 1px solid lightgray;
+    border-radius: 1px;
+    padding: 5px;
+}
+
+.hashTag {
+    padding: 3px;
+    margin-right: 3px;
+    background-color: lightblue;
+    font-size: 11pt;
+    border-radius: 3px;
+}
+
+#tagSpan {
+    margin: 3px;
+    padding: 3px;
+}
+
+.deleteTagBtn{
+    background-color: grey;
+    padding: 2px;
+    border-radius: 10px;
+}
+
+.deleteTagBtn:hover{
+    background-color: lightcoral;
+    cursor: pointer;
+}

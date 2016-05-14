@@ -3,14 +3,15 @@ package by.lostFinder.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by М on 08.03.2016.
  */
 @Entity
 @Table(name = "hashtag")
-public class HashTag {
+public class HashTag implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,12 +22,9 @@ public class HashTag {
     protected String name;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "hashTags")
-    private Set<Post> posts;
+    @ManyToMany(mappedBy = "hashTags")
+    private List<Post> posts;
 
-    public HashTag(String name){
-        this.name = name;
-    }
 
     public HashTag(){}
 
@@ -46,11 +44,11 @@ public class HashTag {
         this.name = name;
     }
 
-    public Set<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Set<Post> posts) {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 }

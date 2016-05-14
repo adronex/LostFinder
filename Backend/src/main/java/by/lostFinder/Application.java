@@ -8,6 +8,7 @@ import by.lostFinder.services.NamedService;
 import by.lostFinder.services.SimpleService;
 import by.lostFinder.services.impl.AccountServiceImpl;
 import by.lostFinder.services.impl.NamedServiceImpl;
+import by.lostFinder.services.impl.PostServiceImpl;
 import by.lostFinder.services.impl.SimpleServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,6 +38,6 @@ public class Application {
     public SimpleService<AccountDetail> accountDetailService(){return new SimpleServiceImpl<AccountDetail, SimpleRepository<AccountDetail>>() {}; }
 
     @Bean
-    public SimpleService<Post> postService(){return new SimpleServiceImpl<Post, SimpleRepository<Post>>() {}; }
+    public SimpleService<Post> postService(){return new PostServiceImpl() {}; }
 }
 

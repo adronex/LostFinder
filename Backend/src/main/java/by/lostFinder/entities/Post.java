@@ -1,20 +1,23 @@
 package by.lostFinder.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by М on 08.03.2016.
  */
 @Entity
 @Table(name = "post")
-public class Post {
+public class Post implements Serializable {
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "posts")
-    private Set<Account> accounts;
+    @JsonBackReference
+    //@JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,16 +29,12 @@ public class Post {
 
     @Column(name = "description")
     private String description;
-
+    //todo: owner or child side for joinTable?
     @ManyToMany
     @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
                                       inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
-    private Set<HashTag> hashTags;
+    private List<HashTag> hashTags;
 
-
-    public Post(String description){
-        this.description = description;
-    }
 
     public Post(){}
 
@@ -47,11 +46,11 @@ public class Post {
         this.id = id;
     }
 
-    public Set<HashTag> getHashTags() {
+    public List<HashTag> getHashTags() {
         return hashTags;
     }
 
-    public void setHashTags(Set<HashTag> hashTags) {
+    public void setHashTags(List<HashTag> hashTags) {
         this.hashTags = hashTags;
     }
 
@@ -63,11 +62,19 @@ public class Post {
         this.description = description;
     }
 
-    public Set<Account> getAccounts() {
-        return accounts;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccounts(Set<Account> accounts) {
-        this.accounts = accounts;
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

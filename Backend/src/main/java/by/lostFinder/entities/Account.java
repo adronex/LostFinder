@@ -1,23 +1,25 @@
 package by.lostFinder.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
 @Table(name = "account")
-public class Account {
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
-    @ManyToMany
-    @JoinTable(name = "ACCOUNT_POST", joinColumns = @JoinColumn(name = "ID_ACCOUNT"),
-                                      inverseJoinColumns = @JoinColumn(name = "ID_POST"))
-    private Set<Post> posts;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+    private List<Post> posts;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
     private AccountDetail accountDetail;
@@ -31,11 +33,6 @@ public class Account {
     @Column(name = "email")
     private String email;
 
-    public Account(String login, String password, String email){
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
 
     public Account (){}
 
@@ -71,11 +68,11 @@ public class Account {
         this.email = email;
     }
 
-    public Set<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Set<Post> posts) {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 

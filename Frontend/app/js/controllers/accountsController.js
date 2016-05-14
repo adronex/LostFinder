@@ -16,8 +16,8 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
         email: '',
         password: '',
         accountDetail: {
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             city: ''
         }
     };
@@ -44,8 +44,8 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
 
     $scope.$watch('editAcc.password',function() {$scope.test();});
     $scope.$watch('confirmPass',function() {$scope.test();});
-    $scope.$watch('editAcc.accountDetail.first_name', function() {$scope.test();});
-    $scope.$watch('editAcc.accountDetail.last_name', function() {$scope.test();});
+    $scope.$watch('editAcc.accountDetail.firstName', function() {$scope.test();});
+    $scope.$watch('editAcc.accountDetail.lastName', function() {$scope.test();});
 
     //todo: simplify
     $scope.test = function() {
@@ -58,8 +58,8 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
         $scope.incomplete = false;
 
         //todo: change
-        if ($scope.editAcc && (!$scope.editAcc.accountDetail.first_name.length ||
-            !$scope.editAcc.accountDetail.last_name.length ||
+        if ($scope.editAcc && (!$scope.editAcc.accountDetail.firstName.length ||
+            !$scope.editAcc.accountDetail.lastName.length ||
             !$scope.editAcc.password.length || !$scope.confirmPass.length)) {
             $scope.incomplete = true;
         }

@@ -31,5 +31,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'dictionaryController',
             uri: '/hashTags/'
         })
+        .when('/posts', {
+            templateUrl: '../layout/posts.html',
+            controller: 'postsController',
+            uri: '/posts/'
+        })
         .otherwise('/');
 }]);

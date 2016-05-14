@@ -1,13 +1,16 @@
 package by.lostFinder.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by М on 27.02.2016.
  */
 @Entity
 @Table(name = "contact")
-public class Contact {
+public class Contact implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,15 +18,16 @@ public class Contact {
     private long id;
 
     @Column(name = "name")
-    protected String name;
+    private String name;
 
+    @Column
+    private String value;
+
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private AccountDetail accountDetail;
 
-    public Contact(String name){
-        this.name = name;
-    }
 
     public Contact(){}
 
@@ -49,5 +53,13 @@ public class Contact {
 
     public void setAccountDetail(AccountDetail accountDetail) {
         this.accountDetail = accountDetail;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }
