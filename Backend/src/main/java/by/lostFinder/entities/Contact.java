@@ -25,7 +25,7 @@ public class Contact implements Serializable {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "details_id")
     private AccountDetail accountDetail;
 
 

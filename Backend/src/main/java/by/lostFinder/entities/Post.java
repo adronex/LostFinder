@@ -1,9 +1,10 @@
 package by.lostFinder.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -13,28 +14,33 @@ import java.util.List;
 @Table(name = "post")
 public class Post implements Serializable {
 
-    @JsonBackReference
-    //@JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "post_type_id")
+    private PostType postType;
 
     @Column(name = "title")
     private String title;
 
     @Column(name = "description")
     private String description;
-    //todo: owner or child side for joinTable?
+
+    @Column(name = "date")
+    private LocalDate date;
+
     @ManyToMany
     @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
-                                      inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
+            inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
     private List<HashTag> hashTags;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public Post(){}
 
@@ -76,5 +82,29 @@ public class Post implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public PostType getPostType() {
+        return postType;
+    }
+
+    public void setPostType(PostType postType) {
+        this.postType = postType;
+    }
+
+//    public String getDate() {
+//        return DateTimeFormatter.ofPattern("dd.MM.YYYY").format(date);
+//    }
+//
+//    public void setDate(String date) {
+//        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.YYYY"));
+//    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

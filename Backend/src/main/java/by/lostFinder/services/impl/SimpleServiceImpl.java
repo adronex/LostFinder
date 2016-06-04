@@ -1,6 +1,5 @@
 package by.lostFinder.services.impl;
 
-import by.lostFinder.entities.superEntity.IdEntity;
 import by.lostFinder.repositories.superRepositories.SimpleRepository;
 import by.lostFinder.services.SimpleService;
 import org.springframework.beans.factory.annotation.Autowired;

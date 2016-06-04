@@ -17,7 +17,7 @@ public class AccountServiceImpl extends SimpleServiceImpl<Account, AccountReposi
     @Override
     public Account save(Account entity) {
         entity.getAccountDetail().setAccount(entity);
-        entity.getPosts().forEach(post->post.setAccount(entity));
+        if (entity.getPosts() != null) entity.getPosts().forEach(post->post.setAccount(entity));
         return super.save(entity);
     }
 

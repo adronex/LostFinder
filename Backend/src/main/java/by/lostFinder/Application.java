@@ -1,6 +1,5 @@
 package by.lostFinder;
 
-
 import by.lostFinder.entities.*;
 import by.lostFinder.repositories.superRepositories.NamedRepository;
 import by.lostFinder.repositories.superRepositories.SimpleRepository;
@@ -21,6 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan
 @EnableJpaRepositories(value = "by.lostFinder.repositories")
 public class Application {
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -39,5 +39,9 @@ public class Application {
 
     @Bean
     public SimpleService<Post> postService(){return new PostServiceImpl() {}; }
+
+    @Bean
+    public NamedService<PostType> postTypeService(){return new NamedServiceImpl<PostType, NamedRepository<PostType>>() {};}
+
 }
 

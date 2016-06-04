@@ -11,9 +11,10 @@ public class PostServiceImpl extends SimpleServiceImpl<Post, PostRepository> imp
     @Autowired
     AccountService accountService;
 
+    //todo: save in to authorize account
     @Override
     public Post save(Post entity) {
-        entity.setAccount(entity.getAccount());
+        entity.setAccount(accountService.getById(2));
         return super.save(entity);
     }
 }
