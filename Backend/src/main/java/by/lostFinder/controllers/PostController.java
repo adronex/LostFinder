@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by М on 16.03.2016.
  */
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/api/posts")
 public class PostController extends GenericController<Post, SimpleService<Post>> {
     @Autowired
     protected PostController(@Qualifier("postService") SimpleService<Post> service){
