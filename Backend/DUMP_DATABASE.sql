@@ -39,6 +39,16 @@ CREATE TABLE `account` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `account`
+--
+
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (2,'sosiya','12345678','pisya@sosisya.com',2),(37,'gus','123','los@polos.com',37),(41,'monbon','123','mon@bon.com',41),(50,'shalaleyla','123','shala@leyla.com',50);
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `account_detail`
 --
 
@@ -52,6 +62,16 @@ CREATE TABLE `account_detail` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account_detail`
+--
+
+LOCK TABLES `account_detail` WRITE;
+/*!40000 ALTER TABLE `account_detail` DISABLE KEYS */;
+INSERT INTO `account_detail` VALUES (2,'pisya sosisya','SosLand'),(37,'gustavo fring','New Mexico'),(41,'mongo bongo','jungle'),(50,'shala leyla','shalamaleyla');
+/*!40000 ALTER TABLE `account_detail` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `contact`
@@ -72,6 +92,16 @@ CREATE TABLE `contact` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `contact`
+--
+
+LOCK TABLES `contact` WRITE;
+/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (1,'phone','234234234234',50),(2,'sss','232323ddssd',2);
+/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hashtag`
 --
 
@@ -85,6 +115,16 @@ CREATE TABLE `hashtag` (
   UNIQUE KEY `NAME_UNIQUE` (`NAME`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hashtag`
+--
+
+LOCK TABLES `hashtag` WRITE;
+/*!40000 ALTER TABLE `hashtag` DISABLE KEYS */;
+INSERT INTO `hashtag` VALUES (1,'голова'),(6,'девственность'),(3,'кот'),(5,'кошелёк'),(8,'потерял'),(4,'собака'),(2,'трусы'),(7,'убежал');
+/*!40000 ALTER TABLE `hashtag` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `post`
@@ -109,6 +149,16 @@ CREATE TABLE `post` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `post`
+--
+
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,'убежал кот, черный, толстый, полосатый','убежал кот',2,'2016-05-12',2),(2,'потерял кошелёк в районе пл.Победы, черный, много денег','потерял кошелёк',2,'2016-04-29',2);
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `post_hashtag`
 --
 
@@ -128,6 +178,16 @@ CREATE TABLE `post_hashtag` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `post_hashtag`
+--
+
+LOCK TABLES `post_hashtag` WRITE;
+/*!40000 ALTER TABLE `post_hashtag` DISABLE KEYS */;
+INSERT INTO `post_hashtag` VALUES (24,2,5),(25,2,8),(28,1,7),(29,1,3);
+/*!40000 ALTER TABLE `post_hashtag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `post_type`
 --
 
@@ -141,6 +201,16 @@ CREATE TABLE `post_type` (
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_type`
+--
+
+LOCK TABLES `post_type` WRITE;
+/*!40000 ALTER TABLE `post_type` DISABLE KEYS */;
+INSERT INTO `post_type` VALUES (1,'нашёл'),(2,'потерял');
+/*!40000 ALTER TABLE `post_type` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -151,4 +221,4 @@ CREATE TABLE `post_type` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-04 21:52:27
+-- Dump completed on 2016-06-04 23:18:26
