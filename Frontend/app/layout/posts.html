@@ -6,32 +6,38 @@
             <h3 ng-switch-when="newPost">Create New Post:</h3>
             <h3 ng-switch-when="editPost">Edit Post:</h3>
         </div>
-        <table id="regForm">
+        <table class="halfSize">
             <tr>
                 <td>
                     <label>Title:</label>
-                    <input class="w3-input w3-border" type="text" ng-model="editPost.title"
+                    <input class="w3-input w3-border" type="text" maxlength="40" ng-model="editPost.title"
                            placeholder="Title">
                 </td>
             </tr>
             <tr>
                 <td>
+                    <label>Date:</label>
+                    <input class="w3-input w3-border" type="text" ng-model="editPost.date"
+                           placeholder="Date">
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <label>Description:</label>
-                    <textarea class="w3-input w3-border" type="text" ng-model="editPost.description"
+                    <textarea class="w3-input w3-border" type="text" maxlength="300" ng-model="editPost.description"
                               placeholder="Some description"></textarea>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Hashtags:</label>
-                    <div id="hashTagsInput">
-                        <span id="tagSpan">
+                    <div id="hashTagsDiv">
+                        <span>
                             <hash-tag class="hashTag" ng-repeat="tag in editPost.hashTags"></hash-tag>
                         </span>
-                        <input class="w3-input w3-border" type="text" ng-model="inputHashTag" ng-keyup="hashTagsCreate($event.keyCode)"
+                        <input id="hashTagInput" type="text" ng-model="inputHashTag" ng-keydown="hashTagsCreate($event.keyCode)"
                                placeholder="Some key words"/>
                     </div>
-
                 </td>
             </tr>
         </table>
@@ -49,8 +55,10 @@
             <tr class="w3-teal">
                 <th>No</th>
                 <th>Id</th>
+                <th>Post type</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Publish date</th>
                 <th>HashTags</th>
                 <th>Control</th>
             </tr>
@@ -58,8 +66,10 @@
             <tr ng-repeat="post in posts">
                 <td>{{ $index + 1 }}</td>
                 <td>{{ post.id }}</td>
+                <td>{{ post.postType.name }}</td>
                 <td>{{ post.title }}</td>
-                <td>{{ post.description }}</td>
+                <td>{{ post.description | hideText:20 }}</td>
+                <td>{{ post.date }}</td>
                 <td><span ng-repeat="hashTag in post.hashTags">{{ hashTag.name }}, </span></td>
                 <td>
                     <button class="w3-btn w3-blue w3-ripple" ng-click="onActionEdit(post)">&#9998; Edit</button>

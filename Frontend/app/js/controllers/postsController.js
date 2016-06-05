@@ -39,10 +39,11 @@ app.controller('postsController',['$scope', '$route', 'dictionaryService', funct
 
     $scope.$watch('editPost.title',function() {$scope.test();});
     $scope.$watch('editPost.description', function() {$scope.test();});
-    $scope.$watch('editPost.accountId', function() {$scope.test();});
+    $scope.$watch('editPost.hashTags.length', function() {$scope.test();});
 
     $scope.test = function() {
-        if (!$scope.editPost.title.length || !$scope.editPost.description.length) {
+        if (!$scope.editPost.title.length || !$scope.editPost.description.length
+            || !$scope.editPost.hashTags.length) {
             $scope.incomplete = true;
         } else $scope.incomplete = false;
     };
@@ -79,25 +80,33 @@ app.controller('postsController',['$scope', '$route', 'dictionaryService', funct
         $scope.editPost = angular.copy(postTemplate);
     };
 
+    $scope.$watch('inputHashTag',function() {clearInput()});
+
     $scope.hashTagsCreate = function(keyCode){
         // 8 - backspace
-        if (keyCode == 8){
+        if ($scope.editPost.hashTags.length == 5) $scope.inputHashTag = "";
+        if (keyCode == 8 && !$scope.inputHashTag){
             $scope.editPost.hashTags.pop();
         }
-        if(testSeparator($scope.inputHashTag[0])){
-            $scope.inputHashTag = null;
-            return;
-        }
+        if (clearInput()) return;
         if(testSeparator(keyCode)){
             if(keyCode != 32) $scope.inputHashTag = $scope.inputHashTag.slice(0, -1);
             $scope.editPost.hashTags.push({name: $scope.inputHashTag });
-            $scope.inputHashTag = null;
+            $scope.inputHashTag = "";
         }
+    };
+
+    var clearInput = function(){
+        if(testSeparator($scope.inputHashTag[0])){
+            $scope.inputHashTag = "";
+            return true;
+        }
+        return false;
     };
 
     var testSeparator = function(c){
         // 32 - ' ' 188 - ',' 190 - '.'
-        var codes = [32, 188, 190, ',', '.', '/', undefined]; //todo: change!
+        var codes = [32, 188, 190, ',', '.', undefined]; //todo: change!
         var contain = false;
         angular.forEach(codes, function(code) {
             if(c == code) contain = true;
@@ -107,7 +116,6 @@ app.controller('postsController',['$scope', '$route', 'dictionaryService', funct
 
     $scope.deleteHashTag = function(index){
         $scope.editPost.hashTags.splice(index, 1);
-        var df = 0;
     };
 
 }]);

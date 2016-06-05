@@ -1,1 +1,84 @@
-<h1>Home</h1>
+<header>
+    <md-toolbar id="toolbar" class="md-whiteframe-1dp">
+        <div class="md-toolbar-tools" layout="row">
+            <div class="md-headline" id="logo" flex="20" layout="row" layout-align="end center">
+                <a show-gt-sm href="#/home">П<span id="titleO"></span><span id="titleStick"></span>
+                    <span id="shukay">ШУКАЙ</span>
+                </a>
+            </div>
+            <div layout="row" layout-align="center center" flex>
+                <md-input-container md-no-float>
+                    <md-icon md-svg-icon="icons/search_white.svg"></md-icon>
+                    <input class="md-body-2" type="search" placeholder="Введите запрос">
+                </md-input-container>
+                <md-button href="#/home" ng-class="{'active': $location.path() == '/'}">Объявления</md-button>
+                <md-button href="#/map" ng-class="{'active': $location.path() == '/map'}">Карта</md-button>
+            </div>
+            <div flex="20" layout="row" layout-align="end center">
+                <md-button>Вход</md-button>
+            </div>
+        </div>
+    </md-toolbar>
+</header>
+
+<div id="content" layout="row">
+
+    <div flex="15" flex-sm="25" hide-xs class="md-padding" layout="column" layout-align="start center">
+            <md-input-container>
+                <label>Тип</label>
+                <md-select ng-model="filter.type">
+                    <md-option ng-repeat="type in types" value="{{type.name }}">
+                        {{type.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+    </div>
+
+    <md-content flex layout="row" layout-align="center center" layout-wrap ng-cloack>
+        <md-card ng-repeat="post in posts" flex-xs="80" flex-sm="45" flex-gt-sm="30" flex-gt-md="20">
+            <md-card-header>
+                <md-card-avatar>
+                    <span ng-style="post.type == types.lost.name ? { background: types.lost.color } : { background: types.find.color }"></span>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">{{post.type | uppercase}}</span>
+                </md-card-header-text>
+            </md-card-header>
+            <img ng-src={{post.img}} class="md-card-image" alt="image caption">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-title">{{post.title}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>{{description | hideText: 50}}</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="start center">
+                <md-button>Подробнее</md-button>
+            </md-card-actions>
+        </md-card>
+    </md-content>
+
+    <div flex="15" class="md-padding" hide-sm>
+
+    </div>
+</div>
+
+<!--<md-grid-list md-cols="3" md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-lg="4" md-row-height="250px" md-gutter="10px">-->
+<!--<md-grid-tile md-whiteframe="1" ng-repeat="post in posts">-->
+<!--<md-grid-tile-header>-->
+<!--<md-icon><span ng-style="post.type == types.lost.name ? { background: types.lost.color } : { background: types.find.color }"></span></md-icon>-->
+<!--<span><h3>{{post.type | uppercase}}</h3></span>-->
+<!--</md-grid-tile-header>-->
+<!--<div layout="column" layout-align="center center">-->
+<!--<img ng-src="{{post.img}}">-->
+<!--<md-content>-->
+<!--<p class="md-title">{{post.title}}</p>-->
+<!--<p class="md-subhead">{{description | hideText: 50}}</p>-->
+<!--</md-content>-->
+<!--</div>-->
+<!--<md-grid-tile-footer layout="row">-->
+<!--<md-button layout-align="end center">Подробнее</md-button>-->
+<!--</md-grid-tile-footer>-->
+<!--</md-grid-tile>-->
+<!--</md-grid-list>-->

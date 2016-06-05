@@ -7,6 +7,12 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <!--google maps-->
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDaawgBdOuBo_TpuhmKoCUFJBNO2qvWwXw&sensor=true&libraries=drawing&callback' async defer></script>
+    <!--google maps end-->
 
     <script src="properties/globalProperties.js"></script>
     <script src="js/app.js"></script>
@@ -14,18 +20,22 @@
     <script src="js/controllers/accountsController.js"></script>
     <script src="js/controllers/postsController.js"></script>
     <script src="js/directives/tagsDirective.js"></script>
+    <script src="js/controllers/mapController.js"></script>
+    <script src="js/controllers/homeController.js"></script>
 
     <script src="js/services/dictionaryService.js"></script>
+    <script src="js/filters/hideText.js"></script>
 
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
 </head>
 
 <body>
 
 
 <nav class="w3-sidenav w3-light-grey w3-card-4 w3-animate-left" style="display:none">
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-large w3-dark-grey">Close &times;</a>
+    <a onclick="w3_close()" class="w3-closenav w3-large w3-dark-grey">Close &times;</a>
     <a href="#/" class="w3-padding">Home</a>
     <a href="#/accounts" class="w3-padding">Accounts list</a>
     <a href="#/dictionaries" class="w3-padding">Dictionaries</a>
@@ -33,10 +43,10 @@
 </nav>
 
 <div id="main">
-    <header class="w3-container w3-teal">
+    <div class="w3-container w3-teal">
         <span class="w3-opennav w3-xlarge" onclick="w3_open()">&#9776;</span>
         <span>Poshuk</span>
-    </header>
+    </div>
 
     <div ng-view class="w3-container"></div>
 </div>

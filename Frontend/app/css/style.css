@@ -1,3 +1,8 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
 header {
     font-size: 20pt;
 }
@@ -15,7 +20,7 @@ table {
     width: auto;
 }
 
-#regForm {
+.halfSize {
     width: 50%;
     border-collapse: separate;
     border: none;
@@ -26,32 +31,180 @@ form {
     display: block;
 }
 
-#hashTagsInput {
+textarea {
+    resize: none;
+}
+
+#hashTagsDiv {
     border: 1px solid lightgray;
     border-radius: 1px;
     padding: 5px;
+    overflow: hidden;
+}
+
+#hashTagInput {
+    border: none;
+    outline: 0 none;
 }
 
 .hashTag {
-    padding: 3px;
-    margin-right: 3px;
-    background-color: lightblue;
+    background-color: lightsteelblue;
     font-size: 11pt;
-    border-radius: 3px;
+    border-radius: 1px;
+    margin-right: 4px;
+    padding: 0 4px;
+    transition: all 0.2s;
+    display: inline-block;
 }
 
-#tagSpan {
-    margin: 3px;
-    padding: 3px;
+.hashTag:hover{
+    cursor: pointer;
 }
 
 .deleteTagBtn{
     background-color: grey;
-    padding: 2px;
     border-radius: 10px;
+    font-size: 8pt;
+    cursor: pointer;
+    display: inline-block;
+    height: 14px;
+    width: 14px;
 }
 
 .deleteTagBtn:hover{
-    background-color: lightcoral;
+    background-color: firebrick;
     cursor: pointer;
 }
+
+/* reset css */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+    color: inherit;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/*new*/
+@font-face {
+    font-family: "Roboto-Medium";
+    src: url("../fonts/Roboto-Medium.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+#map {
+    height: 400px;
+}
+
+/*logo*/
+#logo {
+    display: inline-block;
+    vertical-align: middle;
+    letter-spacing: 3px;
+}
+
+#titleStick {
+    display: inline-block;
+    position: relative;
+    left: -5px;
+    top: 11px;
+    width: 20px;
+    border: 1px solid white;
+    background: white;
+    box-shadow: 2px 2px 2px 1px rgba(35,35,35,0.83);
+    transform: rotate(45deg);
+}
+
+#titleO {
+    left: 3px;
+    top: 7px;
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 30px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55) 0%,rgba(255,255,255,0) 100%);
+    box-shadow: 1px 1px 2px 1px rgba(35,35,35,0.83);
+}
+
+#shukay{
+    position: relative;
+    left: -20px;
+}
+/*logo end*/
+
+#toolbar {
+    background: #263238;
+}
+
+#content {
+    width: 100%;
+    min-height: 100vh;
+    background: #2a2f27 url("../img/mainbg.jpg") no-repeat fixed center / cover;
+}
+
+md-input-container .md-errors-spacer {
+    min-height: 0 !important;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+    color: #ECEFF1;
+}
+
+md-content {
+    background: transparent;
+}
+
+/*title*/
+
+md-card-avatar span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+}
+
+/*md-grid-tile {*/
+    /*background: #E0F2F1;*/
+/*}*/
+
+/*md-grid-tile-header.ng-scope, md-grid-tile-footer.ng-scope {*/
+    /*color: black;*/
+    /*!*background: #B71C1C;*!*/
+/*}*/
+
+/*md-grid-tile-header.ng-scope span {*/
+    /*display: inline-block;*/
+    /*width: 20px;*/
+    /*height: 20px;*/
+    /*border-radius: 20px;*/
+    /*margin-left: 10px;*/
+/*}*/
+/*title end*/
+
+.active {
+    background: #00796B !important;
+}
+
