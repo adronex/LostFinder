@@ -33,6 +33,12 @@ public class Account implements Serializable {
 
     public Account (){}
 
+    public Account(String login, String password, String email) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+
     public long getId() {
         return id;
     }
