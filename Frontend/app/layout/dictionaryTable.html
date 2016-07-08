@@ -1,10 +1,10 @@
 <form ng-init="loadItems()">
 
     <p>Dictionary list
-        <select  onchange="location = this.value">
+        <select onchange="location = this.value">
             <option value=""></option>
-            <option value="#/dictionaries/hashTags">hashtags</option>
-            <option value="#/dictionaries/postTypes">post types</option>
+            <option value="#/api/dictionaries/hashTags">hashtags</option>
+            <option value="#/api/dictionaries/postTypes">post types</option>
         </select>
     </p>
 
@@ -42,9 +42,6 @@
                 <button class="w3-btn w3-blue w3-ripple" ng-click="onActionEdit(item)">&#9998; Edit</button>
                 <button class="w3-btn w3-dark-grey w3-ripple" ng-click="onActionDelete(item)">&#10006; Delete</button>
             </td>
-            <!--<td ng-show="item.ctrlButtons" class="hideItem" >-->
-            <!--<div ng-include="'../layout/ctrlButtons.html'"></div>-->
-            <!--</td>-->
         </tr>
     </table>
 </form>

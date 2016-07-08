@@ -14,13 +14,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-/**
- * Default class description.
- *
- * @author P.Sinitsky
- * @version 1.0
- * @since 11.04.2016
- */
+
 @SpringBootApplication
 @Configuration
 @EnableAuthorizationServer

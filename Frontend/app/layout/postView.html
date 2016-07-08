@@ -1,0 +1,27 @@
+<div layout="row" class="md-padding">
+
+    <div flex>
+
+    </div>
+
+    <md-content id="postView" layout="column" md-whiteframe="1" flex="60">
+        <div layout="row" layout-align="space-between center" class="md-padding" id="postHeader">
+            <h5 class="md-title" flex>{{post.title}}</h5>
+            <div>{{post.date | date}}</div>
+        </div>
+        <div layout="row" flex="50" id="postContent">
+            <div id="postImage" style="background-image: url({{post.img}})" flex></div>
+            <div id="postDescription" layout="column" class="md-padding" flex="40" layout-align="start start">
+                <p class="md-body-1">{{post.description}}</p>
+                <md-chips ng-model="post.tags" readonly="true">
+                    <md-chip-template>{{$chip}}</md-chip-template>
+                </md-chips>
+            </div>
+        </div>
+        <google-map id="postMap" geocoder location flex></google-map>
+    </md-content>
+
+    <div flex>
+
+    </div>
+</div>

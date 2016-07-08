@@ -29,7 +29,7 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
     $scope.hideForm = true;
 
     $scope.loadAccounts = function(){
-        dictionaryService.getAll('/accounts').success(function(data){
+        dictionaryService.getAll('/api/accounts').success(function(data){
             $scope.accounts =  data;
         });
     };

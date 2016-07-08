@@ -8,13 +8,8 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-/**
- * Created on 18.04.2016;
- * @author operb_000 (operbober@gmail.com);
- * @since 1.0.
- */
+
 public class CustomTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {

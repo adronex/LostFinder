@@ -7,13 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
-/**
- * Default class description.
- *
- * @author P.Sinitsky
- * @version 1.0
- * @since 11.04.2016
- */
 @SpringBootApplication
 @Configuration
 @EnableResourceServer

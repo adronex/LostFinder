@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by М on 15.03.2016.
  */
 @RestController
-@RequestMapping("/contacts")
+@RequestMapping("api/accounts/accountsDetail/contacts")
 public class ContactController extends GenericController<Contact, NamedService<Contact>> {
     @Autowired
     protected ContactController(@Qualifier("contactService") NamedService<Contact> service){

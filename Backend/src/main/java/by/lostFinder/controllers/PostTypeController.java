@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/postTypes")
+@RequestMapping("/api/dictionaries/postTypes")
 public class PostTypeController extends GenericController<PostType, NamedService<PostType>> {
     @Autowired
     protected PostTypeController(@Qualifier("postTypeService") NamedService<PostType> service){super(service);}

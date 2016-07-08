@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by М on 15.03.2016.
  */
 @RestController
-@RequestMapping("/hashTags")
+@RequestMapping("/api/dictionaries/hashTags")
 public class HashTagController extends GenericController<HashTag, NamedService<HashTag>> {
     @Autowired
     protected HashTagController(@Qualifier("hashTagService") NamedService<HashTag> service){

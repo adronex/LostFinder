@@ -15,7 +15,6 @@ public class PostServiceImpl extends SimpleServiceImpl<Post, PostRepository> imp
 
     @Override
     public Post save(Post entity) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         entity.setAccount(accountService.getAccountByLogin(authentication.getName()));
         return super.save(entity);

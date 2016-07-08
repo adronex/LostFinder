@@ -1,6 +1,3 @@
-/**
- * Created by М on 19.04.2016.
- */
 
 'use strict';
 
@@ -8,7 +5,8 @@ var app = angular.module('lostfinder',
                         ['ngRoute',
                             'ngAnimate',
                             'ngMaterial',
-                            'lostfinder.services']);
+                            'lostfinder.services'
+                        ]);
 
 var services = angular.module('lostfinder.services', []);
 
@@ -20,35 +18,39 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'homeController',
             uri: '/home/'
         })
-        .when('/dictionaries', {
+        .when('/api/dictionaries', {
             templateUrl: '../layout/dictionaryTable.html',
-            //controller: 'dictionaryController',
-            uri: '/dictionaries/'
+            uri: 'api/dictionaries/'
         })
-        .when('/accounts', {
+        .when('/api/accounts', {
             templateUrl: '../layout/accounts.html',
             controller: 'accountsController',
-            uri: '/accounts/'
+            uri: '/api/accounts/'
         })
-        .when('/dictionaries/hashTags', {
+        .when('/api/dictionaries/hashTags', {
             templateUrl: '../layout/dictionaryTable.html',
             controller: 'dictionaryController',
-            uri: '/hashTags/'
+            uri: '/api/dictionaries/hashTags/'
         })
-        .when('/dictionaries/postTypes', {
+        .when('/api/dictionaries/postTypes', {
             templateUrl: '../layout/dictionaryTable.html',
             controller: 'dictionaryController',
-            uri: '/postTypes/'
+            uri: '/api/dictionaries/postTypes/'
         })
-        .when('/posts', {
+        .when('/api/posts', {
             templateUrl: '../layout/posts.html',
             controller: 'postsController',
-            uri: '/posts/'
+            uri: '/api/posts/'
         })
         .when('/map', {
             templateUrl: '../layout/map.html',
-            controller: 'mapController',
+            controller: 'globalMapController',
             uri: '/map/'
+        })
+        .when('/post', {
+            templateUrl: '../layout/postView.html',
+            controller: 'postViewController',
+            uri: '/post/'
         })
         .otherwise('/');
 }]);

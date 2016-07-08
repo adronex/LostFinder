@@ -1,12 +1,8 @@
-/**
- * Created by М on 26.05.2016.
- */
 
-app.controller('mapController', function($scope, $timeout) {
+app.controller('mapController', ['$scope', '$timeout', function($scope, $timeout) {
 
-    var map;
-    var geocoder;
-    var infoWindow;
+    var geocoder = new google.maps.Geocoder;
+    var infoWindow = new google.maps.InfoWindow();
     var drawingManager;
 
     var allMarkers = [];
@@ -14,94 +10,167 @@ app.controller('mapController', function($scope, $timeout) {
 
     $scope.error = "";
 
-    $scope.initialize = function () {
-
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 53.87844, lng: 27.46582},
-            zoom: 6,
-            streetViewControl: false
+    $scope.loadMarkers = function(){
+        $scope.post.latlng.forEach(function(coords){
+            var marker = new google.maps.Marker({
+                map: $scope.map,
+                position: coords
+            });
+            setOnClickListener(marker);
         });
+    };
 
-        infoWindow = new google.maps.InfoWindow();
-        geocoder = new google.maps.Geocoder;
+    $scope.setDrawingFunctions = function () {
 
         drawingManager = new google.maps.drawing.DrawingManager({
             drawingControl: true,
             drawingControlOptions: {
-                position: google.maps.ControlPosition.TOP_CENTER,
+                position: google.maps.ControlPosition.RIGHT_TOP,
                 drawingModes: [
                     google.maps.drawing.OverlayType.MARKER,
                     google.maps.drawing.OverlayType.CIRCLE
                 ]
             },
             circleOptions: {
-                strokeWeight: 5,
+                strokeWeight: 3,
                 clickable: true,
                 editable: true,
                 zIndex: 1,
-                map: map
+                map: $scope.map
             },
             markerOptions: {
-                map: map,
+                map: $scope.map,
                 animation: google.maps.Animation.DROP,
                 draggable: true
             }
         });
-        drawingManager.setMap(map);
+        drawingManager.setMap($scope.map);
 
-        google.maps.event.addListener(map, "click", function(event){
+        google.maps.event.addListener($scope.map, "click", function(){
             infoWindow.close();
         });
 
         drawingManager.addListener('markercomplete', function (marker) {
             infoWindow.close();
-            marker.addListener('click', function(){
-                infoWindow.setOptions({maxWidth: 200, content: getAddress(marker.position)});
-                map.setOptions({center: marker.position, zoom: 16});
-                infoWindow.open(marker.map, marker);
-            });
+            setOnClickListener(marker);
+            
             marker.addListener('rightclick', function(){
                 marker.setMap(null);
                 allMarkers = allMarkers.filter(function(marker){
                     return marker.getMap();
                 });
             });
+            marker.addListener('dragstart', function(){
+                infoWindow.close();
+            });
+
             if(allMarkers.length == 3) {
                 marker.setMap(null);
                 $scope.error = "error";
-                $scope.$apply();
                 $timeout(function () {
                     $scope.error = "";
-                    $scope.$apply();
                 }, 2000);
                 drawingManager.setDrawingMode(null);
+                $scope.$apply();
             }
             else allMarkers.push(marker);
         });
 
-        drawingManager.addListener('circlecomplete', function (c) {
+        drawingManager.addListener('circlecomplete', function (newCircle) {
             infoWindow.close();
-            c.addListener('rightclick', function(){
-                c.setMap(null);
+            newCircle.addListener('rightclick', function(){
+                newCircle.setMap(null);
             });
-            c.addListener('click', function(){
-                var center = c.getCenter();
-                infoWindow.setOptions({maxWidth: 200, position: center, content: getAddress(center)});
-                map.setOptions({center: center, zoom: 16});
-                infoWindow.open(c.getMap(), c);
+            newCircle.addListener('click', function(){
+                var center = newCircle.getCenter();
+                infoWindow.setOptions({maxWidth: 200, position: center, content: getAddress(center)}); // todo: remake
+                $scope.map.setOptions({center: center, zoom: 17});
+                infoWindow.open(newCircle.getMap(), newCircle);
             });
+            newCircle.addListener('center_changed', function(){
+                infoWindow.close();
+            });
+
             var temp = circle;
-            circle = c;
+            circle = newCircle;
             if (temp) temp.setMap(null);
             drawingManager.setDrawingMode(null);
         });
+
+        var deleteMarkersButton = document.createElement('div');
+        deleteMarkersButton.id = 'deleteMarkersButton';
+        deleteMarkersButton.innerHTML = 'Очистить карту';
+        deleteMarkersButton.addEventListener('click', function(){
+            if (allMarkers.length){
+                allMarkers.forEach(function(mk){
+                    mk.setMap(null);
+                });
+                allMarkers = [];
+            }
+            if (circle){
+                circle.setMap(null);
+                circle = '';
+            }
+        });
+
+        setMapControls(deleteMarkersButton, google.maps.ControlPosition.TOP_RIGHT)
     };
+    
+    function setOnClickListener(element){
+        element.addListener('click', function(){
+            infoWindow.setOptions({maxWidth: 200, content: getAddress(element.position)}); //todo: remake
+            $scope.map.setOptions({center: element.position, zoom: 17});
+            infoWindow.open(element.map, element);
+        });
+    }
+    
+    $scope.setGeocoder = function(){
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'placeAutocomplete';
+        input.placeholder = 'Введите адрес';
+        var autocomplete = new google.maps.places.SearchBox(input);
+
+        autocomplete.addListener('places_changed', function() {
+            autocomplete.bindTo('bounds', $scope.map);
+            var places = autocomplete.getPlaces();
+
+            if (places.length == 0) return;
+            if (places[0].geometry.viewport) {
+                $scope.map.fitBounds(places[0].geometry.viewport);
+                $scope.map.setZoom(12);
+            } else {
+                $scope.map.setCenter(places[0].geometry.location);
+                $scope.map.setZoom(17);
+            }
+        });
+        setMapControls(input, google.maps.ControlPosition.TOP_CENTER);
+    };
+
+    $scope.setLocationButton = function(){
+        var locationButton = document.createElement('div');
+        locationButton.id = 'locationButton';
+        locationButton.innerHTML = 'O';
+        locationButton.addEventListener('click', function(){
+            getLocation();
+        });
+        setMapControls(locationButton, google.maps.ControlPosition.TOP_RIGHT);
+    };
+
+    function getLocation(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setPosition, showError);
+        } else {
+            $scope.error = "Geolocation is not supported by this browser.";
+            $timeout(function () { $scope.error = ""; }, 2000);
+        }
+    }
 
     function getAddress(latlng){
         geocoder.geocode({'location': latlng}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
-                if (results[1]) {
-                    infoWindow.setContent(results[1].formatted_address);
+                if (results[0]) {
+                    infoWindow.setContent(results[0].formatted_address); // todo: remake
                 } else {
                     window.alert('No results found');
                 }
@@ -111,30 +180,15 @@ app.controller('mapController', function($scope, $timeout) {
         });
     }
 
-    $scope.deleteAllMarkers = function (){
-        if (allMarkers.length){
-            allMarkers.forEach(function(mk){
-                mk.setMap(null);
-            });
-            allMarkers = [];
-        }
-        if (circle){
-            circle.setMap(null);
-            circle = '';
-        }
-    };
-
-    $scope.getLocation = function(){
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setPosition, showError);
-        } else {
-            $scope.error = "Geolocation is not supported by this browser.";
-            $timeout(function () { $scope.error = ""; }, 2000);
-        }
-    };
-
     function setPosition(position){
-        map.setOptions({center: {lat: position.coords.latitude, lng: position.coords.longitude}, zoom: 16});
+        $scope.map.setOptions({center: {lat: position.coords.latitude, lng: position.coords.longitude}, zoom: 17});
+    }
+
+    function setMapControls(button, position){
+        $timeout(function(){
+            $scope.map.getDiv().appendChild(button);
+            $scope.map.controls[position].push(button);
+        }, 500);
     }
 
 // not necessary
@@ -142,23 +196,19 @@ app.controller('mapController', function($scope, $timeout) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
                 $scope.error = "User denied the request for Geolocation.";
-                $scope.$apply();
                 break;
             case error.POSITION_UNAVAILABLE:
                 $scope.error = "Location information is unavailable.";
-                $scope.$apply();
                 break;
             case error.TIMEOUT:
                 $scope.error = "The request to get user location timed out.";
-                $scope.$apply();
                 break;
             case error.UNKNOWN_ERROR:
                 $scope.error = "An unknown error occurred.";
-                $scope.$apply();
                 break;
         }
         $timeout(function () { $scope.error = ""; }, 2000);
         $scope.$apply();
     }
 
-});
+}]);

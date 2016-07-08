@@ -9,14 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Default class description.
- *
- * @author P.Sinitsky
- * @version 1.0
- * @since 11.04.2016
- */
-
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class OptionsRequestsFilter implements Filter {

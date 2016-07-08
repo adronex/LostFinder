@@ -1,6 +1,3 @@
-/**
- * Created by М on 19.04.2016.
- */
 
 'use strict';
 
@@ -25,7 +22,7 @@ app.controller('postsController',['$scope', '$route', 'dictionaryService', funct
     $scope.hideForm = true;
 
     $scope.loadPosts = function(){
-        dictionaryService.getAll('/posts').success(function(data){
+        dictionaryService.getAll('/api/posts').success(function(data){
             $scope.posts =  data;
         });
     };

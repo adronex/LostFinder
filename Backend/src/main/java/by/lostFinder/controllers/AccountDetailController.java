@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by М on 15.03.2016.
  */
 @RestController
-@RequestMapping("/accountDetail")
+@RequestMapping("/api/accounts/accountDetail")
 public class AccountDetailController extends GenericController<AccountDetail, SimpleService<AccountDetail>> {
     @Autowired
     protected AccountDetailController(@Qualifier("accountDetailService") SimpleService<AccountDetail> service){
