@@ -11,13 +11,16 @@ app.controller('mapController', ['$scope', '$timeout', function($scope, $timeout
     $scope.error = "";
 
     $scope.loadMarkers = function(){
+        var bounds = new google.maps.LatLngBounds();
         $scope.post.latlng.forEach(function(coords){
             var marker = new google.maps.Marker({
                 map: $scope.map,
                 position: coords
             });
             setOnClickListener(marker);
+            bounds.extend(marker.position);
         });
+        $scope.map.fitBounds(bounds);
     };
 
     $scope.setDrawingFunctions = function () {
