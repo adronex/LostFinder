@@ -1,1 +1,6 @@
+*.iml
+target
 bower_components
+.idea
+.bowerrc
+Frontend/node
