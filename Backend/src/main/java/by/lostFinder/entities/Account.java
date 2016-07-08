@@ -1,13 +1,17 @@
 package by.lostFinder.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 
 @Entity
 @Table(name = "account")
-public class Account implements Serializable {
+public class Account implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,12 +35,7 @@ public class Account implements Serializable {
     private AccountDetail accountDetail;
 
 
-    public Account (){}
-
-    public Account(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
+    public Account() {
     }
 
     public long getId() {
@@ -53,10 +52,6 @@ public class Account implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -85,5 +80,41 @@ public class Account implements Serializable {
 
     public void setAccountDetail(AccountDetail accountDetail) {
         this.accountDetail = accountDetail;
+    }
+
+    // SPRING SECURITY IMPLEMENTATION
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

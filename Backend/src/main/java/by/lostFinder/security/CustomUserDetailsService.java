@@ -15,60 +15,16 @@ import java.util.Collection;
 @Service
 class CustomUserDetailsService implements UserDetailsService {
 
-	private final AccountRepository accountRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
-	@Autowired
-	public CustomUserDetailsService(AccountRepository accountRepository) {
-		this.accountRepository = accountRepository;
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account account = accountRepository.findByLoginIgnoreCase(username);
-		if (account == null) {
-			throw new UsernameNotFoundException(String.format("Account %s does not exist!", username));
-		}
-		return new AccountRepositoryAccountDetails(account);
-	}
-
-	private final static class AccountRepositoryAccountDetails extends Account implements UserDetails {
-
-		private static final long serialVersionUID = 1L;
-
-		private AccountRepositoryAccountDetails(Account account) {
-			super(account.getLogin(), account.getPassword(), account.getEmail());
-		}
-
-		@Override
-		public Collection<? extends GrantedAuthority> getAuthorities() {
-			return new ArrayList<>();//getPermissions();
-		}
-
-		@Override
-		public String getUsername() {
-			return getLogin();
-		}
-
-		@Override
-		public boolean isAccountNonExpired() {
-			return true;
-		}
-
-		@Override
-		public boolean isAccountNonLocked() {
-			return true;
-		}
-
-		@Override
-		public boolean isCredentialsNonExpired() {
-			return true;
-		}
-
-		@Override
-		public boolean isEnabled() {
-			return true;
-		}
-
-	}
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountRepository.findByEmailIgnoreCase(username);
+        if (account == null) {
+            throw new UsernameNotFoundException(String.format("Account %s does not exist!", username));
+        }
+        return account;
+    }
 
 }

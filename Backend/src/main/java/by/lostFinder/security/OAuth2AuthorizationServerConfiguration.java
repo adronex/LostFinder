@@ -24,20 +24,19 @@ public class OAuth2AuthorizationServerConfiguration extends
     private TokenStore tokenStore = new InMemoryTokenStore();
 
     @Autowired
-    @Qualifier("authenticationManagerBean")
-    private AuthenticationManager authenticationManager;
+    private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    @Qualifier("authenticationManagerBean")
+    private AuthenticationManager authenticationManager;
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
         endpoints
-                .tokenStore(this.tokenStore)
-                .authenticationManager(this.authenticationManager)
+                .tokenStore(tokenStore)
+                .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
-                .tokenEnhancer(tokenEnhancer())
                 .pathMapping("/oauth/token", "/api/login");
     }
 
@@ -50,11 +49,5 @@ public class OAuth2AuthorizationServerConfiguration extends
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("read", "write");
     }
-
-    @Bean
-    public TokenEnhancer tokenEnhancer() {
-        return new CustomTokenEnhancer();
-    }
-
 
 }
