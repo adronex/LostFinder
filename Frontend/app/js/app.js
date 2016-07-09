@@ -10,7 +10,7 @@ var app = angular.module('lostfinder',
 
 var services = angular.module('lostfinder.services', []);
 
-app.config(['$routeProvider', function ($routeProvider) {
+app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
     $routeProvider
         .when('/', {
@@ -53,4 +53,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             uri: '/post/'
         })
         .otherwise('/');
+
+    $httpProvider.interceptors.push('authInjector');
 }]);

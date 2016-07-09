@@ -22,11 +22,6 @@ public class AccountServiceImpl extends SimpleServiceImpl<Account, AccountReposi
     }
 
     @Override
-    public Account getAccountByLogin(String login) {
-        return repository.findByLoginIgnoreCase(login);
-    }
-
-    @Override
     public Account getAccountByEmail(String email) {
         return repository.findByEmailIgnoreCase(email);
     }

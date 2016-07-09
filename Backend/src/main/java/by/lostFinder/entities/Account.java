@@ -18,9 +18,6 @@ public class Account implements UserDetails, Serializable {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "login")
-    private String login;
-
     @Column(name = "password")
     private String password;
 
@@ -44,14 +41,6 @@ public class Account implements UserDetails, Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public void setPassword(String password) {
