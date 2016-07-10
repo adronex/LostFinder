@@ -20,6 +20,7 @@ services
                 var requestOnAuthUrl = rejection.config.url.indexOf(serverUrl + '/api/login') !== -1;
                 if (rejection.status == 401 && !requestOnAuthUrl) {
                     window.location.href = "/";
+                    sessionStorage.setItem('access_token', undefined);
                 }
                 return {};
             }

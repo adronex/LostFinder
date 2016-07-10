@@ -14,7 +14,7 @@ services
                         "Authorization": "Basic bG9zdEZpbmRlcjpQb3NodWtheSptbmUqdHV0KjA1MDY=",
                         "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
                     },
-                    data: 'grant_type=password&username=' + email + '&password=' + password
+                    data: 'grant_type=password&username=' + email + '###NATIVE&password=' + password
                 })
             },
             setToken: function (data) {

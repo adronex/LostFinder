@@ -1,10 +1,12 @@
 package by.lostFinder.entities;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,12 +29,23 @@ public class Account implements UserDetails, Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private List<Post> posts;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "details_id")
     private AccountDetail accountDetail;
 
+    @Enumerated
+    private OAuthType oauthType;
+
+    private String oauthId;
 
     public Account() {
+    }
+
+    public Account(String email, AccountDetail detail, String oauthId, OAuthType oauthType) {
+        this.oauthId = oauthId;
+        this.email = email;
+        this.accountDetail = detail;
+        this.oauthType = oauthType;
     }
 
     public long getId() {
@@ -69,6 +82,14 @@ public class Account implements UserDetails, Serializable {
 
     public void setAccountDetail(AccountDetail accountDetail) {
         this.accountDetail = accountDetail;
+    }
+
+    public OAuthType getOauthType() {
+        return oauthType;
+    }
+
+    public String getOauthId() {
+        return oauthId;
     }
 
     // SPRING SECURITY IMPLEMENTATION

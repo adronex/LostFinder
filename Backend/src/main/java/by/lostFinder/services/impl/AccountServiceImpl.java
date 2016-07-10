@@ -2,6 +2,7 @@ package by.lostFinder.services.impl;
 
 import by.lostFinder.entities.Account;
 import by.lostFinder.entities.AccountDetail;
+import by.lostFinder.entities.OAuthType;
 import by.lostFinder.repositories.AccountRepository;
 import by.lostFinder.services.AccountService;
 import by.lostFinder.services.SimpleService;
@@ -15,14 +16,15 @@ public class AccountServiceImpl extends SimpleServiceImpl<Account, AccountReposi
     SimpleService<AccountDetail> accountDetailService;
 
     @Override
+    public Account findByAuthUsername(String username) {
+        String[] buff = username.split("###");
+        return repository.findByEmailIgnoreCaseAndOauthType(buff[0], OAuthType.valueOf(buff[1]));
+    }
+
+    @Override
     public Account save(Account entity) {
         entity.getAccountDetail().setAccount(entity);
         if (entity.getPosts() != null) entity.getPosts().forEach(post->post.setAccount(entity));
         return super.save(entity);
-    }
-
-    @Override
-    public Account getAccountByEmail(String email) {
-        return repository.findByEmailIgnoreCase(email);
     }
 }

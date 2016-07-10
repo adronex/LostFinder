@@ -34,7 +34,7 @@ app.controller('headerController', ['$scope', '$location', '$mdDialog', '$mdMedi
 
         };
 
-        function DialogController($scope, $mdDialog) {
+        function DialogController($scope, $mdDialog, $auth) {
             $scope.hide = function () {
                 $mdDialog.hide();
             };
@@ -51,9 +51,19 @@ app.controller('headerController', ['$scope', '$location', '$mdDialog', '$mdMedi
                         authService.setToken(response.data);
                     },
                     function (error) {
-
+                        alert('Access denied!');
                     });
-            }
+            };
+            $scope.oauth = function(provider) {
+                $auth.authenticate(provider).then(
+                    function (response) {
+                        authService.setToken(response.data);
+                        alert('sosisya');
+                    },
+                    function (error) {
+                        alert('Access denied!');
+                    });
+            };
         }
     }]);
 
