@@ -1,25 +1,24 @@
 <div layout="row">
 
-    <div flex flex-sm="25" hide-xs class="md-padding" layout="column" layout-align="start center">
-        <div class="md-padding" md-whiteframe="1" layout="column">
-            <md-radio-group ng-model="filter.type" class="md-primary">
-                <label>Тип</label>
-                <md-radio-button ng-repeat="type in types" ng-value="$index" ng-class="{ 'md-checked': $first }">
-                    {{type.name}}
-                </md-radio-button>
-            </md-radio-group>
-            <md-input-container>
-                <label>Город</label>
-                <md-select ng-model="filter.cities" multiple>
-                    <md-optgroup label="Города">
-                        <md-option ng-value="city" ng-repeat="city in cities">
-                            {{city}}
-                        </md-option>
-                    </md-optgroup>
-                </md-select>
-            </md-input-container>
-            <div flex>
-                <md-datepicker ng-model="filter.date" md-placeholder="Дата создания" md-open-on-focus></md-datepicker>
+    <div flex flex-sm="25" hide-xs class="md-padding" layout="row" layout-align="center start">
+        <div flex="60" md-whiteframe="1" layout="row" layout-align="start start" id="postsFilter">
+            <div class="md-padding" layout="column">
+                <md-radio-group ng-model="filter.type" class="md-primary">
+                    <label>Тип</label>
+                    <md-radio-button ng-repeat="type in types" ng-value="$index" ng-class="{ 'md-checked': $first }">
+                        {{type.name}}
+                    </md-radio-button>
+                </md-radio-group>
+                <md-input-container>
+                    <label>Города</label>
+                    <md-select ng-model="filter.cities" multiple>
+                        <md-optgroup label="Города">
+                            <md-option ng-value="city" ng-repeat="city in cities">
+                                {{city}}
+                            </md-option>
+                        </md-optgroup>
+                    </md-select>
+                </md-input-container>
             </div>
         </div>
     </div>
