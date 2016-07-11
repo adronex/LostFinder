@@ -1,21 +1,24 @@
 package by.lostFinder.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
 @Entity
 @Table(name = "account")
-public class Account implements Serializable {
+public class Account implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
-
-    @Column(name = "login")
-    private String login;
 
     @Column(name = "password")
     private String password;
@@ -26,17 +29,23 @@ public class Account implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private List<Post> posts;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "details_id")
     private AccountDetail accountDetail;
 
+    @Enumerated
+    private OAuthType oauthType;
 
-    public Account (){}
+    private String oauthId;
 
-    public Account(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
+    public Account() {
+    }
+
+    public Account(String email, AccountDetail detail, String oauthId, OAuthType oauthType) {
+        this.oauthId = oauthId;
         this.email = email;
+        this.accountDetail = detail;
+        this.oauthType = oauthType;
     }
 
     public long getId() {
@@ -45,18 +54,6 @@ public class Account implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -85,5 +82,49 @@ public class Account implements Serializable {
 
     public void setAccountDetail(AccountDetail accountDetail) {
         this.accountDetail = accountDetail;
+    }
+
+    public OAuthType getOauthType() {
+        return oauthType;
+    }
+
+    public String getOauthId() {
+        return oauthId;
+    }
+
+    // SPRING SECURITY IMPLEMENTATION
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

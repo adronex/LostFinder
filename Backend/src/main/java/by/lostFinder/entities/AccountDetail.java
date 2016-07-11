@@ -33,6 +33,15 @@ public class AccountDetail implements Serializable {
 
     public AccountDetail(){}
 
+    public AccountDetail(String name) {
+        this.name = name;
+    }
+
+
+    public AccountDetail(String lastName, String firstName) {
+        this.name = lastName + " " + firstName;
+    }
+
     public long getId() {
         return id;
     }

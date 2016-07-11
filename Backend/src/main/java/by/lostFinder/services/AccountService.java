@@ -4,7 +4,6 @@ import by.lostFinder.entities.Account;
 
 public interface AccountService extends SimpleService<Account> {
 
-    public Account getAccountByLogin(String login);
+    Account findByAuthUsername(String username);
 
-    public Account getAccountByEmail(String email);
 }
