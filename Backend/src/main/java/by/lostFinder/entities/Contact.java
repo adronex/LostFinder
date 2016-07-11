@@ -5,17 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by М on 27.02.2016.
- */
 @Entity
 @Table(name = "contact")
-public class Contact implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+public class Contact extends IdEntity implements Serializable {
 
     @Column(name = "name")
     private String name;
@@ -28,7 +20,6 @@ public class Contact implements Serializable {
     @JoinColumn(name = "details_id")
     private AccountDetail accountDetail;
 
-
     public Contact(){}
 
     public String getName() {
@@ -37,14 +28,6 @@ public class Contact implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public AccountDetail getAccountDetail() {

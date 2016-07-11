@@ -8,12 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "post_type")
-public class PostType implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+public class PostType extends IdEntity implements Serializable {
 
     @Column(name = "name")
     private String name;
@@ -23,14 +18,6 @@ public class PostType implements Serializable {
     private List<Post> post;
 
     public PostType(){}
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

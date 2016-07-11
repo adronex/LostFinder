@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by М on 14.03.2016.
- */
 @MappedSuperclass
 public abstract class GenericController<E, S extends SimpleService<E>> implements Filter {
 

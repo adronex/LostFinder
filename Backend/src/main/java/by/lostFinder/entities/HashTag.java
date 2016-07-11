@@ -6,17 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by М on 08.03.2016.
- */
 @Entity
 @Table(name = "hashtag")
-public class HashTag implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    protected long id;
+public class HashTag extends IdEntity implements Serializable {
 
     @Column(name = "name")
     protected String name;
@@ -25,16 +17,7 @@ public class HashTag implements Serializable {
     @ManyToMany(mappedBy = "hashTags")
     private List<Post> posts;
 
-
     public HashTag(){}
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

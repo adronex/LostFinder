@@ -1,6 +1,3 @@
-/**
- * Created by М on 18.05.2016.
- */
 
 app.filter('hideText', function(){
    return function (value, max){

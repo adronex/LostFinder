@@ -7,17 +7,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Created by М on 08.03.2016.
- */
 @Entity
 @Table(name = "post")
-public class Post implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+public class Post extends IdEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "post_type_id")
@@ -43,14 +35,6 @@ public class Post implements Serializable {
     private Account account;
 
     public Post(){}
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public List<HashTag> getHashTags() {
         return hashTags;
@@ -91,14 +75,6 @@ public class Post implements Serializable {
     public void setPostType(PostType postType) {
         this.postType = postType;
     }
-
-//    public String getDate() {
-//        return DateTimeFormatter.ofPattern("dd.MM.YYYY").format(date);
-//    }
-//
-//    public void setDate(String date) {
-//        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.YYYY"));
-//    }
 
     public LocalDate getDate() {
         return date;

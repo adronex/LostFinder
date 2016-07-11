@@ -1,6 +1,3 @@
-/**
- * Created by М on 19.04.2016.
- */
 
 'use strict';
 
@@ -12,7 +9,6 @@ app.controller('accountsController',['$scope', '$route', 'dictionaryService', fu
 
     //todo: change, if possible
     var accTemplate = {
-        login: '',
         email: '',
         password: '',
         accountDetail: {

@@ -1,24 +1,17 @@
 package by.lostFinder.entities;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 
 @Entity
 @Table(name = "account")
-public class Account implements UserDetails, Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+public class Account extends IdEntity implements UserDetails, Serializable {
 
     @Column(name = "password")
     private String password;
@@ -46,14 +39,6 @@ public class Account implements UserDetails, Serializable {
         this.email = email;
         this.accountDetail = detail;
         this.oauthType = oauthType;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setPassword(String password) {

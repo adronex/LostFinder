@@ -6,17 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by М on 07.03.2016.
- */
 @Entity
 @Table(name = "account_detail")
-public class AccountDetail implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+public class AccountDetail extends IdEntity implements Serializable {
 
     @Column(name = "name")
     private String name;
@@ -40,14 +32,6 @@ public class AccountDetail implements Serializable {
 
     public AccountDetail(String lastName, String firstName) {
         this.name = lastName + " " + firstName;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getDescription() {

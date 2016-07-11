@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by М on 15.03.2016.
- */
 @RestController
 @RequestMapping("/api/accounts/accountDetail")
 public class AccountDetailController extends GenericController<AccountDetail, SimpleService<AccountDetail>> {

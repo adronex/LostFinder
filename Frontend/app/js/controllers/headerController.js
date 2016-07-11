@@ -1,3 +1,4 @@
+
 app.controller('headerController', ['$scope', '$location', '$mdDialog', '$mdMedia', 'authService',
     function ($scope, $location, $mdDialog, $mdMedia, authService) {
 
