@@ -6,19 +6,37 @@
 
     <md-content id="postView" layout="column" md-whiteframe="1" flex="60">
         <div layout="row" layout-align="space-between center" class="md-padding" id="postHeader">
-            <h5 class="md-title" flex>{{post.title}}</h5>
+            <h5 class="md-title upperLetter" flex>{{post.title}}</h5>
             <div>{{post.date | date}}</div>
         </div>
-        <div layout="row" flex="50" id="postContent">
+        <div layout="row" flex="50" id="postContent" class="md-body-1">
             <div id="postImage" style="background-image: url({{post.img}})" flex></div>
             <div id="postDescription" layout="column" class="md-padding" flex="40" layout-align="start start">
-                <p class="md-body-1">{{post.description}}</p>
+                <p class="md-body-1 upperLetter">{{post.description}}</p>
                 <md-chips ng-model="post.tags" readonly="true">
                     <md-chip-template>{{$chip}}</md-chip-template>
                 </md-chips>
+                <div class="paddingTop">
+                    <div ng-switch="post.type" class="md-subhead">
+                        <p>Радиус места
+                            <span ng-switch-when="нашел"> нахождения:</span>
+                            <span ng-switch-when="потерял"> поиска:</span>
+                        </p>
+                    </div>
+                    <p>{{post.area.radius}} метра(-ов) от {{post.area.address}}.</p>
+                </div>
+                <div ng-show="post.location.length" class="paddingTop">
+                    <p class="md-subhead">Возможные места нахождения:</p>
+                    <p ng-repeat="location in post.location">{{location.address}}</p>
+                </div>
+                <div class="paddingTop">
+                    <p class="md-subhead">Контакты для связи</p>
+                    <p>Электронная почта: {{contacts.email}}</p>
+                    <p>Телефон: (+375) {{contacts.phone}}</p>
+                </div>
             </div>
         </div>
-        <google-map id="postMap" geocoder location flex></google-map>
+        <google-map flex location post-markers="post.location" post-area="post.area"></google-map>
     </md-content>
 
     <div flex>

@@ -45,7 +45,7 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider',
                 uri: '/api/posts/'
             })
             .when('/map', {
-                templateUrl: '../layout/map.html',
+                templateUrl: '../layout/globalMap.html',
                 controller: 'globalMapController',
                 uri: '/map/'
             })

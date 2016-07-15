@@ -27,7 +27,7 @@ public abstract class GenericController<E, S extends SimpleService<E>> implement
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private E getById(@PathVariable("id") Long id){
+    private E getById(@PathVariable("id") String id){
         return service.getById(id);
     }
 
@@ -37,7 +37,7 @@ public abstract class GenericController<E, S extends SimpleService<E>> implement
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    private void delete(@PathVariable("id") Long id){
+    private void delete(@PathVariable("id") String id){
         service.delete(id);
     }
 

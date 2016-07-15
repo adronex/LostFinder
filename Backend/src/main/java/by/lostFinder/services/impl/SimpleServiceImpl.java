@@ -19,12 +19,12 @@ public abstract class SimpleServiceImpl<E, R extends SimpleRepository<E>> implem
     }
 
     @Override
-    public E getById(long id) {
+    public E getById(String id) {
         return repository.findOne(id);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(String id) {
         repository.delete(id);
     }
 
