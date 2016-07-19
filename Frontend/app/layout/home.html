@@ -5,7 +5,7 @@
             <div class="md-padding" layout="column">
                 <md-radio-group ng-model="filter.type" class="md-primary">
                     <label>Тип</label>
-                    <md-radio-button ng-repeat="type in types" ng-value="$index" ng-class="{ 'md-checked': $first }">
+                    <md-radio-button ng-repeat="type in types" ng-value="type">
                         {{type.name}}
                     </md-radio-button>
                 </md-radio-group>
@@ -47,8 +47,19 @@
         </md-grid-list>
     </div>
 
-    <div flex class="md-padding" hide-sm hide-xs>
-
+    <div flex class="md-padding" layout="row" layout-align="center start" hide-sm hide-xs>
+        <div flex="60" md-whiteframe="1" layout="row" layout-align="center center">
+            <a flex href="#/createPost">
+                <div class="md-padding" layout="column" layout-align="center center">
+                    <md-button href="#/createPost" class="md-fab md-primary">
+                        <md-icon md-svg-src="icons/add_doc.svg"></md-icon>
+                    </md-button>
+                    <div class="md-padding md-subhead">
+                        <p class="upperCase textCenter">СОЗДАТЬ ОБЪЯВЛЕНИЕ</p>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 
 </div>

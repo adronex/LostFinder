@@ -5,6 +5,7 @@ var app = angular.module('lostfinder',
     ['ngRoute',
         'ngAnimate',
         'ngMaterial',
+        'ngMessages',
         'lostfinder.services',
         'satellizer'
     ]);
@@ -53,6 +54,11 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider',
                 templateUrl: '../layout/postView.html',
                 controller: 'postViewController',
                 uri: '/post/'
+            })
+            .when('/createPost', {
+                templateUrl: '../layout/createPostPage.html',
+                controller: 'createPostController',
+                uri: '/createPost/'
             })
             .otherwise('/');
 

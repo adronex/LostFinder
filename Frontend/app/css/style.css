@@ -132,11 +132,16 @@ button.md-datepicker-button.md-icon-button.md-button.md-ink-ripple, div.md-datep
 }
 
 #locationButton, #deleteMarkersButton {
-    margin: 10px;
-    padding: 8px;
+    margin: 10px 5px 5px 0;
+    padding: 5px;
     background-color: white;
     border-radius: 3px;
     box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+#locationButton {
+    margin: 10px;
+    padding: 0;
 }
 
 #locationButton:hover, #deleteMarkersButton:hover {
@@ -165,7 +170,7 @@ button.md-datepicker-button.md-icon-button.md-button.md-ink-ripple, div.md-datep
 
 /**/
 
-/*post*/
+/*post view*/
 #postDescription {
     background: #F2FCE2;
     border-left: 1px solid #E0E0E0;
@@ -189,11 +194,68 @@ button.md-datepicker-button.md-icon-button.md-button.md-ink-ripple, div.md-datep
     border-bottom: 1px solid #E0E0E0;
 }
 
+/**/
+
+/*post create*/
+#createPostPage {
+    border-radius: 2px;
+}
+
+#createPostHeader {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+md-input-container {
+    margin: 0 !important;
+}
+
+#postCreatePhoto {
+    border: 1px solid #E0E0E0;
+    border-radius: 2px;
+    margin-left: 10px;
+    /*width: 100%;*/
+    height: 33vh;
+}
+
+#postCreateMap {
+    min-height: 33vh;
+    width: 100%;
+}
+
+#publicButton {
+    margin: 0 !important;
+}
+
+/**/
+
+.textCenter {
+    text-align: center;
+}
+
+.upperCase {
+    text-transform: uppercase;
+}
+
+.paddingTopBottom {
+    padding: 10px 0 10px 0;
+}
+
 .paddingTop {
     padding-top: 10px;
+}
+
+.paddingBottom {
+    padding-bottom: 10px;
 }
 
 .upperLetter:first-letter {
     text-transform: uppercase;
 }
-/**/
+
+.underlineText {
+    text-decoration: underline;
+}
+
+md-icon {
+    margin: 0 !important;
+}

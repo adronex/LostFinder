@@ -79,7 +79,7 @@ app.controller('mapController', ['$scope', '$timeout','$compile', function ($sco
             if (places.length == 0) return;
             if (places[0].geometry.viewport) {
                 $scope.map.fitBounds(places[0].geometry.viewport);
-                $scope.map.setZoom(12);
+                $scope.map.setZoom(15);
             } else {
                 $scope.map.setCenter(places[0].geometry.location);
                 $scope.map.setZoom(17);

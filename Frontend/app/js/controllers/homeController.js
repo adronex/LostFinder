@@ -57,7 +57,6 @@ app.controller('homeController',['$scope', function($scope) {
                     ];
 
     $scope.filter = {
-        type: "",
         cities: [],
         date:  new Date()
     };
