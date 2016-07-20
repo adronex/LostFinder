@@ -1,4 +1,4 @@
-package by.lostFinder.entities;
+package by.lostFinder.entities.superEntity;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Column;

@@ -209,16 +209,19 @@ md-input-container {
     margin: 0 !important;
 }
 
+#photoDiv {
+    margin-left: 10px;
+}
+
 #postCreatePhoto {
     border: 1px solid #E0E0E0;
     border-radius: 2px;
-    margin-left: 10px;
-    /*width: 100%;*/
-    height: 33vh;
+    height: 40vh;
+    width: 100%;
 }
 
 #postCreateMap {
-    min-height: 33vh;
+    min-height: 40vh;
     width: 100%;
 }
 

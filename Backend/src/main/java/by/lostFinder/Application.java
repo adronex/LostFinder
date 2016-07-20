@@ -43,5 +43,11 @@ public class Application {
     @Bean
     public NamedService<PostType> postTypeService(){return new NamedServiceImpl<PostType, NamedRepository<PostType>>() {};}
 
+    @Bean
+    public SimpleService<Location> locationService(){return new SimpleServiceImpl<Location, SimpleRepository<Location>>() {}; }
+
+    @Bean
+    public SimpleService<LocationArea> locationAreaService(){return new SimpleServiceImpl<LocationArea, SimpleRepository<LocationArea>>() {}; }
+
 }
 

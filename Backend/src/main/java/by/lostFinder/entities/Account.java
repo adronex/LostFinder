@@ -1,5 +1,6 @@
 package by.lostFinder.entities;
 
+import by.lostFinder.entities.superEntity.IdEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

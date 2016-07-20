@@ -1,5 +1,6 @@
 package by.lostFinder.entities;
 
+import by.lostFinder.entities.superEntity.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ public class Contact extends IdEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "value")
     private String value;
 
     @JsonIgnore

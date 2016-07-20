@@ -1,5 +1,6 @@
 package by.lostFinder.entities;
 
+import by.lostFinder.entities.superEntity.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

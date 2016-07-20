@@ -1,5 +1,6 @@
 package by.lostFinder.entities;
 
+import by.lostFinder.entities.superEntity.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -33,6 +34,13 @@ public class Post extends IdEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @OneToMany(mappedBy = "post")
+    private List<Location> locations;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_area")
+    private LocationArea locationArea;
 
     public Post(){}
 
@@ -82,5 +90,21 @@ public class Post extends IdEntity implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocationArea getLocationArea() {
+        return locationArea;
+    }
+
+    public void setLocationArea(LocationArea locationArea) {
+        this.locationArea = locationArea;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 }

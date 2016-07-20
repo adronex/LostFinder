@@ -49,13 +49,13 @@
                         <div ng-messages="newPostForm.hashTags.$error" role="alert">
                             <div ng-message="md-max-chips">Максимум 5 ключевых слов.</div>
                         </div>
-                        <div layout="row" layout-align="start center" flex>
+                    </div>
+                    <div flex="50" layout="column" layout-align="start start" id="photoDiv">
+                        <div id="postCreatePhoto">
+                        </div>
+                        <div layout="row" layout-align="start center">
                             <p class="md-subhead">Загрузите фотографии:</p>
                             <md-button type="file" class="md-raised">Открыть...</md-button>
-                        </div>
-                    </div>
-                    <div flex="50">
-                        <div id="postCreatePhoto" flex>
                         </div>
                     </div>
                 </div>
