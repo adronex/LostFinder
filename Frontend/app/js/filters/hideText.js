@@ -1,3 +1,4 @@
+'use strict';
 
 app.filter('hideText', function(){
    return function (value, max){

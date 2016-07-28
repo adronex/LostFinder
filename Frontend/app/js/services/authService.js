@@ -19,6 +19,11 @@ services
             },
             setToken: function (data) {
                 sessionStorage.setItem('access_token', data.token_type + ' ' + data.access_token);
+            },
+            isAuthenticated: function () {
+                return sessionStorage.getItem('access_token') !== null
+                    ? sessionStorage.getItem('access_token') !== ''
+                    : false;
             }
         }
     }]);

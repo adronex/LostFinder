@@ -17,8 +17,6 @@
     <script src="properties/globalProperties.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/dictionaryController.js"></script>
-    <script src="js/controllers/accountsController.js"></script>
-    <script src="js/controllers/postsController.js"></script>
     <script src="js/controllers/mapController.js"></script>
     <script src="js/controllers/homeController.js"></script>
     <script src="js/controllers/headerController.js"></script>
@@ -26,11 +24,11 @@
     <script src="js/controllers/globalMapController.js"></script>
     <script src="js/controllers/createPostController.js"></script>
 
-    <script src="js/directives/tagsDirective.js"></script>
     <script src="js/directives/googleMap.js"></script>
     <script src="js/directives/postTile.js"></script>
 
     <script src="js/services/dictionaryService.js"></script>
+    <script src="js/services/mapService.js"></script>
     <script src="js/services/authInjector.js"></script>
     <script src="js/services/authService.js"></script>
     <script src="js/filters/hideText.js"></script>
@@ -66,7 +64,8 @@
                 <md-button href="#/map" ng-class="{'active': $location.path() == '/map'}">Карта</md-button>
             </div>
             <div flex="20" layout="row" layout-align="end center">
-                <md-button ng-click="showLoginDialog($event)">Вход</md-button>
+                <md-button ng-hide="logIn" ng-click="showLoginDialog($event)">Вход</md-button>
+                <md-button ng-show="logIn">Выход</md-button>
             </div>
         </div>
     </md-toolbar>

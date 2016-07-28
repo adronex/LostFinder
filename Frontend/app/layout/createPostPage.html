@@ -16,7 +16,7 @@
                             <p class="md-subhead">Выберите тип объявления:</p>
                             <md-radio-group ng-model="newPost.type" class="md-primary" layout="row" flex
                                             layout-align="space-around center">
-                                <md-radio-button ng-repeat="type in postTypes" ng-value="type">{{type}}
+                                <md-radio-button ng-repeat="type in postTypes" ng-value="type">{{type.name}}
                                 </md-radio-button>
                             </md-radio-group>
                         </div>
@@ -42,12 +42,14 @@
                                 </div>
                             </div>
                         </md-input-container>
-                        <p class="md-subhead">Введите несколько ключевых слов:</p>
-                        <md-chips name="hashTags" ng-model="newPost.hashTags" placeholder="Ключевые слова"
-                                  md-separator-keys="separatorKeys" md-max-chips="5" required>
-                        </md-chips>
-                        <div ng-messages="newPostForm.hashTags.$error" role="alert">
-                            <div ng-message="md-max-chips">Максимум 5 ключевых слов.</div>
+                        <div>
+                            <p class="md-subhead">Введите несколько ключевых слов:</p>
+                            <md-chips name="hashTags" ng-model="hashTags" placeholder="Ключевые слова"
+                                      md-separator-keys="separatorKeys" md-max-chips="5" required>
+                            </md-chips>
+                            <div ng-messages="newPostForm.hashTags.$error" role="alert">
+                                <div ng-message="md-max-chips">Максимум 5 ключевых слов.</div>
+                            </div>
                         </div>
                     </div>
                     <div flex="50" layout="column" layout-align="start start" id="photoDiv">
@@ -63,27 +65,31 @@
                     <md-icon md-svg-src="icons/location_marker.svg"></md-icon>
                     <p class="md-subhead paddingTopBottom">Отметьте на карте расположение:</p>
                 </div>
-                <google-map drawing location searchbox id="postCreateMap"></google-map>
+                <google-map id="postCreateMap" post="newPost" drawing location searchbox></google-map>
                 <div layout="row" class="paddingTopBottom">
                     <div layout="column" flex="50">
-                        <p class="md-subhead paddingTopBottom">Контакты для связи:</p>
+                        <p class="md-subhead paddingTop">Контакты для связи:</p>
                         <div ng-repeat="contact in newPost.contacts" layout="column">
-                            <ng-form name="contactsForm">
+                            <ng-form name="contactsForm" layout="row" layout-align="start start">
                                 <md-input-container md-no-float>
                                     <md-icon md-svg-src="icons/phone.svg"></md-icon>
                                     <input name="phone" ng-model="contact.value" placeholder="Номер телефона"
                                            ng-pattern="phoneRegExp" required>
                                     <div ng-messages="contactsForm.phone.$error" role="alert">
                                         <div ng-message-exp="['required', 'pattern']">
-                                            Введите номер телефона в формате (12) 345-67-89
+                                            Введите номер в формате (12) 345-67-89
                                         </div>
                                     </div>
                                 </md-input-container>
+                                <md-button class="md-icon-button" ng-click="deleteContact($index)"
+                                           ng-show="deleteContactButton" aria-label="add contact">
+                                    <md-icon md-svg-icon="icons/close_black_48px.svg"></md-icon>
+                                </md-button>
                             </ng-form>
                         </div>
                         <div layout="row" layout-align="start center">
                             <md-button ng-click="addContact()" ng-disabled="disableContact"
-                                       class="md-fab md-mini md-primary">
+                                       class="md-fab md-mini md-primary" aria-label="add contact">
                                 <md-icon md-svg-src="icons/add_plus.svg"></md-icon>
                             </md-button>
                             <p ng-hide="disableContact">Ещё один номер</p>
@@ -97,7 +103,7 @@
                                    type="number" max="31" min="1" required>
                             <div ng-messages="newPostForm.lifetime.$error" role="alert">
                                 <div ng-message-exp="['required', 'max', 'min', 'pattern']">Срок подачи объявления от 1
-                                    до 31 дней.
+                                    до 31 дня.
                                 </div>
                             </div>
                         </md-input-container>
@@ -105,7 +111,9 @@
                             Согласен с <a href="#/" class="underlineText">правилами</a> размещения.
                         </md-checkbox>
                         <div layout="row" layout-align="start center">
-                            <md-button id="publicButton" class="md-primary md-raised" ng-disabled="true">Опубликовать
+                            <md-button id="publicButton" class="md-primary md-raised"
+                                       ng-click="savePost()" ng-disabled="false">
+                                Опубликовать
                             </md-button>
                         </div>
                     </div>

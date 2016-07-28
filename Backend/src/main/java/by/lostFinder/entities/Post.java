@@ -25,6 +25,9 @@ public class Post extends IdEntity implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
+    @Column(name = "lifetime")
+    private int lifetime;
+
     @ManyToMany
     @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
             inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
@@ -90,6 +93,14 @@ public class Post extends IdEntity implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public int getLifetime() {
+        return lifetime;
+    }
+
+    public void setLifetime(int lifetime) {
+        this.lifetime = lifetime;
     }
 
     public LocationArea getLocationArea() {

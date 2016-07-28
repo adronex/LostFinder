@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.time.LocalDate;
+
 public class PostServiceImpl extends SimpleServiceImpl<Post, PostRepository> implements SimpleService<Post> {
 
     @Autowired
@@ -17,6 +19,7 @@ public class PostServiceImpl extends SimpleServiceImpl<Post, PostRepository> imp
     public Post save(Post entity) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         entity.setAccount(accountService.findByAuthUsername(authentication.getName()));
+        entity.setDate(LocalDate.now());
         return super.save(entity);
     }
 }

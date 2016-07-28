@@ -1,3 +1,5 @@
+'use strict';
+
 app.controller('postViewController', ['$scope', function ($scope) {
 
     $scope.post = {

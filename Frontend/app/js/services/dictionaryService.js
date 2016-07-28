@@ -1,4 +1,3 @@
-
 'use strict';
 
 services.factory('dictionaryService', ['$http', function ($http) {

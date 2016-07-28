@@ -1,3 +1,4 @@
+'use strict';
 
 app.controller('globalMapController', [ '$scope', function($scope){
     $scope.posts = [{

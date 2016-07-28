@@ -1,3 +1,4 @@
+'use strict';
 
 app.directive('googleMap', [ function(){
 
@@ -13,13 +14,13 @@ app.directive('googleMap', [ function(){
         restrict: 'E',
         controller: 'mapController',
         scope: {
-            postMarkers: '=',
-            postArea: '=',
-            globalMapPosts: '='
+            postMarkers: '=?',
+            postArea: '=?',
+            globalMapPosts: '=?',
+            post: '=?'
         },
         link: function($scope, element, attr, ctrl){
 
-            $scope.error = "";
             $scope.infoWindow = new google.maps.InfoWindow();
 
             $scope.map = new google.maps.Map(element[0], {
@@ -29,6 +30,9 @@ app.directive('googleMap', [ function(){
             });
             $scope.map.addListener("click", function () {
                 $scope.infoWindow.close();
+            });
+            $scope.infoWindow.setOptions({
+                maxWidth: 200
             });
 
             $scope.$watch('attr', function () {

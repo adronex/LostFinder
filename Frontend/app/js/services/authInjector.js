@@ -5,6 +5,8 @@
  * @version 1.0
  * @date 14.04.2016
  */
+'use strict';
+
 services
     .factory('authInjector', function() {
 

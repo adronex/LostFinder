@@ -1,4 +1,3 @@
-
 'use strict';
 
 app.controller('dictionaryController', ['$scope', '$route', 'dictionaryService', function ($scope, $route, dictionaryService) {

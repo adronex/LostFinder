@@ -262,3 +262,11 @@ md-input-container {
 md-icon {
     margin: 0 !important;
 }
+
+#facebookButton {
+    background: url("../img/facebook_button.png") no-repeat center / cover;
+}
+
+#googleButton {
+    background: url("../img/google_button.png") no-repeat center / cover;
+}
