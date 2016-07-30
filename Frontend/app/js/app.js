@@ -16,7 +16,7 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider',
 
             $routeProvider
                 .when('/', {
-                    templateUrl: '../layout/home.html',
+                    templateUrl: '../layout/allPosts.html',
                     controller: 'homeController',
                     uri: '/home/'
                 })

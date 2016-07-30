@@ -57,12 +57,5 @@ app.controller('homeController',['$scope', function($scope) {
                     }
                     ];
 
-    $scope.filter = {
-        cities: [],
-        date:  new Date()
-    };
-
-    $scope.cities = ["Минск", "Брест", "Гомель", "Витебск", "Могилев", "Гродно"];
-
     $scope.types = { all:{ name: "все", color: ""}, lost:{ name: "ищу", color: "#C62828"}, find:{name: "нашел", color: "#1565C0"}};
 }]);

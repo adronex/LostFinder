@@ -3,10 +3,9 @@
 app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryService', 'mapService',
     function ($scope, $mdConstant, dictionaryService, mapService) {
 
-        var uri = {
-            postTypes: '/api/dictionaries/postTypes',
-            posts: '/api/posts'
-        };
+        dictionaryService.getAll(uri.postTypes).success(function (data) {
+            $scope.postTypes = data;
+        });
 
         var keys = {
             SPACE: 32, // ' '
@@ -29,10 +28,6 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
         $scope.rulesConfirm = false;
         $scope.disableContact = false;
         $scope.deleteContactButton = false;
-
-        dictionaryService.getAll(uri.postTypes).success(function (data) {
-            $scope.postTypes = data;
-        });
 
         $scope.$watchCollection('hashTags', function (newVal) {
             $scope.newPost.hashTags = [];

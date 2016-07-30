@@ -9,7 +9,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, header,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
     margin: 0;
@@ -23,12 +23,15 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, menu, nav, section {
     display: block;
 }
+/**/
 
-/*new*/
-
+#allContent {
+    background: #2a2f27 url("../img/mainbg.jpg") no-repeat fixed center / cover;
+    min-height: 100vh;
+}
 
 /*logo*/
 #logo {
@@ -78,20 +81,7 @@ a.md-button.md-ink-ripple.active {
 }
 /**/
 
-#view {
-    width: 100%;
-    min-height: 100vh;
-    background: #2a2f27 url("../img/mainbg.jpg") no-repeat fixed center / cover;
-    /*background: #2a2f27 linear-gradient(120deg, #155799, #159957) no-repeat fixed center / cover;*/
-}
-
 /*title*/
-md-card-avatar span {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-}
 
 md-grid-tile {
     background: white;
@@ -112,14 +102,13 @@ md-grid-tile {
     background: white;
 }
 
-/*date picker*/
-button.md-datepicker-button.md-icon-button.md-button.md-ink-ripple, div.md-datepicker-input-container{
-    margin: 0;
-    padding: 0;
-}
-/**/
-
 /*map*/
+
+google-map {
+    min-height: 300px;
+    width: 100%;
+}
+
 #globalMap {
     height: 80vh;
     min-height: 600px;
@@ -171,14 +160,21 @@ button.md-datepicker-button.md-icon-button.md-button.md-ink-ripple, div.md-datep
 /**/
 
 /*post view*/
+
 #postDescription {
     background: #F2FCE2;
     border-left: 1px solid #E0E0E0;
+
+}
+
+#postMapDetail {
+    background: #F2FCE2;
+    border-top: 1px solid #E0E0E0;
+    min-height: 120px;
 }
 
 #postView {
-    height: 90vh;
-    min-height: 600px;
+    height: 100%;
     border-radius: 2px;
 }
 
@@ -192,6 +188,7 @@ button.md-datepicker-button.md-icon-button.md-button.md-ink-ripple, div.md-datep
 #postContent {
     border-top: 1px solid #E0E0E0;
     border-bottom: 1px solid #E0E0E0;
+    min-height: 300px;
 }
 
 /**/
@@ -205,7 +202,7 @@ button.md-datepicker-button.md-icon-button.md-button.md-ink-ripple, div.md-datep
     border-bottom: 1px solid #E0E0E0;
 }
 
-md-input-container {
+#createPostPage md-input-container {
     margin: 0 !important;
 }
 
@@ -249,6 +246,14 @@ md-input-container {
 
 .paddingBottom {
     padding-bottom: 10px;
+}
+
+.paddingLeft {
+    padding-left: 10px;
+}
+
+.paddingRight{
+    padding-right: 10px;
 }
 
 .upperLetter:first-letter {

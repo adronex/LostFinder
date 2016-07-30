@@ -1,11 +1,27 @@
 
-app.controller('headerController', ['$scope', '$location', '$mdDialog', '$mdMedia', 'authService',
-    function ($scope, $location, $mdDialog, $mdMedia, authService) {
+app.controller('headerController', ['$scope', '$location', '$mdDialog', '$mdMedia', 'authService', 'dictionaryService',
+    function ($scope, $location, $mdDialog, $mdMedia, authService, dictionaryService) {
+
+        dictionaryService.getAll(uri.postTypes).success(function (data) {
+            $scope.postTypes = data;
+        });
+
+        $scope.filter = {
+            postType: {},
+            date:  new Date()
+        };
 
         $scope.authService = authService;
         $scope.$location = $location;
-        $scope.searchText = '';
-        $scope.ctrl = {};
+        $scope.autocomplete = {
+            searchText: '',
+            items: [],
+            selectedItem: {},
+            itemText: ''
+        };
+        $scope.searchTextChange = function(){
+
+        };
 
         $scope.user = {
             email: '',

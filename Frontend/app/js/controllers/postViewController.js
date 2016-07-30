@@ -8,7 +8,7 @@ app.controller('postViewController', ['$scope', function ($scope) {
         description: 'черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый',
         date: new Date(),
         img: "img/cat.jpg",
-        location: [
+        locations: [
             {
                 coords: {
                     lat: 53.899382,
