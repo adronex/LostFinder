@@ -1,6 +1,7 @@
 package by.lostFinder.security;
 
 import by.lostFinder.entities.Account;
+import by.lostFinder.repositories.AccountRepository;
 import by.lostFinder.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Service;
 class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private AccountService accountService;
+    private AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountService.findByAuthUsername(username);
+        Account account = accountRepository.findByEmailIgnoreCase(username);
         if (account == null) {
             throw new UsernameNotFoundException(String.format("Account %s does not exist!", username));
         }

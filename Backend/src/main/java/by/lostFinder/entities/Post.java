@@ -9,26 +9,21 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "post")
-public class Post extends IdEntity implements Serializable {
+public class Post extends IdEntity {
 
     @ManyToOne
     @JoinColumn(name = "post_type_id")
     private PostType postType;
 
-    @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "lifetime")
     private int lifetime;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
             inverseJoinColumns = @JoinColumn(name = "ID_HASHTAG"))
     private List<HashTag> hashTags;
@@ -38,7 +33,8 @@ public class Post extends IdEntity implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
     private List<Location> locations;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

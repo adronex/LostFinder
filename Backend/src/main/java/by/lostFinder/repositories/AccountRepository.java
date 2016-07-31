@@ -7,7 +7,5 @@ import by.lostFinder.repositories.superRepositories.SimpleRepository;
 
 public interface AccountRepository extends SimpleRepository<Account> {
 
-    Account findByEmailIgnoreCaseAndOauthType(String email, OAuthType oAuthType);
-
-    Account findByOauthIdAndOauthType(String oauthId, OAuthType oauthType);
+    Account findByEmailIgnoreCase(String email);
 }

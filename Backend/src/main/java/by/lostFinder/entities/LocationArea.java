@@ -15,10 +15,6 @@ public class LocationArea extends LocationEntity {
     @Column(name = "radius")
     private int radius;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "locationArea")
-    private Post post;
-
     public LocationArea(){
     }
 
@@ -28,13 +24,5 @@ public class LocationArea extends LocationEntity {
 
     public void setRadius(int radius) {
         this.radius = radius;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
     }
 }

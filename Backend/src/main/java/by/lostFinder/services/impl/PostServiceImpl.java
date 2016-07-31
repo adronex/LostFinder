@@ -1,6 +1,7 @@
 package by.lostFinder.services.impl;
 
 import by.lostFinder.entities.Post;
+import by.lostFinder.repositories.AccountRepository;
 import by.lostFinder.repositories.PostRepository;
 import by.lostFinder.services.AccountService;
 import by.lostFinder.services.PostService;
@@ -17,13 +18,14 @@ import java.util.List;
 public class PostServiceImpl extends SimpleServiceImpl<Post, PostRepository> implements PostService {
 
     @Autowired
-    AccountService accountService;
+    AccountRepository accountRepository;
 
     @Override
     public Post save(Post entity) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        entity.setAccount(accountService.findByAuthUsername(authentication.getName()));
+        entity.setAccount(accountRepository.findByEmailIgnoreCase(authentication.getName()));
         entity.setDate(LocalDate.now());
+        entity.getLocations().stream().forEach(e -> e.setPost(entity));
         return super.save(entity);
     }
 

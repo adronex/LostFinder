@@ -6,16 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "location")
 public class Location extends LocationEntity {
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
-
-    public Location() {
-    }
 
     public Post getPost() {
         return post;
