@@ -9,11 +9,12 @@
     "angular-cookies": "~1.5.5",
     "angular-animate": "~1.5.5",
     "angular-material": "^1.0.9",
-    "satellizer": "^0.14.1"
+    "satellizer": "~0.15.4"
   },
   "resolutions": {
     "angular": "~1.5.5",
     "angular-route": "~1.5.5",
-    "angular-cookies": "~1.5.5"
+    "angular-cookies": "~1.5.5",
+    "satellizer": "~0.15.4"
   }
 }
