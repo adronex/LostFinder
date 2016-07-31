@@ -52,6 +52,8 @@ app.controller('headerController', ['$scope', '$location', '$mdDialog', '$mdMedi
 
         };
 
+        $scope.logout = authService.logout();
+        
         function DialogController($scope, $mdDialog, $auth) {
 
             $scope.closeDialog = function () {

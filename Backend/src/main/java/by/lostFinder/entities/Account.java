@@ -27,19 +27,16 @@ public class Account extends IdEntity implements UserDetails, Serializable {
     @JoinColumn(name = "details_id")
     private AccountDetail accountDetail;
 
-    @Enumerated
-    private OAuthType oauthType;
-
     private String oauthId;
 
     public Account() {
     }
 
-    public Account(String email, AccountDetail detail, String oauthId, OAuthType oauthType) {
+    public
+    Account(String email, AccountDetail detail, String oauthId) {
         this.oauthId = oauthId;
         this.email = email;
         this.accountDetail = detail;
-        this.oauthType = oauthType;
     }
 
     public void setPassword(String password) {
@@ -68,10 +65,6 @@ public class Account extends IdEntity implements UserDetails, Serializable {
 
     public void setAccountDetail(AccountDetail accountDetail) {
         this.accountDetail = accountDetail;
-    }
-
-    public OAuthType getOauthType() {
-        return oauthType;
     }
 
     public String getOauthId() {

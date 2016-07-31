@@ -4,8 +4,8 @@
         <div layout="column" layout-fill layout-align="space-between stretch">
             <div layout="row" class="md-padding">
                         <span class="postType"
-                              ng-style="post.type == types.lost.name ? { background: types.lost.color } : { background: types.find.color }"></span>
-                <h5>{{post.type | uppercase}}</h5>
+                              ng-style="post.postType == types.lost.name ? { background: types.lost.color } : { background: types.find.color }"></span>
+                <h5>{{post.postType | uppercase}}</h5>
             </div>
             <img flex="60" flex-xl="45" ng-src={{post.img}}>
             <div layout="column" class="md-padding">

@@ -65,7 +65,7 @@
             </div>
             <div flex="20" layout="row" layout-align="end center">
                 <md-button ng-hide="logIn" ng-click="showLoginDialog($event)">Вход</md-button>
-                <md-button ng-show="logIn">Выход</md-button>
+                <md-button ng-show="logIn" ng-click="logout()">Выход</md-button>
             </div>
         </div>
     </md-toolbar>

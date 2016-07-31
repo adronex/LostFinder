@@ -7,7 +7,7 @@ CREATE TABLE `location_area` (
   PRIMARY KEY (`ID`));
 
 ALTER TABLE `post`
-ADD COLUMN `ID_AREA` VARCHAR(36) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL AFTER `POST_TYPE_ID`;
+ADD COLUMN `ID_AREA` VARCHAR(36) NOT NULL AFTER `POST_TYPE_ID`;
 
 INSERT INTO `location_area` (`ID`, `lat`, `lng`, `address`, `radius`) VALUES ('1', '53', '27', 'Беларусь', '300');
 INSERT INTO `location_area` (`ID`, `lat`, `lng`, `address`, `radius`) VALUES ('2', '54', '27', 'Беларусь', '100');
@@ -46,7 +46,7 @@ ADD CONSTRAINT `FK_POST_LOCATION`
 UPDATE `post_type` SET `name`='ищу' WHERE `ID`='2';
 
 ALTER TABLE `post`
-CHANGE COLUMN `TITLE` `TITLE` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ;
+CHANGE COLUMN `TITLE` `TITLE` VARCHAR(50) NOT NULL ;
 
 ALTER TABLE `post`
 ADD COLUMN `LIFETIME` INT NOT NULL AFTER `ID_AREA`;

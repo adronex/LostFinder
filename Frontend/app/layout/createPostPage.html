@@ -8,7 +8,7 @@
                 <div layout="column" flex="50">
                     <div class="paddingBottom" layout="row">
                         <p class="md-subhead">Выберите тип объявления:</p>
-                        <md-radio-group ng-model="newPost.type" class="md-primary" layout="row" flex
+                        <md-radio-group ng-model="newPost.postType" class="md-primary" layout="row" flex
                                         layout-align="space-around center">
                             <md-radio-button ng-repeat="type in postTypes" ng-value="type">{{type.name}}
                             </md-radio-button>

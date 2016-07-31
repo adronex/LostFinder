@@ -16,12 +16,6 @@ public class AccountServiceImpl extends SimpleServiceImpl<Account, AccountReposi
     SimpleService<AccountDetail> accountDetailService;
 
     @Override
-    public Account findByAuthUsername(String username) {
-        String[] buff = username.split("###");
-        return repository.findByEmailIgnoreCaseAndOauthType(buff[0], OAuthType.valueOf(buff[1]));
-    }
-
-    @Override
     public Account save(Account entity) {
         entity.getAccountDetail().setAccount(entity);
         if (entity.getPosts() != null) entity.getPosts().forEach(post->post.setAccount(entity));
