@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('googleMap', [ function(){
+app.directive('googleMap', [function () { //todo: remake
 
     var options = {
         LOCATION: 'location',
@@ -19,7 +19,7 @@ app.directive('googleMap', [ function(){
             globalMapPosts: '=?',
             post: '=?'
         },
-        link: function($scope, element, attr, ctrl){
+        link: function ($scope, element, attr, ctrl) {
 
             $scope.infoWindow = new google.maps.InfoWindow();
 
@@ -35,26 +35,33 @@ app.directive('googleMap', [ function(){
                 maxWidth: 200
             });
 
-            $scope.$watch('attr', function () {
-                for (var key in attr) {
-                    switch (key) {
-                        case options.LOCATION:
-                            ctrl.setLocationButton();
-                            break;
-                        case options.SEARCHBOX:
-                            ctrl.setSearchBox();
-                            break;
-                        case options.DRAWING:
-                            ctrl.setDrawingFunctions();
-                            break;
-                        default:
-                            break;
-                    }
+            for (var key in attr) { //todo: remake
+                switch (key) {
+                    case options.LOCATION:
+                        ctrl.setLocationButton();
+                        break;
+                    case options.SEARCHBOX:
+                        ctrl.setSearchBox();
+                        break;
+                    case options.DRAWING:
+                        ctrl.setDrawingFunctions();
+                        break;
+                    default:
+                        break;
                 }
+            }
+
+            $scope.$watch('postMarkers', function (newVal) {
+                if(newVal) ctrl.loadPostMarkers(newVal);
             });
 
-            if($scope.postMarkers || $scope.postArea) ctrl.loadPostMarkers($scope.postMarkers, $scope.postArea);
-            if($scope.globalMapPosts) ctrl.loadGlobalMapPosts($scope.globalMapPosts);
+            $scope.$watch('postArea', function(newVal){
+                if(newVal) ctrl.loadPostArea(newVal);
+            });
+
+            $scope.$watch('globalMapPosts', function(newVal){
+                if(newVal) ctrl.loadGlobalMapPosts(newVal);
+            });
         }
     }
 }]);

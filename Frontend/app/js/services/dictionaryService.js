@@ -4,10 +4,9 @@ services.factory('dictionaryService', ['$http', function ($http) {
 
     return {
         getAll: function (uri) {
-            return $http.get(serverUrl + uri)
-                .success(function (data, status) {
-                    return data;
-                })
+            return $http.get(serverUrl + uri).then(function(response) {
+                return response.data;
+            })
         },
 
         putItem: function (uri, itemForPut) {

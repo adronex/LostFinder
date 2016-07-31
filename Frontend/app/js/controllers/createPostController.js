@@ -3,7 +3,7 @@
 app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryService', 'mapService',
     function ($scope, $mdConstant, dictionaryService, mapService) {
 
-        dictionaryService.getAll(uri.postTypes).success(function (data) {
+        dictionaryService.getAll(uri.postTypes).then(function (data) {
             $scope.postTypes = data;
         });
 

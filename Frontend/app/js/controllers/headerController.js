@@ -2,7 +2,7 @@
 app.controller('headerController', ['$scope', '$location', '$mdDialog', '$mdMedia', 'authService', 'dictionaryService',
     function ($scope, $location, $mdDialog, $mdMedia, authService, dictionaryService) {
 
-        dictionaryService.getAll(uri.postTypes).success(function (data) {
+        dictionaryService.getAll(uri.postTypes).then(function(data) {
             $scope.postTypes = data;
         });
 

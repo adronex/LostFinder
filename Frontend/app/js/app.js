@@ -25,10 +25,10 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider',
                     controller: 'globalMapController',
                     uri: '/map/'
                 })
-                .when('/post', {
+                .when('/posts/:id', {
                     templateUrl: '../layout/postView.html',
                     controller: 'postViewController',
-                    uri: '/post/'
+                    uri: '/posts/'
                 })
                 .when('/createPost', {
                     templateUrl: '../layout/createPostPage.html',

@@ -3,54 +3,60 @@
 app.controller('mapController', ['$scope', '$timeout', '$compile', 'mapService',
     function ($scope, $timeout, $compile, mapService) {
 
-        this.loadPostMarkers = function (markers, area) {
+        this.loadPostMarkers = function (markers) {
             if (markers.length) {
-                markers.forEach(function (location) {
+                markers.forEach(function (mk) {
                     var marker = new google.maps.Marker({
                         map: $scope.map,
-                        position: location.coords
+                        position: {lat: mk.lat, lng: mk.lng}
                     });
                     marker.addListener('click', function () {
                         $scope.infoWindow.setOptions({
-                            content: location.address
+                            content: mk.address
                         });
                         setMapCenter(marker.position);
                         $scope.infoWindow.open($scope.map, marker);
                     });
                 });
             }
-            if (area.address) {
+        };
+
+        this.loadPostArea = function (area) {
+            if (Object.keys(area).length) {
                 var circle = new google.maps.Circle({
                     map: $scope.map,
                     radius: area.radius,
-                    center: area.coords
+                    center: {lat: area.lat, lng: area.lng}
                 });
                 circle.addListener('click', function () {
-                    setMapCenter(area.coords)
+                    setMapCenter(circle.getCenter())
                 });
             }
-            setMapCenter(area.coords);
+            setMapCenter(circle.getCenter());
         };
 
         this.loadGlobalMapPosts = function (posts) {
-            posts.forEach(function (post) {
-                var coords = post.area.address ? post.area.coords : post.location[0].coords;
-                var marker = new google.maps.Marker({
-                    map: $scope.map,
-                    position: coords
-                });
-                marker.addListener('click', function () {
-                    $scope.post = post;
-                    var postTile = '<post-tile flex></post-tile>';
-                    var compiled = $compile(postTile)($scope);
-                    $scope.$apply();
-                    $scope.infoWindow.setOptions({
-                        content: compiled[0]
+            if (posts.length) {
+                posts.forEach(function (post) {
+                    var coords = post.locationArea.address ? {lat: post.locationArea.lat, lng: post.locationArea.lng}
+                                                           : {lat: post.locations[0].lat, lng: post.locations[0].lng};
+                    var marker = new google.maps.Marker({
+                        map: $scope.map,
+                        position: coords
                     });
-                    setMapCenter(marker.position);
-                    $scope.infoWindow.open($scope.map, marker);
+                    marker.addListener('click', function () {
+                        $scope.post = post;
+                        var postTile = '<post-tile flex></post-tile>';
+                        var compiled = $compile(postTile)($scope);
+                        $scope.$apply();
+                        $scope.infoWindow.setOptions({
+                            content: compiled[0]
+                        });
+                        setMapCenter(marker.position);
+                        $scope.infoWindow.open($scope.map, marker);
+                    });
                 });
-            });
+            }
         };
 
         function setMapCenter(position) {
@@ -203,7 +209,7 @@ app.controller('mapController', ['$scope', '$timeout', '$compile', 'mapService',
                     });
                     mapService.setArea(newCircle);
                 });
-                newCircle.addListener('radius_changed', function(){
+                newCircle.addListener('radius_changed', function () {
                     mapService.setArea(newCircle);
                 });
             });

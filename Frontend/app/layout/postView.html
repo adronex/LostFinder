@@ -7,11 +7,12 @@
         </div>
 
         <div layout="row" flex="45" id="postContent" class="md-body-1">
-            <div id="postImage" style="background-image: url({{post.img}})" flex="60"></div>
+            <!--<div id="postImage" style="background-image: url({{imageLink}})" flex="60"></div>-->
+            <img flex="60" ng-src="{{imageLink}}">
             <div layout="column" id="postDescription" class="md-padding" flex="40" layout-align="start start">
                 <p class="md-body-1 upperLetter">{{post.description}}</p>
-                <md-chips ng-model="post.tags" readonly="true">
-                    <md-chip-template>{{$chip}}</md-chip-template>
+                <md-chips ng-model="post.hashTags" readonly="true">
+                    <md-chip-template>{{$chip.name}}</md-chip-template>
                 </md-chips>
                 <div class="paddingTop" flex>
                     <p class="md-subhead">Контакты для связи</p>
@@ -21,17 +22,17 @@
             </div>
         </div>
 
-        <google-map flex="45" location post-markers="post.locations" post-area="post.area"></google-map>
+        <google-map flex="45" location post-markers="post.locations" post-area="post.locationArea"></google-map>
 
         <div flex="auto" layout="row" layout-align="center start" class="md-padding md-body-1" id="postMapDetail">
             <div flex class="paddingRight">
-                <div ng-switch="post.type" class="md-subhead">
+                <div ng-switch="post.postType.name" class="md-subhead">
                     <p>Радиус места
                         <span ng-switch-when="нашел"> нахождения:</span>
-                        <span ng-switch-when="потерял"> поиска:</span>
+                        <span ng-switch-when="ищу"> поиска:</span>
                     </p>
                 </div>
-                <p>{{post.area.radius}} метра(-ов) от {{post.area.address}}.</p>
+                <p>{{post.locationArea.radius}} метра(-ов) от {{post.locationArea.address}}.</p>
             </div>
             <div ng-show="post.locations.length" flex class="paddingLeft">
                 <p class="md-subhead">Возможные места нахождения:</p>

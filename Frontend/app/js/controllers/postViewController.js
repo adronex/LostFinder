@@ -1,45 +1,12 @@
 'use strict';
 
-app.controller('postViewController', ['$scope', function ($scope) {
+app.controller('postViewController', ['$scope', '$routeParams', 'dictionaryService', function ($scope, $routeParams, dictionaryService) {
 
-    $scope.post = {
-        type: 'потерял',
-        title: 'пропал кот',
-        description: 'черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый, черный кот, красный ошейник, толстый',
-        date: new Date(),
-        img: "img/cat.jpg",
-        locations: [
-            {
-                coords: {
-                    lat: 53.899382,
-                    lng: 27.566698
-                },
-                address: 'ул. Красноармейская 6, Минск, Беларусь'
-            },
-            {
-                coords: {
-                    lat: 53.900191,
-                    lng: 27.565432
-                },
-                address: 'ул. Кирова 43, Минск, Беларусь'
+    $scope.imageLink = 'http://fakeimg.pl/500x350/?text=Some&font=lobster"';
 
-            },
-            {
-                coords: {
-                    lat: 53.900406,
-                    lng: 27.567170
-                },
-                address: 'ул. Кирова 30, Минск, Беларусь'
-            }],
-        area: {
-            coords: {
-                lat: 53.900140,
-                lng: 27.566580
-            },
-            radius: 163,
-            address: 'ул. Красноармейская 6, Минск, Беларусь'
-        },
-        tags: ['пропал', 'кот', 'минск', 'толстый', 'ошейник']
-    };
+    dictionaryService.getAll(uri.posts + '/' + $routeParams.id).then(function(data){
+        $scope.post = data;
+        $scope.post.date = new Date($scope.post.date);
+    });
 
 }]);

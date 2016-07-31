@@ -21,11 +21,13 @@ time, mark, audio, video {
     text-decoration: none;
     color: inherit;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
     display: block;
 }
+
 /**/
 
 #allContent {
@@ -48,7 +50,7 @@ footer, header, menu, nav, section {
     width: 20px;
     border: 1px solid white;
     background: white;
-    box-shadow: 2px 2px 2px 1px rgba(35,35,35,0.83);
+    box-shadow: 2px 2px 2px 1px rgba(35, 35, 35, 0.83);
     transform: rotate(45deg);
 }
 
@@ -61,14 +63,15 @@ footer, header, menu, nav, section {
     height: 30px;
     border: 2px solid;
     border-radius: 30px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.55) 0%,rgba(255,255,255,0) 100%);
-    box-shadow: 1px 1px 2px 1px rgba(35,35,35,0.83);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 1px 1px 2px 1px rgba(35, 35, 35, 0.83);
 }
 
-#shukay{
+#shukay {
     position: relative;
     left: -20px;
 }
+
 /**/
 
 #toolbar {
@@ -79,9 +82,20 @@ footer, header, menu, nav, section {
 a.md-button.md-ink-ripple.active {
     background-color: #00796B;
 }
+
 /**/
 
 /*title*/
+
+.postTileHeader {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: black;
+    border-radius: 2px 2px 0 0;
+}
+
+.postTileImage {
+    border-radius: 2px 2px 0 0;
+}
 
 md-grid-tile {
     background: white;
@@ -95,8 +109,8 @@ md-grid-tile {
     border-radius: 20px;
     margin-right: 20px;
 }
-/**/
 
+/**/
 
 .md-select-menu-container, .md-whiteframe-1dp {
     background: white;
@@ -125,7 +139,7 @@ google-map {
     padding: 5px;
     background-color: white;
     border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
 #locationButton {
@@ -252,7 +266,7 @@ google-map {
     padding-left: 10px;
 }
 
-.paddingRight{
+.paddingRight {
     padding-right: 10px;
 }
 
