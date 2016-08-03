@@ -42,13 +42,13 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` VALUES (2,'sosiya','12345678','pisya@sosisya.com',2),(37,'gus','123','los@polos.com',37),(41,'monbon','123','mon@bon.com',41),(50,'shalaleyla','123','shala@leyla.com',50);
+-- INSERT INTO `account` VALUES (2,'sosiya','12345678','pisya@sosisya.com',2),(37,'gus','123','los@polos.com',37),(41,'monbon','123','mon@bon.com',41),(50,'shalaleyla','123','shala@leyla.com',50);
 
 --
 -- Dumping data for table `account_detail`
 --
 
-INSERT INTO `account_detail` VALUES (2,'pisya sosisya','SosLand'),(37,'gustavo fring','New Mexico'),(41,'mongo bongo','jungle'),(50,'shala leyla','shalamaleyla');
+-- INSERT INTO `account_detail` VALUES (2,'pisya sosisya','SosLand'),(37,'gustavo fring','New Mexico'),(41,'mongo bongo','jungle'),(50,'shala leyla','shalamaleyla');
 
 --
 -- Table structure for table `contact`
@@ -69,7 +69,7 @@ CREATE TABLE `contact` (
 -- Dumping data for table `contact`
 --
 
-INSERT INTO `contact` VALUES (1,'phone','234234234234',50),(2,'sss','232323ddssd',2);
+-- INSERT INTO `contact` VALUES (1,'phone','234234234234',50),(2,'sss','232323ddssd',2);
 
 --
 -- Table structure for table `hashtag`
@@ -87,7 +87,7 @@ CREATE TABLE `hashtag` (
 -- Dumping data for table `hashtag`
 --
 
-INSERT INTO `hashtag` VALUES (1,'голова'),(6,'девственность'),(3,'кот'),(5,'кошелёк'),(8,'потерял'),(4,'собака'),(2,'трусы'),(7,'убежал');
+-- INSERT INTO `hashtag` VALUES (1,'голова'),(6,'девственность'),(3,'кот'),(5,'кошелёк'),(8,'потерял'),(4,'собака'),(2,'трусы'),(7,'убежал');
 
 --
 -- Table structure for table `post`
@@ -111,7 +111,7 @@ CREATE TABLE `post` (
 --
 -- Dumping data for table `post`
 --
-INSERT INTO `post` VALUES (1,'убежал кот, черный, толстый, полосатый','убежал кот',2,'2016-05-12',2),(2,'потерял кошелёк в районе пл.Победы, черный, много денег','потерял кошелёк',2,'2016-04-29',2);
+-- INSERT INTO `post` VALUES (1,'убежал кот, черный, толстый, полосатый','убежал кот',2,'2016-05-12',2),(2,'потерял кошелёк в районе пл.Победы, черный, много денег','потерял кошелёк',2,'2016-04-29',2);
 
 --
 -- Table structure for table `post_hashtag`
@@ -132,7 +132,7 @@ CREATE TABLE `post_hashtag` (
 -- Dumping data for table `post_hashtag`
 --
 
-INSERT INTO `post_hashtag` VALUES (24,2,5),(25,2,8),(28,1,7),(29,1,3);
+-- INSERT INTO `post_hashtag` VALUES (24,2,5),(25,2,8),(28,1,7),(29,1,3);
 
 --
 -- Table structure for table `post_type`

@@ -9,13 +9,6 @@ CREATE TABLE `location_area` (
 ALTER TABLE `post`
 ADD COLUMN `ID_AREA` VARCHAR(36) NOT NULL AFTER `POST_TYPE_ID`;
 
-INSERT INTO `location_area` (`ID`, `lat`, `lng`, `address`, `radius`) VALUES ('1', '53', '27', 'Беларусь', '300');
-INSERT INTO `location_area` (`ID`, `lat`, `lng`, `address`, `radius`) VALUES ('2', '54', '27', 'Беларусь', '100');
-
-
-UPDATE `post` SET `ID_AREA`='1' WHERE `ID`='1';
-UPDATE `post` SET `ID_AREA`='2' WHERE `ID`='2';
-
 ALTER TABLE `post`
 ADD INDEX `FK_POST_AREA_idx` (`ID_AREA` ASC);
 ALTER TABLE `post`

@@ -2,26 +2,14 @@
     <div layout="column" layout-align="center center">
         <div layout="row" layout-align="center center">
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="closeDialog()">
+            <md-button class="md-icon-button" ng-click="closeDialog()" aria-label="close">
                 <md-icon md-svg-src="icons/close_black_48px.svg"></md-icon>
             </md-button>
         </div>
         <p class="md-subhead upperCase">войти через:</p>
         <div layout="row">
-            <md-button class="md-raised" id="facebookButton" ng-click="oauth('facebook')"></md-button>
-            <md-button class="md-raised" id="googleButton" ng-click="oauth('google')"></md-button>
+            <md-button class="md-raised" id="facebookButton" ng-click="oauth('facebook')" aria-label="fb"></md-button>
+            <md-button class="md-raised" id="googleButton" ng-click="oauth('google')" aria-label="g"></md-button>
         </div>
-    </div>
-    <div layout="column" layout-align="center center" class="paddingTop">
-        <p class="md-subhead upperCase">войти:</p>
-        <md-input-container>
-            <label>Email</label>
-            <input ng-model="user.email" type="email">
-        </md-input-container>
-        <md-input-container>
-            <label>Password</label>
-            <input ng-model="user.password" type="password">
-        </md-input-container>
-        <md-button class="md-raised md-primary" ng-click="login()">Войти</md-button>
     </div>
 </div>

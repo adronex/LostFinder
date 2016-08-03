@@ -2,10 +2,9 @@ package by.lostFinder.entities.superEntity;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 
 @MappedSuperclass
-public class LocationEntity extends IdEntity implements Serializable {
+public class LocationEntity extends IdEntity {
 
     @Column(name = "lat")
     private float lat;

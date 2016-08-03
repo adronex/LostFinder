@@ -1,7 +1,8 @@
 'use strict';
 
 var app = angular.module('lostfinder',
-    ['ngRoute',
+    [
+        'ngRoute',
         'ngAnimate',
         'ngMaterial',
         'ngMessages',
@@ -17,7 +18,7 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider',
             $routeProvider
                 .when('/', {
                     templateUrl: '../layout/allPosts.html',
-                    controller: 'homeController',
+                    controller: 'allPostController',
                     uri: '/home/'
                 })
                 .when('/map', {
@@ -52,16 +53,15 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider',
             $httpProvider.interceptors.push('authInjector');
         }])
 
-    .run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
+    .run(['$rootScope', '$location', 'authService', 'loginDialog',
+        function ($rootScope, $location, authService, loginDialog) {
 
         $rootScope.$on("$routeChangeStart", function (event, next) {
             if (next.requires && next.requires.login) {
                 if (!authService.isAuthenticated()) {
-                    $location.path('/');
+                    $location.path("/");
+                    loginDialog.show();
                 }
-                //if (next.requires.role && !authService.hasRole(next.requires.role)) {
-                //    $location.path('/404');
-                //}
             }
         });
     }]);

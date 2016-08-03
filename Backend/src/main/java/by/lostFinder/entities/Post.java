@@ -4,7 +4,6 @@ import by.lostFinder.entities.superEntity.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,6 +21,9 @@ public class Post extends IdEntity {
     private LocalDate date;
 
     private int lifetime;
+
+    @OneToMany(mappedBy = "post")
+    private List<Contact> contacts;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "POST_HASHTAG", joinColumns = @JoinColumn(name = "ID_POST"),
@@ -113,5 +115,13 @@ public class Post extends IdEntity {
 
     public void setLocations(List<Location> locations) {
         this.locations = locations;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 }

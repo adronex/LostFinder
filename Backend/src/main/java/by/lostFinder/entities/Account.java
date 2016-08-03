@@ -5,14 +5,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 
 @Entity
 @Table(name = "account")
-public class Account extends IdEntity implements UserDetails, Serializable {
+public class Account extends IdEntity implements UserDetails {
 
     @Column(name = "password")
     private String password;
