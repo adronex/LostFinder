@@ -1,6 +1,8 @@
 package by.lostFinder.controllers;
 
 import by.lostFinder.services.SimpleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,6 @@ import javax.persistence.MappedSuperclass;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @MappedSuperclass
 public abstract class GenericController<E, S extends SimpleService<E>> implements Filter {
@@ -22,8 +23,8 @@ public abstract class GenericController<E, S extends SimpleService<E>> implement
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    private List<E> getAll(){
-        return service.getAll();
+    private Page<E> getAll(Pageable pageable){
+        return service.getAll(pageable);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

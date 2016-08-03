@@ -2,9 +2,7 @@
 app.controller('headerController', ['$scope', '$location', 'authService', 'dictionaryService', 'loginDialog',
     function ($scope, $location, authService, dictionaryService, loginDialog) {
 
-        dictionaryService.getAll(uri.postTypes).then(function(data) {
-            $scope.postTypes = data;
-        });
+        $scope.postTypes = {'LOOK': 'Ищу', 'FOUND': 'Нашел'};
 
         $scope.filter = {
             postType: {},

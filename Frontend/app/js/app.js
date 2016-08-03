@@ -7,7 +7,8 @@ var app = angular.module('lostfinder',
         'ngMaterial',
         'ngMessages',
         'lostfinder.services',
-        'satellizer'
+        'satellizer',
+        'blockUI'
     ]);
 
 var services = angular.module('lostfinder.services', []);

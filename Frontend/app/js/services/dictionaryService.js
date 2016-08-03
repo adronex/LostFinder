@@ -3,8 +3,14 @@
 services.factory('dictionaryService', ['$http', function ($http) {
 
     return {
-        getAll: function (uri) {
+        getById: function (uri) {
             return $http.get(serverUrl + uri).then(function(response) {
+                return response.data;
+            })
+        },
+
+        getAll: function (uri, filter) {
+            return $http.post(serverUrl + uri, filter).then(function(response) {
                 return response.data;
             })
         },

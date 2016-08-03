@@ -1,11 +1,12 @@
 package by.lostFinder.services;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface SimpleService<E> {
 
     E save(E entity);
     E getById(String id);
     void delete(String id);
-    List<E> getAll();
+    Page<E> getAll(Pageable pageable);
 }

@@ -3,9 +3,8 @@
 app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryService', 'mapService',
     function ($scope, $mdConstant, dictionaryService, mapService) {
 
-        dictionaryService.getAll(uri.postTypes).then(function (data) {
-            $scope.postTypes = data;
-        });
+
+        $scope.postTypes = {'LOOK': 'Ищу', 'FOUND': 'Нашел'};
 
         var keys = {
             SPACE: 32, // ' '
@@ -59,7 +58,7 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
         });
 
 
-        $scope.$on('areaUpdate', function(event, newVal){
+        $scope.$on('areaUpdate', function (event, newVal) {
             $scope.newPost.locationArea = newVal;
             mapService.getAddress({lat: newVal.lat, lng: newVal.lng})
                 .then(function (val) {
@@ -67,7 +66,7 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
                 });
         });
 
-        $scope.$on('locationsUpdate', function(event, newVal){
+        $scope.$on('locationsUpdate', function (event, newVal) {
             $scope.newPost.locations = newVal;
             newVal.forEach(function (item, index) {
                 mapService.getAddress({lat: item.lat, lng: item.lng}).then(function (val) {

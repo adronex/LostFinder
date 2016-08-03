@@ -3,16 +3,14 @@ package by.lostFinder.entities;
 import by.lostFinder.entities.superEntity.IdEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "contact")
 public class Contact extends IdEntity {
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "value")
     private String value;
 
     @JsonIgnore
@@ -22,12 +20,12 @@ public class Contact extends IdEntity {
 
     public Contact(){}
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Post getPost() {
@@ -36,13 +34,5 @@ public class Contact extends IdEntity {
 
     public void setPost(Post post) {
         this.post = post;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

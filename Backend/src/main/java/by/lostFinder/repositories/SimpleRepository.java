@@ -1,4 +1,4 @@
-package by.lostFinder.repositories.superRepositories;
+package by.lostFinder.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

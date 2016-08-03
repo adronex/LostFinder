@@ -1,8 +1,7 @@
-package by.lostFinder.repositories;
+package by.lostFinder.repositories.account;
 
 import by.lostFinder.entities.Account;
-import by.lostFinder.entities.OAuthType;
-import by.lostFinder.repositories.superRepositories.SimpleRepository;
+import by.lostFinder.repositories.SimpleRepository;
 
 
 public interface AccountRepository extends SimpleRepository<Account> {

@@ -1,8 +1,7 @@
 package by.lostFinder.security;
 
 import by.lostFinder.entities.Account;
-import by.lostFinder.repositories.AccountRepository;
-import by.lostFinder.services.AccountService;
+import by.lostFinder.repositories.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

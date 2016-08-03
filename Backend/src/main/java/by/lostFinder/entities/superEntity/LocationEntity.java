@@ -1,41 +1,34 @@
 package by.lostFinder.entities.superEntity;
 
-import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class LocationEntity extends IdEntity {
 
-    @Column(name = "lat")
-    private float lat;
+    protected float lat;
 
-    @Column(name = "lng")
-    private float lng;
+    protected float lng;
 
-    @Column(name = "address")
-    private String address;
+    protected String address;
+
+    public LocationEntity() {
+    }
+
+    public LocationEntity(String address, float lat, float lng) {
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
+    }
 
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public float getLat() {
         return lat;
     }
 
-    public void setLat(float lat) {
-        this.lat = lat;
-    }
-
     public float getLng() {
         return lng;
-    }
-
-    public void setLng(float lng) {
-        this.lng = lng;
     }
 }

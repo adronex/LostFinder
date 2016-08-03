@@ -1,7 +1,6 @@
-package by.lostFinder.services.impl;
+package by.lostFinder.services;
 
-import by.lostFinder.repositories.superRepositories.NamedRepository;
-import by.lostFinder.services.NamedService;
+import by.lostFinder.repositories.NamedRepository;
 import org.springframework.stereotype.Service;
 
 @Service

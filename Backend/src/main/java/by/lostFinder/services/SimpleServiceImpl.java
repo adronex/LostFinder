@@ -1,11 +1,10 @@
-package by.lostFinder.services.impl;
+package by.lostFinder.services;
 
-import by.lostFinder.repositories.superRepositories.SimpleRepository;
-import by.lostFinder.services.SimpleService;
+import by.lostFinder.repositories.SimpleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public abstract class SimpleServiceImpl<E, R extends SimpleRepository<E>> implements SimpleService<E>{
@@ -29,8 +28,8 @@ public abstract class SimpleServiceImpl<E, R extends SimpleRepository<E>> implem
     }
 
     @Override
-    public List<E> getAll() {
-        return repository.findAll();
+    public Page<E> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
 }

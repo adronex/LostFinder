@@ -1,7 +1,7 @@
-package by.lostFinder.repositories;
+package by.lostFinder.repositories.post;
 
 import by.lostFinder.entities.Post;
-import by.lostFinder.repositories.superRepositories.SimpleRepository;
+import by.lostFinder.repositories.SimpleRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
