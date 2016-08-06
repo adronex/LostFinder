@@ -1,7 +1,7 @@
 package by.lostFinder.dto.post;
 
-import by.lostFinder.entities.Post;
-import by.lostFinder.entities.PostType;
+import by.lostFinder.entities.post.Post;
+import by.lostFinder.entities.post.PostType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.NotNull;
@@ -23,6 +23,8 @@ public class PostDto {
     private List<LocationDto> locations;
     @NotNull
     private List<HashTagDto> hashTags;
+    @NotNull
+    private List<ContactDto> contacts;
 
     @JsonIgnore
     public Post getNewEntity(){
@@ -59,5 +61,9 @@ public class PostDto {
 
     public List<HashTagDto> getHashTags() {
         return hashTags;
+    }
+
+    public List<ContactDto> getContacts() {
+        return contacts;
     }
 }

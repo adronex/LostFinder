@@ -3,8 +3,8 @@
 services.factory('dictionaryService', ['$http', function ($http) {
 
     return {
-        getById: function (uri) {
-            return $http.get(serverUrl + uri).then(function(response) {
+        getById: function (uri, id) {
+            return $http.get(serverUrl + uri + "/" + id).then(function(response) {
                 return response.data;
             })
         },
@@ -17,14 +17,7 @@ services.factory('dictionaryService', ['$http', function ($http) {
 
         putItem: function (uri, itemForPut) {
             return $http.put(serverUrl + uri, itemForPut)
-                .success(function (data, status) {
-                    return data;
-                })
-        },
-
-        deleteItem: function (uri, itemForDelete) {
-            return $http.delete(serverUrl + uri + itemForDelete.id, itemForDelete)
-                .success(function (data, status) {
+                .then(function (data) {
                     return data;
                 })
         }

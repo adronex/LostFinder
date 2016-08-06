@@ -2,7 +2,7 @@ package by.lostFinder.controllers;
 
 import by.lostFinder.dto.ExternalOAuthDto;
 import by.lostFinder.dto.ExternalResponseDto;
-import by.lostFinder.security.external.CustomExternalOAuthService;
+import by.lostFinder.oauth.external.CustomExternalOAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

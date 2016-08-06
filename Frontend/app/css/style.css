@@ -106,14 +106,6 @@ md-grid-tile {
     border-radius: 2px;
 }
 
-.postType {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-    margin-right: 20px;
-}
-
 /**/
 
 .md-select-menu-container, .md-whiteframe-1dp {

@@ -1,43 +1,38 @@
+<md-content id="postView" layout="column" md-whiteframe="1">
 
-    <md-content id="postView" layout="column" md-whiteframe="1">
+    <div flex="none" layout="row" layout-align="space-between center" class="md-padding">
+        <h5 class="md-title upperLetter" flex>{{post.title}}</h5>
+        <div>{{post.date | date}}</div>
+    </div>
 
-        <div flex="none" layout="row" layout-align="space-between center" class="md-padding">
-            <h5 class="md-title upperLetter" flex>{{post.title}}</h5>
-            <div>{{post.date | date}}</div>
-        </div>
-
-        <div layout="row" flex="45" id="postContent" class="md-body-1">
-            <!--<div id="postImage" style="background-image: url({{imageLink}})" flex="60"></div>-->
-            <img flex="60" ng-src="{{imageLink}}">
-            <div layout="column" id="postDescription" class="md-padding" flex="40" layout-align="start start">
-                <p class="md-body-1 upperLetter">{{post.description}}</p>
-                <md-chips ng-model="post.hashTags" readonly="true">
-                    <md-chip-template>{{$chip.name}}</md-chip-template>
-                </md-chips>
-                <div class="paddingTop" flex>
-                    <p class="md-subhead">Контакты для связи</p>
-                    <p>Электронная почта: {{contacts.email}}</p>
-                    <p>Телефон: (+375) {{contacts.phone}}</p>
-                </div>
+    <div layout="row" flex="45" id="postContent" class="md-body-1">
+        <img flex="60" ng-src="{{imageLink}}">
+        <div layout="column" id="postDescription" class="md-padding" flex="40" layout-align="start start">
+            <p class="md-body-1 upperLetter">{{post.description}}</p>
+            <md-chips ng-model="post.hashTags" readonly="true">
+                <md-chip-template>{{$chip.name}}</md-chip-template>
+            </md-chips>
+            <div class="paddingTop" flex>
+                <p class="md-subhead">Контакты для связи:</p>
+                <p ng-repeat="contact in post.contacts">(+375) {{contact.value}}</p>
             </div>
         </div>
+    </div>
 
-        <google-map flex="45" location post-markers="post.locations" post-area="post.locationArea"></google-map>
+    <google-map flex="45" location post-markers="post.locations" post-area="post.locationArea"></google-map>
 
-        <div flex="auto" layout="row" layout-align="center start" class="md-padding md-body-1" id="postMapDetail">
-            <div flex class="paddingRight">
-                <div ng-switch="post.postType.name" class="md-subhead">
-                    <p>Радиус места
-                        <span ng-switch-when="нашел"> нахождения:</span>
-                        <span ng-switch-when="ищу"> поиска:</span>
-                    </p>
-                </div>
-                <p>{{post.locationArea.radius}} метра(-ов) от {{post.locationArea.address}}.</p>
-            </div>
-            <div ng-show="post.locations.length" flex class="paddingLeft">
-                <p class="md-subhead">Возможные места нахождения:</p>
-                <p ng-repeat="location in post.locations">{{location.address}}</p>
-            </div>
+    <div flex="auto" layout="row" layout-align="center start" class="md-padding md-body-1" id="postMapDetail">
+        <div flex class="paddingRight md-subhead">
+            <p>Радиус места
+                <span ng-if="post.postType == $parent.postTypes.FOUND"> нахождения:</span>
+                <span ng-if="post.postType == $parent.postTypes.LOOK"> поиска:</span>
+            </p>
+            <p>{{post.locationArea.radius}} метра(-ов) от {{post.locationArea.address}}.</p>
         </div>
+        <div ng-show="post.locations.length" flex class="paddingLeft">
+            <p class="md-subhead">Возможные места нахождения:</p>
+            <p ng-repeat="location in post.locations">{{location.address}}</p>
+        </div>
+    </div>
 
-    </md-content>
+</md-content>

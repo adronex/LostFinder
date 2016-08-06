@@ -2,8 +2,8 @@ package by.lostFinder.controllers;
 
 import by.lostFinder.dto.filter.BaseFilterDto;
 import by.lostFinder.dto.post.PostDto;
-import by.lostFinder.entities.Post;
-import by.lostFinder.services.PostService;
+import by.lostFinder.entities.post.Post;
+import by.lostFinder.services.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/posts")
-public class PostController {
+public class PostController extends GenericController<PostService> {
 
     @Autowired
-    private PostService service;
+    protected PostController(PostService service){
+        super(service);
+    }
 
     @RequestMapping(method = RequestMethod.PUT)
     protected void save(@RequestBody @Valid PostDto dto) {

@@ -8,11 +8,7 @@
     <md-grid-tile ng-repeat="post in posts" md-whiteframe>
         <div layout="column" layout-fill layout-align="space-between stretch">
             <md-grid-tile-header layout="row" class="md-padding postTileHeader">
-                <!--<span class="postType"-->
-                      <!--ng-style="post.postType.name == types.lost.name ? { background: types.lost.color }-->
-                                                                      <!--: { background: types.find.color }">-->
-                <!--</span>-->
-                <h5>{{post.postType.name | uppercase}}</h5>
+                <h5>{{$parent.postTypes[post.postType] | uppercase}}</h5>
             </md-grid-tile-header>
             <img class="postTileImage" flex="50" ng-src="{{imageLink}}">
             <div flex="30" layout="column" class="md-padding">

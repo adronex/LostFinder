@@ -1,6 +1,6 @@
 package by.lostFinder.dto.post;
 
-import by.lostFinder.entities.LocationArea;
+import by.lostFinder.entities.post.LocationArea;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.NotNull;

@@ -1,15 +1,16 @@
 app.service('loginDialog', ['$mdDialog', function ($mdDialog) {
 
-    function DialogController($scope, $auth, authService) {
+    function DialogController($rootScope, $scope, $auth, authService) {
         $scope.closeDialog = function () {
             $mdDialog.cancel();
         };
         $scope.oauth = function(provider) {
+            $rootScope.$broadcast('authLoading');
             $scope.closeDialog();
             $auth.authenticate(provider).then(
                 function (response) {
                     authService.setToken(response.data);
-                    console.log('sosisya');
+                    console.log(provider);
                 },
                 function (error) {
                     console.log('Access denied! ' + error);

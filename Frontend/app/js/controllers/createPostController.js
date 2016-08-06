@@ -1,10 +1,7 @@
 'use strict';
 
-app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryService', 'mapService',
-    function ($scope, $mdConstant, dictionaryService, mapService) {
-
-
-        $scope.postTypes = {'LOOK': 'Ищу', 'FOUND': 'Нашел'};
+app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryService', 'mapService', '$location',
+    function ($scope, $mdConstant, dictionaryService, mapService, $location) {
 
         var keys = {
             SPACE: 32, // ' '
@@ -76,8 +73,8 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
         });
 
         $scope.savePost = function () {
-            dictionaryService.putItem(uri.posts, $scope.newPost).success(function (data) {
-                //redirect to created post page
+            dictionaryService.putItem(uri.posts, $scope.newPost).then(function (data) {
+                $location.path('/');
             });
         }
 

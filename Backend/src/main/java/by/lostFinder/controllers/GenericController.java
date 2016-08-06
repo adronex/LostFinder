@@ -1,65 +1,70 @@
 package by.lostFinder.controllers;
 
-import by.lostFinder.services.SimpleService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import by.lostFinder.dto.JsonExceptionMessage;
+import javassist.NotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.persistence.MappedSuperclass;
-import javax.servlet.*;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+/**
+ * Created on 05.03.2016;
+ *
+ * @author p.sinitskiy (adronex303@gmail.com);
+ * @since 1.0.
+ */
+public abstract class GenericController<S> {
 
-@MappedSuperclass
-public abstract class GenericController<E, S extends SimpleService<E>> implements Filter {
+    private static final String ERROR_MESSAGE_TITLE = "Error";
 
     protected S service;
 
-    protected GenericController(S service){
+    protected GenericController(S service) {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    private Page<E> getAll(Pageable pageable){
-        return service.getAll(pageable);
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public JsonExceptionMessage handleException() {
+        return new JsonExceptionMessage(ERROR_MESSAGE_TITLE, "Not found!");
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private E getById(@PathVariable("id") String id){
-        return service.getById(id);
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public JsonExceptionMessage handleException(NotFoundException ex) {
+        return new JsonExceptionMessage(ERROR_MESSAGE_TITLE, ex.getMessage());
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    private E save(@RequestBody E entity){
-        return service.save(entity);
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public JsonExceptionMessage handleException(AccessDeniedException ex) {
+        return new JsonExceptionMessage(ERROR_MESSAGE_TITLE, ex.getMessage());
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    private void delete(@PathVariable("id") String id){
-        service.delete(id);
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public JsonExceptionMessage handleException(DataIntegrityViolationException ex) {
+        return new JsonExceptionMessage(ERROR_MESSAGE_TITLE, ex.getMessage());
     }
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public JsonExceptionMessage handleException(IllegalArgumentException ex) {
+        return new JsonExceptionMessage(ERROR_MESSAGE_TITLE, ex.getMessage());
     }
 
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-        filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    @Override
-    public void destroy() {
+    @ExceptionHandler(UsernameNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public JsonExceptionMessage handleException(UsernameNotFoundException ex) {
+        return new JsonExceptionMessage(ERROR_MESSAGE_TITLE, ex.getMessage());
     }
 }
