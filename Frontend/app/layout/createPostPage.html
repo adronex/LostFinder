@@ -8,8 +8,8 @@
                 <div layout="column" flex="50">
                     <div class="paddingBottom" layout="row">
                         <p class="md-subhead">Выберите тип объявления:</p>
-                        <md-radio-group ng-model="newPost.postType" class="md-primary" layout="row" flex
-                                        layout-align="space-around center">
+                        <md-radio-group flex ng-model="newPost.postType" class="md-primary" layout="row"
+                                        layout-align="space-around center" required>
                             <md-radio-button ng-repeat="(key, value) in $parent.postTypes" ng-value="key">{{value}}
                             </md-radio-button>
                         </md-radio-group>
@@ -38,8 +38,8 @@
                     </md-input-container>
                     <div>
                         <p class="md-subhead">Введите несколько ключевых слов:</p>
-                        <md-chips name="hashTags" ng-model="hashTags" placeholder="Ключевые слова"
-                                  md-separator-keys="separatorKeys" md-max-chips="5" required>
+                        <md-chips name="hashTags" ng-model="postModel.hashTags" placeholder="Ключевые слова"
+                                  md-separator-keys="postModel.separatorKeys" md-max-chips="5">
                         </md-chips>
                         <div ng-messages="newPostForm.hashTags.$error" role="alert">
                             <div ng-message="md-max-chips">Максимум 5 ключевых слов.</div>
@@ -59,7 +59,7 @@
                 <md-icon md-svg-src="icons/location_marker.svg"></md-icon>
                 <p class="md-subhead paddingTopBottom">Отметьте на карте расположение:</p>
             </div>
-            <google-map id="postCreateMap" post="newPost" drawing location searchbox></google-map>
+            <google-map location-button search-box drawing-function id="postCreateMap" post="newPost"></google-map>
             <div layout="row" class="paddingTopBottom">
                 <div layout="column" flex="50">
                     <p class="md-subhead paddingTop">Контакты для связи:</p>
@@ -68,7 +68,7 @@
                             <md-input-container md-no-float>
                                 <md-icon md-svg-src="icons/phone.svg"></md-icon>
                                 <input name="phone" ng-model="contact.value" placeholder="Номер телефона"
-                                       ng-pattern="phoneRegExp" required>
+                                       ng-pattern="postModel.phoneRegExp" required>
                                 <div ng-messages="contactsForm.phone.$error" role="alert">
                                     <div ng-message-exp="['required', 'pattern']">
                                         Введите номер в формате (12) 345-67-89
@@ -76,18 +76,18 @@
                                 </div>
                             </md-input-container>
                             <md-button class="md-icon-button" ng-click="deleteContact($index)"
-                                       ng-show="deleteContactButton" aria-label="add contact">
+                                       ng-show="postModel.disableDeleteContact" aria-label="add contact">
                                 <md-icon md-svg-icon="icons/close_black_48px.svg"></md-icon>
                             </md-button>
                         </ng-form>
                     </div>
                     <div layout="row" layout-align="start center">
-                        <md-button ng-click="addContact()" ng-disabled="disableContact"
+                        <md-button ng-click="addContact()" ng-disabled="postModel.disableAddContact"
                                    class="md-fab md-mini md-primary" aria-label="add contact">
                             <md-icon md-svg-src="icons/add_plus.svg"></md-icon>
                         </md-button>
-                        <p ng-hide="disableContact">Ещё один номер</p>
-                        <p ng-show="disableContact">Максимум 3 номера</p>
+                        <p ng-hide="postModel.disableAddContact">Ещё один номер</p>
+                        <p ng-show="postModel.disableAddContact">Максимум 3 номера</p>
                     </div>
                 </div>
                 <div layout="column" flex="50" class="paddingTopBottom">
@@ -101,12 +101,13 @@
                             </div>
                         </div>
                     </md-input-container>
-                    <md-checkbox ng-model="rulesConfirm" class="md-primary">
+                    <md-checkbox ng-model="postModel.rulesConfirm" class="md-primary">
                         Согласен с <a href="#/" class="underlineText">правилами</a> размещения.
                     </md-checkbox>
                     <div layout="row" layout-align="start center">
-                        <md-button id="publicButton" class="md-primary md-raised"
-                                   ng-click="savePost()" ng-disabled="false">
+                        <md-button id="publicButton" class="md-primary md-raised" ng-click="savePost()"
+                                   ng-disabled="newPostForm.$invalid || contactsForm.$invalid || postModel.areaMarker
+                                   || (postModel.hashTags.length == 0) || !newPost.postType || !postModel.rulesConfirm">
                             Опубликовать
                         </md-button>
                     </div>

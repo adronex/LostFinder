@@ -1,15 +1,14 @@
 'use strict';
 
-app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryService', 'mapService', '$location',
-    function ($scope, $mdConstant, dictionaryService, mapService, $location) {
+app.controller('createPostController', ['$scope', 'dictionaryService', 'mapService', '$location',
+    function ($scope, dictionaryService, mapService, $location) {
 
         var keys = {
-            SPACE: 32, // ' '
+            ENTER: 13,
+            SPACE: 32,
             COMMA: 188, // ','
             PERIOD: 190 // '.'
         };
-        $scope.separatorKeys = [$mdConstant.KEY_CODE.ENTER, keys.SPACE, keys.COMMA, keys.PERIOD];
-        $scope.phoneRegExp = new RegExp('^[(]?[0-9]{2}[)]?[0-9]{3}([-]?[0-9]{2}){2}$');
 
         $scope.newPost = {
             hashTags: [],
@@ -19,20 +18,16 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
             locations: [],
             locationArea: {}
         };
-        $scope.hashTags = [];
 
-        $scope.rulesConfirm = false;
-        $scope.disableContact = false;
-        $scope.deleteContactButton = false;
-
-        $scope.$watchCollection('hashTags', function (newVal) {
-            $scope.newPost.hashTags = [];
-            newVal.forEach(function (val) {
-                $scope.newPost.hashTags.push({
-                    name: val
-                });
-            });
-        });
+        $scope.postModel = {
+            hashTags : [],
+            rulesConfirm : false,
+            disableAddContact : false,
+            disableDeleteContact : false,
+            areaMarker: false,
+            separatorKeys : [keys.ENTER, keys.SPACE, keys.COMMA, keys.PERIOD],
+            phoneRegExp : '^[(]?[0-9]{2}[)]?[0-9]{3}([-]?[0-9]{2}){2}$'
+        };
 
         $scope.addContact = function () {
             $scope.newPost.contacts.push({
@@ -44,16 +39,30 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
             $scope.newPost.contacts.splice(index, 1);
         };
 
-        $scope.$watchCollection('newPost.contacts', function (newVal) {
-            var maxContacts = 3;
-            $scope.disableContact = (function () {
-                return newVal.length == maxContacts;
-            })();
-            $scope.deleteContactButton = (function () {
-                return newVal.length > 1;
-            })();
+        $scope.savePost = function () {
+            dictionaryService.putItem(uri.posts, $scope.newPost).then(function () {
+                $location.path('/');
+            });
+        };
+
+        $scope.$watchCollection('postModel.hashTags', function (newVal) {
+            $scope.newPost.hashTags = [];
+            newVal.forEach(function (val) {
+                $scope.newPost.hashTags.push({
+                    name: val
+                });
+            });
         });
 
+        $scope.$watchCollection('newPost.contacts', function (newVal) {
+            var maxContacts = 3;
+            $scope.postModel.disableAddContact = (newVal.length == maxContacts);
+            $scope.postModel.disableDeleteContact = (newVal.length > 1);
+        });
+
+        $scope.$watch('newPost.locationArea', function(){
+            $scope.postModel.areaMarker = (Object.keys($scope.newPost.locationArea).length == 0);
+        });
 
         $scope.$on('areaUpdate', function (event, newVal) {
             $scope.newPost.locationArea = newVal;
@@ -61,6 +70,7 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
                 .then(function (val) {
                     $scope.newPost.locationArea.address = val;
                 });
+            $scope.$apply();
         });
 
         $scope.$on('locationsUpdate', function (event, newVal) {
@@ -70,12 +80,13 @@ app.controller('createPostController', ['$scope', '$mdConstant', 'dictionaryServ
                     $scope.newPost.locations[index].address = val;
                 });
             });
+            $scope.$apply();
         });
 
-        $scope.savePost = function () {
-            dictionaryService.putItem(uri.posts, $scope.newPost).then(function (data) {
-                $location.path('/');
-            });
-        }
+        $scope.$on('clearMap', function(){
+            $scope.newPost.locationArea = {};
+            $scope.newPost.locations = [];
+            $scope.$apply();
+        });
 
     }]);

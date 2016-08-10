@@ -1,6 +1,7 @@
 app.controller('bodyController', ['$rootScope', '$scope', '$location', 'authService', 'dictionaryService', 'loginDialog',
     function ($rootScope, $scope, $location, authService, dictionaryService, loginDialog) {
 
+        // global access from $parent
         $scope.postTypes = {
             'LOOK': 'ищу',
             'FOUND': 'нашел'
@@ -8,11 +9,14 @@ app.controller('bodyController', ['$rootScope', '$scope', '$location', 'authServ
 
         $scope.filter = {
             postType: '',
-            date: new Date()
+            date: new Date(),
+            show: true
         };
 
-        $scope.logIn = false;
-        $scope.authLoading = false;
+        $scope.model = {
+            logIn : false,
+            authLoading : false
+        };
 
         $scope.authService = authService;
         $scope.$location = $location;
@@ -25,25 +29,20 @@ app.controller('bodyController', ['$rootScope', '$scope', '$location', 'authServ
             itemText: ''
         };
 
-        $scope.user = {
-            email: '',
-            password: ''
-        };
-
         $scope.$watch((function () {
             return authService.isAuthenticated()
         }), function (newVal) {
-            $scope.logIn = newVal;
-            $scope.authLoading = false;
+            $scope.model.logIn = newVal;
+            $scope.model.authLoading = false;
         });
 
         $rootScope.$on('authLoading', function(){
-            $scope.authLoading = true;
+            $scope.model.authLoading = true;
         });
 
         $scope.$on('$routeChangeSuccess', function(event, next){
            var path = next.$$route.originalPath;
-           $scope.showFilter = (path === "/" || path === "/map");
+           $scope.filter.show = (path === "/" || path === "/map");
         });
 
         $scope.logout = function () {

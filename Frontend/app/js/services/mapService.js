@@ -1,8 +1,6 @@
 
 app.factory('mapService', [ '$q','$rootScope', function($q, $rootScope){
 
-    var geocoder = new google.maps.Geocoder;
-
     return {
 
         setLocations: function(markers){
@@ -28,7 +26,11 @@ app.factory('mapService', [ '$q','$rootScope', function($q, $rootScope){
                 $rootScope.$broadcast('areaUpdate', area);
             }
         },
+        clearMap: function(){
+            $rootScope.$broadcast('clearMap');
+        },
         getAddress: function(latlng){
+            var geocoder = new google.maps.Geocoder;
             var deferred = $q.defer();
             geocoder.geocode({'location': latlng}, function(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
@@ -36,6 +38,9 @@ app.factory('mapService', [ '$q','$rootScope', function($q, $rootScope){
                         return deferred.resolve(results[1].formatted_address);
                     }
                     return deferred.resolve(results[0].formatted_address);
+                }
+                else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+                    console.log('geocoder status: over query limit!!!')
                 }
                 return deferred.reject();
             });

@@ -24,8 +24,11 @@
     <script src="js/controllers/globalMapController.js"></script>
     <script src="js/controllers/createPostController.js"></script>
 
-    <script src="js/directives/googleMap.js"></script>
+    <script src="js/directives/gmap/googleMap.js"></script>
     <script src="js/directives/postTile.js"></script>
+    <script src="js/directives/gmap/locationButton.js"></script>
+    <script src="js/directives/gmap/searchBox.js"></script>
+    <script src="js/directives/gmap/drawingFunctions.js"></script>
 
     <script src="js/services/dictionaryService.js"></script>
     <script src="js/services/mapService.js"></script>
@@ -65,9 +68,9 @@
                 <md-button href="#/map" ng-class="{'active': $location.path() == '/map'}">Карта</md-button>
             </div>
             <div flex="20" layout="row" layout-align="end center">
-                <md-progress-circular md-mode="indeterminate" ng-show="authLoading" class="md-hue-2" md-diameter="40px"></md-progress-circular>
-                <md-button ng-hide="logIn" ng-click="loginDialog.show($event)" ng-disabled="authLoading">Вход</md-button>
-                <md-button ng-show="logIn" ng-click="logout()">Выход</md-button>
+                <md-progress-circular md-mode="indeterminate" ng-show="model.authLoading" class="md-hue-2" md-diameter="40px"></md-progress-circular>
+                <md-button ng-hide="model.logIn" ng-click="loginDialog.show($event)" ng-disabled="model.authLoading">Вход</md-button>
+                <md-button ng-show="model.logIn" ng-click="logout()">Выход</md-button>
             </div>
         </div>
     </md-toolbar>
@@ -76,7 +79,7 @@
 <div layout="row" id="allContent">
 
     <div flex layout="row" layout-align="center start" class="md-padding">
-        <div flex flex-gt-md="70" layout="column" md-whiteframe="1" class="md-padding" ng-show="showFilter">
+        <div flex flex-gt-md="70" layout="column" md-whiteframe="1" class="md-padding" ng-show="filter.show">
             <md-input-container>
                 <label for="typeFilter">Тип объявления</label>
                 <md-select id="typeFilter" ng-model="filter.postType">
