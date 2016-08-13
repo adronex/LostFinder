@@ -8,6 +8,7 @@ app.controller('postViewController', ['$scope', '$routeParams', 'dictionaryServi
         $scope.post = data;
         $scope.post.date = new Date($scope.post.date);
         $scope.post.postType = $scope.$parent.postTypes[$scope.post.postType];
+        $scope.$broadcast('postLoaded', data);
     });
 
 }]);

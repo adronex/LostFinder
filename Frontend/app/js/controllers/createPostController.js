@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('createPostController', ['$scope', 'dictionaryService', 'mapService', '$location',
-    function ($scope, dictionaryService, mapService, $location) {
+app.controller('createPostController', ['$scope', 'dictionaryService', '$location',
+    function ($scope, dictionaryService, $location) {
 
         var keys = {
             ENTER: 13,
@@ -62,31 +62,6 @@ app.controller('createPostController', ['$scope', 'dictionaryService', 'mapServi
 
         $scope.$watch('newPost.locationArea', function(){
             $scope.postModel.areaMarker = (Object.keys($scope.newPost.locationArea).length == 0);
-        });
-
-        $scope.$on('areaUpdate', function (event, newVal) {
-            $scope.newPost.locationArea = newVal;
-            mapService.getAddress({lat: newVal.lat, lng: newVal.lng})
-                .then(function (val) {
-                    $scope.newPost.locationArea.address = val;
-                });
-            $scope.$apply();
-        });
-
-        $scope.$on('locationsUpdate', function (event, newVal) {
-            $scope.newPost.locations = newVal;
-            newVal.forEach(function (item, index) {
-                mapService.getAddress({lat: item.lat, lng: item.lng}).then(function (val) {
-                    $scope.newPost.locations[index].address = val;
-                });
-            });
-            $scope.$apply();
-        });
-
-        $scope.$on('clearMap', function(){
-            $scope.newPost.locationArea = {};
-            $scope.newPost.locations = [];
-            $scope.$apply();
         });
 
     }]);

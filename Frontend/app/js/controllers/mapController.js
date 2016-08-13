@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('mapController', ['$scope', '$element','$timeout', '$compile',
-    function ($scope, $element, $timeout, $compile) {
+app.controller('mapController', ['$scope', '$element','$timeout', '$q',
+    function ($scope, $element, $timeout, $q) {
 
         var self = this;
 
@@ -18,75 +18,38 @@ app.controller('mapController', ['$scope', '$element','$timeout', '$compile',
             maxWidth: 200
         });
 
-        this.loadPostMarkers = function (markers) {
-            if (markers.length) {
-                markers.forEach(function (mk) {
-                    var marker = new google.maps.Marker({
-                        map: self.gmap,
-                        position: {lat: mk.lat, lng: mk.lng}
-                    });
-                    marker.addListener('click', function () {
-                        self.infoWindow.setOptions({
-                            content: mk.address
-                        });
-                        setMapCenter(marker.position);
-                        self.infoWindow.open(self.gmap, marker);
-                    });
-                });
-            }
-        };
 
-        this.loadPostArea = function (area) {
-            if (Object.keys(area).length) {
-                var circle = new google.maps.Circle({
-                    map: self.gmap,
-                    radius: area.radius,
-                    center: {lat: area.lat, lng: area.lng}
-                });
-                circle.addListener('click', function () {
-                    setMapCenter(circle.getCenter())
-                });
-            }
-            setMapCenter(circle.getCenter());
-        };
-
-        this.loadGlobalMapPosts = function (posts) {
-            if (posts.length) {
-                posts.forEach(function (post) {
-                    var coords = post.locationArea.address ? {lat: post.locationArea.lat, lng: post.locationArea.lng}
-                                                           : {lat: post.locations[0].lat, lng: post.locations[0].lng};
-                    var marker = new google.maps.Marker({
-                        map: self.gmap,
-                        position: coords
-                    });
-                    marker.addListener('click', function () {
-                        $scope.post = post;
-                        var postTile = '<post-tile flex></post-tile>';
-                        var compiled = $compile(postTile)($scope);
-                        $scope.$apply();
-                        self.infoWindow.setOptions({
-                            content: compiled[0]
-                        });
-                        setMapCenter(marker.position);
-                        self.infoWindow.open(self.gmap, marker);
-                    });
-                });
-            }
-        };
-
-        function setMapCenter(position) {
+        this.setMapCenter = function(position) {
             self.infoWindow.close();
             self.gmap.setOptions({
                 center: position,
                 zoom: 17
             });
-        }
+        };
 
         this.setMapControls = function(button, position) {
             $timeout(function () {
                 self.gmap.getDiv().appendChild(button);
                 self.gmap.controls[position].push(button);
             }, 500);
+        };
+
+        this.getAddress = function(latitude, longitude){
+            var geocoder = new google.maps.Geocoder();
+            var deferred = $q.defer();
+            geocoder.geocode({'location': {lat: latitude, lng: longitude}}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[0].formatted_address.split(',').length <= 2) {
+                        return deferred.resolve(results[1].formatted_address);
+                    }
+                    return deferred.resolve(results[0].formatted_address);
+                }
+                else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+                    console.log('geocoder status: over query limit!!!');
+                }
+                return deferred.reject();
+            });
+            return deferred.promise;
         };
 
     }]);

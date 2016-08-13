@@ -1,8 +1,9 @@
+'use strict';
+
 app.directive('locationButton', [function () {
 
     return {
         restrict: 'A',
-        templateUrl: '../layout/templates/locationButton.html',
         require: '^googleMap',
         link: function ($scope, element, attr, ctrl) {
 

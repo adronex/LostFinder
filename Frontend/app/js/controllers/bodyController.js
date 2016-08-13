@@ -7,7 +7,7 @@ app.controller('bodyController', ['$rootScope', '$scope', '$location', 'authServ
             'FOUND': 'нашел'
         };
 
-        $scope.filter = {
+        $scope.postFilter = {
             postType: '',
             date: new Date(),
             show: true
@@ -42,7 +42,7 @@ app.controller('bodyController', ['$rootScope', '$scope', '$location', 'authServ
 
         $scope.$on('$routeChangeSuccess', function(event, next){
            var path = next.$$route.originalPath;
-           $scope.filter.show = (path === "/" || path === "/map");
+           $scope.postFilter.show = (path === "/" || path === "/map");
         });
 
         $scope.logout = function () {

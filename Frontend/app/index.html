@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>Пашукай</title>
 
+    <!--google map-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaawgBdOuBo_TpuhmKoCUFJBNO2qvWwXw&sensor=true&libraries=drawing,places"></script>
+    <!---->
 
+    <!--bower-->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -14,7 +17,9 @@
     <script src="bower_components/angular-messages/angular-messages.min.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.js"></script>
     <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+    <!---->
 
+    <!--controllers-->
     <script src="properties/globalProperties.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/mapController.js"></script>
@@ -23,23 +28,32 @@
     <script src="js/controllers/postViewController.js"></script>
     <script src="js/controllers/globalMapController.js"></script>
     <script src="js/controllers/createPostController.js"></script>
+    <!---->
 
+    <!--directives-->
     <script src="js/directives/gmap/googleMap.js"></script>
-    <script src="js/directives/postTile.js"></script>
     <script src="js/directives/gmap/locationButton.js"></script>
     <script src="js/directives/gmap/searchBox.js"></script>
     <script src="js/directives/gmap/drawingFunctions.js"></script>
+    <script src="js/directives/gmap/markersLoader.js"></script>
+    <script src="js/directives/gmap/postsLoader.js"></script>
+    <script src="js/directives/createPostButton.js"></script>
+    <script src="js/directives/postTile.js"></script>
+    <!---->
 
+    <!--services-->
     <script src="js/services/dictionaryService.js"></script>
-    <script src="js/services/mapService.js"></script>
     <script src="js/services/authInjector.js"></script>
     <script src="js/services/authService.js"></script>
     <script src="js/services/loginDialog.js"></script>
     <script src="js/filters/hideText.js"></script>
+    <!---->
 
+    <!--styles-->
     <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <!---->
 
 </head>
 <body ng-controller="bodyController">
@@ -79,10 +93,10 @@
 <div layout="row" id="allContent">
 
     <div flex layout="row" layout-align="center start" class="md-padding">
-        <div flex flex-gt-md="70" layout="column" md-whiteframe="1" class="md-padding" ng-show="filter.show">
+        <div flex flex-gt-md="70" layout="column" md-whiteframe="1" class="md-padding" ng-show="postFilter.show">
             <md-input-container>
                 <label for="typeFilter">Тип объявления</label>
-                <md-select id="typeFilter" ng-model="filter.postType">
+                <md-select id="typeFilter" ng-model="postFilter.postType">
                     <md-option selected="true">все</md-option>
                     <md-option ng-repeat="(key, value) in postTypes" value="{{key}}">
                         {{value}}
@@ -97,18 +111,7 @@
     </div>
 
     <div flex class="md-padding" layout="row" layout-align="center start">
-        <div flex flex-gt-md="70" md-whiteframe="1" layout="row" layout-align="center center">
-            <a flex href="#/createPost">
-                <div class="md-padding" layout="column" layout-align="center center">
-                    <md-button href="#/createPost" class="md-fab md-primary" aria-label="new post">
-                        <md-icon md-svg-src="icons/add_doc.svg"></md-icon>
-                    </md-button>
-                    <div class="md-padding md-subhead">
-                        <p class="upperCase textCenter">СОЗДАТЬ ОБЪЯВЛЕНИЕ</p>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <create-post-button></create-post-button>
     </div>
 
 </div>
