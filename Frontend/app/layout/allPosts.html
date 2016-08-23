@@ -1,18 +1,18 @@
-
-<div ng-show="nothingToShow" flex layout="row" layout-align="center center" md-whiteframe="1" class="md-padding borderRadius">
+<div ng-show="nothingToShow" flex layout="row" layout-align="center center" md-whiteframe="1"
+     class="md-padding border-radius-2">
     <p class="md-subhead">К сожалению, ничего не нашлось...</p>
 </div>
 
-<md-grid-list md-cols-xs="1" md-cols-gt-xs="2" md-cols-gt-md="3" md-cols-xl="4"
-              md-row-height="4:5" md-row-height-xl="2:3" md-gutter="20px">
-    <md-grid-tile ng-repeat="post in posts" md-whiteframe>
-        <div layout="column" layout-fill layout-align="space-between stretch">
-            <md-grid-tile-header layout="row" class="md-padding postTileHeader">
+<md-grid-list md-cols="2" md-cols-gt-md="3" md-cols-xl="4"
+              md-row-height-xl="3:5" md-row-height="2:3" md-gutter="20px" >
+    <md-grid-tile ng-repeat="post in posts" ng-cloak>
+        <div md-whiteframe layout="column" layout-fill class="post-tile">
+            <md-grid-tile-header layout="row" class="md-padding post-tile-header">
                 <h5>{{$parent.postTypes[post.postType] | uppercase}}</h5>
             </md-grid-tile-header>
-            <img class="postTileImage" flex="50" ng-src="{{imageLink}}">
-            <div flex="30" layout="column" class="md-padding">
-                <h4 class="md-title upperLetter">{{post.title | hideText: 20}}</h4>
+            <img class="post-tile-image" flex-md="60" flex-gt-md="50" flex-xl="60" ng-src="{{imageLink}}">
+            <div flex layout="column" class="md-padding">
+                <h4 class="md-title uppercase-first-letter">{{post.title | hideText: 20}}</h4>
                 <p>{{post.description | hideText: 80}}</p>
             </div>
             <div layout="row">
@@ -21,7 +21,3 @@
         </div>
     </md-grid-tile>
 </md-grid-list>
-
-
-
-

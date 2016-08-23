@@ -12,6 +12,9 @@ app.controller('mapController', ['$scope', '$element','$timeout', '$q',
             zoom: 6,
             streetViewControl: false
         });
+        //google.maps.event.addListenerOnce(this.gmap, 'idle', function() {
+        //    google.maps.event.trigger(self.gmap, 'resize');
+        //});
 
         this.infoWindow = new google.maps.InfoWindow();
         this.infoWindow.setOptions({

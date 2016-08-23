@@ -16,22 +16,22 @@ public abstract class CrudController<E extends IdEntity, S extends SimpleService
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    private Page<E> getAll(Pageable pageable){
+    protected Page<E> getAll(Pageable pageable){
         return service.getAll(pageable);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private E getById(@PathVariable("id") String id){
+    protected E getById(@PathVariable("id") String id){
         return service.getById(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    private E save(@RequestBody E entity){
+    protected E save(@RequestBody E entity){
         return service.save(entity);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    private void delete(@PathVariable("id") String id){
+    protected void delete(@PathVariable("id") String id){
         service.delete(id);
     }
 }

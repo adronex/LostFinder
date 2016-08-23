@@ -16,7 +16,7 @@
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-messages/angular-messages.min.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.js"></script>
-    <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <!---->
 
     <!--controllers-->
@@ -59,10 +59,11 @@
 <body ng-controller="bodyController">
 
 <header>
-    <md-toolbar id="toolbar" class="md-whiteframe-1dp">
+    <md-toolbar id="header-toolbar" class="md-whiteframe-1dp">
         <div class="md-toolbar-tools" layout="row">
-            <div hide-sm hide-xs class="md-headline" id="logo" flex="20" layout="row" layout-align="end center">
-                <a hide-sm hide-xs href="#/"><span id="titleO"></span><span id="titleStick"></span>
+            <div class="md-headline" id="logo" flex="20" layout="row" layout-align="end center">
+                <a hide show-gt-md href="#/">
+                    <span id="titleO"></span><span id="title-stick"></span>
                     <span id="shukay">ПАШУКАЙ</span>
                 </a>
             </div>
@@ -92,7 +93,7 @@
 
 <div layout="row" id="allContent">
 
-    <div flex layout="row" layout-align="center start" class="md-padding">
+    <div flex layout="row" layout-align="center start" class="md-padding" ng-cloak>
         <div flex flex-gt-md="70" layout="column" md-whiteframe="1" class="md-padding" ng-show="postFilter.show">
             <md-input-container>
                 <label for="typeFilter">Тип объявления</label>
@@ -106,11 +107,11 @@
         </div>
     </div>
 
-    <div ng-view id="view" ng-cloack flex="60" class="md-padding">
+    <div ng-view flex="60" class="md-padding" id="ngView">
         <!--content-->
     </div>
 
-    <div flex class="md-padding" layout="row" layout-align="center start">
+    <div flex class="md-padding">
         <create-post-button></create-post-button>
     </div>
 

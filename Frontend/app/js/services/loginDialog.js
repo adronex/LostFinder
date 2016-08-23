@@ -1,4 +1,6 @@
-app.service('loginDialog', ['$mdDialog', function ($mdDialog) {
+'use strict';
+
+services.factory('loginDialog', ['$mdDialog', function ($mdDialog) {
 
     function DialogController($rootScope, $scope, $auth, authService) {
         $scope.closeDialog = function () {

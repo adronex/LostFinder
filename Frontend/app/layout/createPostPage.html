@@ -1,75 +1,114 @@
-<md-content id="createPostPage" layout="row" md-whiteframe="1">
+<md-content id="create-post-page" layout="row" md-whiteframe="1" ng-cloak>
     <div layout="column" flex>
-        <div layout="row" layout-align="start center" class="md-padding" id="createPostHeader">
-            <h5 class="md-title upperLetter" flex>Новое объявление</h5>
+
+        <div layout="row" layout-align="start center" class="md-padding" id="create-post-header">
+            <h5 class="md-title uppercase-first-letter" flex>Новое объявление</h5>
         </div>
-        <form name="newPostForm" layout="column" class="md-padding" novalidate>
+
+        <form name="newPostForm" layout="column" class="md-padding">
+
             <div layout="row">
-                <div layout="column" flex="50">
-                    <div class="paddingBottom" layout="row">
-                        <p class="md-subhead">Выберите тип объявления:</p>
-                        <md-radio-group flex ng-model="newPost.postType" class="md-primary" layout="row"
-                                        layout-align="space-around center" required>
+
+                <div layout="column" flex="50" >
+
+                    <div class="padding-bottom-10" layout="row" layout-align="start center">
+                        <p flex="auto" flex-xl="noshrink" class="md-subhead">Выберите тип объявления:</p>
+                        <md-radio-group flex="grow" ng-model="newPost.postType" class="md-primary" layout="row"
+                                        layout-align="space-around center">
                             <md-radio-button ng-repeat="(key, value) in $parent.postTypes" ng-value="key">{{value}}
                             </md-radio-button>
                         </md-radio-group>
                     </div>
+
                     <md-input-container md-no-float>
                         <p class="md-subhead">Заголовок:</p>
                         <input minlength="5" md-maxlength="50" placeholder="Краткое описание" required
                                name="title" ng-model="newPost.title">
-                        <div ng-messages="newPostForm.title.$error" role="alert">
+                        <div ng-messages="newPostForm.title.$error">
                             <div ng-message-exp="['required', 'minlength', 'md-maxlength']">
                                 Заголовок должен обязательно содержать от 5 до 50 символов.
                             </div>
                         </div>
                     </md-input-container>
+
                     <md-input-container md-no-float>
                         <p class="md-subhead">Подробное описание:</p>
                                 <textarea minlength="10" md-maxlength="300" name="description"
                                           ng-model="newPost.description"
                                           placeholder="Опишите подробно характер объявления" required
                                           rows="5"></textarea>
-                        <div ng-messages="newPostForm.description.$error" role="alert">
+                        <div ng-messages="newPostForm.description.$error">
                             <div ng-message-exp="['required', 'minlength', 'md-maxlength']">
                                 Описание должно обязательно содержать от 10 до 300 символов.
                             </div>
                         </div>
                     </md-input-container>
+
                     <div>
                         <p class="md-subhead">Введите несколько ключевых слов:</p>
                         <md-chips name="hashTags" ng-model="postModel.hashTags" placeholder="Ключевые слова"
-                                  md-separator-keys="postModel.separatorKeys" md-max-chips="5">
+                                  md-separator-keys="postModel.separatorKeys" md-max-chips="5" required>
                         </md-chips>
-                        <div ng-messages="newPostForm.hashTags.$error" role="alert">
+                        <div class="errors" ng-messages="newPostForm.hashTags.$error">
                             <div ng-message="md-max-chips">Максимум 5 ключевых слов.</div>
                         </div>
                     </div>
+
                 </div>
-                <div flex="50" layout="column" layout-align="start start" id="photoDiv">
-                    <div id="postCreatePhoto">
+
+                <div flex="50" layout="column" class="margin-left-10">
+
+                    <div layout="row" flex layout-align="center center" id="photos-wrapper" class="centred-text">
+                        <p ng-if="!newPost.photos.length">С фотографиями объявление будет гораздо информативнее.</p>
+                        <div ng-if="newPost.photos.length" layout="row" flex layout-wrap layout-align="center center">
+                            <div ng-repeat="photo in newPost.photos">
+                                <md-button class="md-icon-button delete-photo-button" ng-click="deletePhoto($index)"
+                                           ng-if="postModel.deletePhotoButton" aria-label="delete image">
+                                    <md-icon md-svg-icon="icons/close_black_48px.svg"></md-icon>
+                                </md-button>
+                                <img ngf-src="photo" class="create-post-photos">
+                                <md-progress-linear class="padding-left-right-5"
+                                                    ng-if="photo.progress < 100"
+                                                    md-mode="determinate" value="{{photo.progress}}">
+                                </md-progress-linear>
+                            </div>
+                        </div>
                     </div>
-                    <div layout="row" layout-align="start center">
-                        <p class="md-subhead">Загрузите фотографии:</p>
-                        <md-button type="file" class="md-raised">Открыть...</md-button>
+
+                    <div layout="row" layout-align="center center">
+                        <p class="md-subhead">Добавить фотографии</p>
+                        <md-button class="md-icon-button remove-padding-margin" aria-label="add photo"
+                                   ngf-select="uploadFiles($newFiles)"
+                                   ng-model="newPost.photos"
+                                   ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="5MB"
+                                   ngf-multiple="true" ngf-keep="true" ngf-max-files="8">
+                            <md-icon md-svg-icon="icons/add_plus.svg"></md-icon>
+                        </md-button>
                     </div>
+
                 </div>
+
             </div>
+
             <div layout="row" layout-align="start center">
                 <md-icon md-svg-src="icons/location_marker.svg"></md-icon>
-                <p class="md-subhead paddingTopBottom">Отметьте на карте расположение:</p>
+                <p class="md-subhead padding-top-bottom-10">Отметьте на карте расположение:</p>
             </div>
-            <google-map location-button search-box drawing-function id="postCreateMap" post="newPost"></google-map>
-            <div layout="row" class="paddingTopBottom">
-                <div layout="column" flex="50">
-                    <p class="md-subhead paddingTop">Контакты для связи:</p>
+
+            <google-map location-button search-box drawing-function post="newPost" flex="45"></google-map>
+
+            <div layout="row" class="padding-top-bottom-10">
+
+                <div layout="column" flex="50" class="padding-top-bottom-10">
+
+                    <p class="md-subhead">Контакты для связи:</p>
                     <div ng-repeat="contact in newPost.contacts" layout="column">
                         <ng-form name="contactsForm" layout="row" layout-align="start start">
                             <md-input-container md-no-float>
                                 <md-icon md-svg-src="icons/phone.svg"></md-icon>
                                 <input name="phone" ng-model="contact.value" placeholder="Номер телефона"
                                        ng-pattern="postModel.phoneRegExp" required>
-                                <div ng-messages="contactsForm.phone.$error" role="alert">
+                                <div ng-messages="contactsForm.phone.$error">
                                     <div ng-message-exp="['required', 'pattern']">
                                         Введите номер в формате (12) 345-67-89
                                     </div>
@@ -81,38 +120,49 @@
                             </md-button>
                         </ng-form>
                     </div>
+
                     <div layout="row" layout-align="start center">
                         <md-button ng-click="addContact()" ng-disabled="postModel.disableAddContact"
-                                   class="md-fab md-mini md-primary" aria-label="add contact">
+                                   class="md-icon-button remove-padding-margin" aria-label="add contact">
                             <md-icon md-svg-src="icons/add_plus.svg"></md-icon>
                         </md-button>
                         <p ng-hide="postModel.disableAddContact">Ещё один номер</p>
                         <p ng-show="postModel.disableAddContact">Максимум 3 номера</p>
                     </div>
+
                 </div>
-                <div layout="column" flex="50" class="paddingTopBottom">
+
+                <div layout="column" flex="50" class="padding-top-bottom-10">
+
                     <p class="md-subhead">Срок подачи объявления:</p>
                     <md-input-container md-no-float>
                         <input name="lifetime" ng-model="newPost.lifetime" placeholder="количество дней"
                                type="number" max="31" min="1" required>
-                        <div ng-messages="newPostForm.lifetime.$error" role="alert">
+                        <div ng-messages="newPostForm.lifetime.$error">
                             <div ng-message-exp="['required', 'max', 'min', 'pattern']">Срок подачи объявления от 1
                                 до 31 дня.
                             </div>
                         </div>
                     </md-input-container>
+
                     <md-checkbox ng-model="postModel.rulesConfirm" class="md-primary">
-                        Согласен с <a href="#/" class="underlineText">правилами</a> размещения.
+                        Согласен с <a href="#/" class="underline-text">правилами</a> размещения.
                     </md-checkbox>
+
                     <div layout="row" layout-align="start center">
-                        <md-button id="publicButton" class="md-primary md-raised" ng-click="savePost()"
+                        <md-button id="public-post-button" class="md-primary md-raised" ng-click="savePost()"
                                    ng-disabled="newPostForm.$invalid || contactsForm.$invalid || postModel.areaMarker
                                    || (postModel.hashTags.length == 0) || !newPost.postType || !postModel.rulesConfirm">
                             Опубликовать
                         </md-button>
                     </div>
+
                 </div>
+
             </div>
+
         </form>
+
     </div>
+
 </md-content>

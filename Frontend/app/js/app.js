@@ -8,7 +8,7 @@ var app = angular.module('lostfinder',
         'ngMessages',
         'lostfinder.services',
         'satellizer',
-        'blockUI'
+        'ngFileUpload'
     ]);
 
 var services = angular.module('lostfinder.services', []);
