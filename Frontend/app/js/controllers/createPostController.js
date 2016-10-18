@@ -26,7 +26,6 @@ app.controller('createPostController', ['$scope', 'dictionaryService', '$locatio
             disableAddContact : false,
             disableDeleteContact : false,
             areaMarker: false,
-            deletePhotoButton: true,
             separatorKeys : [keys.ENTER, keys.SPACE, keys.COMMA, keys.PERIOD],
             phoneRegExp : '^[(]?[0-9]{2}[)]?[0-9]{3}([-]?[0-9]{2}){2}$',
             errorPhotos: [],
@@ -72,22 +71,32 @@ app.controller('createPostController', ['$scope', 'dictionaryService', '$locatio
             $scope.newPost.photos.splice(index, 1);
         };
 
+        $scope.showDeleteButton = function(){
+            this.showButton = true;
+        };
+
+        $scope.hideDeleteButton = function(){
+            this.showButton = false;
+        };
+
         $scope.uploadFiles = function(photos) {
-            photos.forEach(function(file) {
-                file.upload = Upload.upload({
-                    url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                    data: {file: file}
+            photos.forEach(function(photo) {
+                photo.upload = Upload.upload({
+                    url: serverUrl + uri.imagesUpload,
+                    file: {file: photo},
+                    method: 'POST',
+                    enctype: "multipart/form-data"
                 });
 
-                file.upload.then(function (response) {
+                photo.upload.then(function (response) {
                     $timeout(function () {
-                        file.result = response.data;
+                        photo.result = response.data;
                     });
                 }, function (response) {
                     if (response.status > 0)
                         $scope.postModel.errorMsg = response.status + ': ' + response.data;
                 }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 *
+                    photo.progress = Math.min(100, parseInt(100.0 *
                         evt.loaded / evt.total));
                 });
             });

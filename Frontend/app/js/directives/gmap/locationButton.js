@@ -8,7 +8,7 @@ app.directive('locationButton', [function () {
         link: function ($scope, element, attr, ctrl) {
 
             var locationButton = document.createElement('div');
-            locationButton.id = 'locationButton';
+            locationButton.id = 'location-button';
             locationButton.title = 'Определить местоположение';
             locationButton.addEventListener('click', function () {
                 if (navigator.geolocation) {

@@ -10,7 +10,7 @@ app.directive('searchBox', [ function(){
 
             var input = document.createElement('input');
             input.type = 'text';
-            input.id = 'searchBox';
+            input.id = 'search-box';
             input.placeholder = 'Введите адрес';
             var searchBox = new google.maps.places.SearchBox(input);
 

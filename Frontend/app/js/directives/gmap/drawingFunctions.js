@@ -121,7 +121,7 @@ app.directive('drawingFunction', [function () {
             });
 
             var deleteMarkersButton = document.createElement('div');
-            deleteMarkersButton.id = 'deleteMarkersButton';
+            deleteMarkersButton.id = 'delete-markers-button';
             deleteMarkersButton.innerHTML = 'Очистить карту';
             deleteMarkersButton.addEventListener('click', function () {
                 if (allMarkers.length) {

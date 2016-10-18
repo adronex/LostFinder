@@ -10,8 +10,6 @@
     "angular-animate": "~1.5.5",
     "angular-material": "^1.0.9",
     "satellizer": "~0.15.4",
-    "blockUI": "*",
-    "angular-block-ui": "^0.2.2",
     "ng-file-upload": "^12.0.4"
   },
   "resolutions": {

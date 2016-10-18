@@ -1,7 +1,7 @@
-<md-content id="create-post-page" layout="row" md-whiteframe="1" ng-cloak>
+<md-content class="border-radius-2" layout="row" md-whiteframe="1" ng-cloak>
     <div layout="column" flex>
 
-        <div layout="row" layout-align="start center" class="md-padding" id="create-post-header">
+        <div layout="row" layout-align="start center" class="md-padding border-bottom-1">
             <h5 class="md-title uppercase-first-letter" flex>Новое объявление</h5>
         </div>
 
@@ -33,10 +33,9 @@
 
                     <md-input-container md-no-float>
                         <p class="md-subhead">Подробное описание:</p>
-                                <textarea minlength="10" md-maxlength="300" name="description"
-                                          ng-model="newPost.description"
-                                          placeholder="Опишите подробно характер объявления" required
-                                          rows="5"></textarea>
+                                <textarea minlength="10" md-maxlength="300" name="description" ng-model="newPost.description"
+                                          placeholder="Опишите подробно характер объявления" required rows="1" class="text-area-limit-height">
+                                </textarea>
                         <div ng-messages="newPostForm.description.$error">
                             <div ng-message-exp="['required', 'minlength', 'md-maxlength']">
                                 Описание должно обязательно содержать от 10 до 300 символов.
@@ -58,26 +57,29 @@
 
                 <div flex="50" layout="column" class="margin-left-10">
 
-                    <div layout="row" flex layout-align="center center" id="photos-wrapper" class="centred-text">
+                    <div layout="row" flex layout-align="center center" id="photos-block" class="centred-text">
+
                         <p ng-if="!newPost.photos.length">С фотографиями объявление будет гораздо информативнее.</p>
+
                         <div ng-if="newPost.photos.length" layout="row" flex layout-wrap layout-align="center center">
-                            <div ng-repeat="photo in newPost.photos">
-                                <md-button class="md-icon-button delete-photo-button" ng-click="deletePhoto($index)"
-                                           ng-if="postModel.deletePhotoButton" aria-label="delete image">
+                            <div ng-repeat="photo in newPost.photos" class="photo-container"
+                                 ng-mouseover="showDeleteButton()" ng-mouseleave="hideDeleteButton()">
+                                <img ngf-src="photo" class="create-post-photos">
+                                <md-button class="md-icon-button delete-photo-button"
+                                           ng-click="deletePhoto($index)" ng-if="showButton" aria-label="delete image">
                                     <md-icon md-svg-icon="icons/close_black_48px.svg"></md-icon>
                                 </md-button>
-                                <img ngf-src="photo" class="create-post-photos">
-                                <md-progress-linear class="padding-left-right-5"
-                                                    ng-if="photo.progress < 100"
+                                <md-progress-linear class="padding-left-right-5" ng-if="photo.progress < 100"
                                                     md-mode="determinate" value="{{photo.progress}}">
                                 </md-progress-linear>
                             </div>
                         </div>
+
                     </div>
 
                     <div layout="row" layout-align="center center">
                         <p class="md-subhead">Добавить фотографии</p>
-                        <md-button class="md-icon-button remove-padding-margin" aria-label="add photo"
+                        <md-button class="md-icon-button " aria-label="add photo"
                                    ngf-select="uploadFiles($newFiles)"
                                    ng-model="newPost.photos"
                                    ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="5MB"

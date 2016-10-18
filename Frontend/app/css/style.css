@@ -125,14 +125,16 @@ google-map {
 }
 
 #location-button {
-    background: url("../icons/location_icon.svg") no-repeat center / contain;
+    background: url("../icons/location_icon.svg") white no-repeat center / contain;
     width: 27px;
     height: 27px;
-    margin: 10px;
+    margin-right: 10px;
     padding: 0;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
-#location-button, #delete-markers-button {
+#delete-markers-button {
     margin: 10px 5px 5px 0;
     padding: 5px;
     background-color: white;
@@ -171,18 +173,12 @@ google-map {
 #post-view-description {
     background: #F2FCE2;
     border-left: 1px solid #E0E0E0;
-
 }
 
 #post-view-map-detail {
     background: #F2FCE2;
     border-top: 1px solid #E0E0E0;
     min-height: 120px;
-}
-
-#post-view {
-    height: 100%;
-    border-radius: 2px;
 }
 
 #post-view-photos {
@@ -202,34 +198,29 @@ google-map {
 
 /*post create*/
 
-#create-post-page {
-    border-radius: 2px;
-}
-
-#create-post-header {
-    border-bottom: 1px solid #E0E0E0;
-}
-
-#create-post-page md-input-container {
+#public-post-button, md-input-container {
     margin: 0 !important;
 }
 
-#photos-wrapper {
+.text-area-limit-height {
+    max-height: 150px;
+}
+
+#photos-block {
     border: 1px solid #E0E0E0;
     border-radius: 2px;
     padding: 5px 0 5px 0;
     background-color: rgba(152, 152, 152, 0.12);
 }
 
-.delete-photo-button {
-    top: 10px;
-    left: 10px;
-    position: absolute;
-    z-index: 9999;
+.photo-container {
+    position: relative !important;
 }
 
-#public-post-button {
-    margin: 0 !important;
+.delete-photo-button {
+    top: 0;
+    left: 0;
+    position: absolute !important;
 }
 
 .create-post-photos {
@@ -247,9 +238,13 @@ google-map {
 
 /*Other*/
 
-.remove-padding-margin {
-    padding: 0 !important;
+.remove-margin-padding {
     margin: 0 !important;
+    padding: 0 !important;
+}
+
+.remove-padding {
+    padding: 0 !important;
 }
 
 .md-select-fix {

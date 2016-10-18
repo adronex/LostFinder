@@ -1,7 +1,7 @@
 {
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "name": "poshukay.by",
+  "name": "pashukay.by",
   "devDependencies": {
     "bower": "^1.3.1"
   },
