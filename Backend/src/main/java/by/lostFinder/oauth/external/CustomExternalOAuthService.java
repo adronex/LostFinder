@@ -7,6 +7,7 @@ import by.lostFinder.repositories.account.AccountRepository;
 import by.lostFinder.utils.HttpUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +21,8 @@ public class CustomExternalOAuthService {
 
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public ExternalOAuthDto facebookProcess(String code, String redirectUri, String clientId) {
         OAuthUserInfo info = new FacebookOAuthHolder(code, redirectUri, clientId).getInfo();
@@ -29,12 +32,12 @@ public class CustomExternalOAuthService {
         if (account == null) {
             account = new Account(info.getEmail(), details, info.getId());
         }
-        account.setPassword(info.getToken());
+        account.setPassword(passwordEncoder.encode(info.getToken()));
         accountRepository.save(account);
 
         String serverUrl = HttpUtils.getServerUrl() + "/api/login";
         JSONObject nativeResponse = new JSONObject
-                (HttpUtils.sendPostRequest(serverUrl, getFacebookOAuthRequestBody(account.getUsername(),
+                (HttpUtils.sendPostRequest(serverUrl, getOAuthRequestBody(account.getUsername(),
                         info.getToken()), true));
         String nativeOauthToken = nativeResponse.getString("access_token");
         return new ExternalOAuthDto(nativeOauthToken);
@@ -47,22 +50,18 @@ public class CustomExternalOAuthService {
         if (account == null) {
             account = new Account(info.getEmail(), details, info.getId());
         }
-        account.setPassword(info.getToken());
+        account.setPassword(passwordEncoder.encode(info.getToken()));
         accountRepository.save(account);
 
         String serverUrl = HttpUtils.getServerUrl() + "/api/login";
         JSONObject nativeResponse = new JSONObject
-                (HttpUtils.sendPostRequest(serverUrl, getGoogleOAuthRequestBody(account.getUsername(),
+                (HttpUtils.sendPostRequest(serverUrl, getOAuthRequestBody(account.getUsername(),
                         info.getToken()), true));
         String nativeOauthToken = nativeResponse.getString("access_token");
         return new ExternalOAuthDto(nativeOauthToken);
     }
 
-    private String getFacebookOAuthRequestBody(String login, String password) {
-        return "grant_type=password&username=" + login + "&password=" + password;
-    }
-
-    private String getGoogleOAuthRequestBody(String login, String password) {
+    private String getOAuthRequestBody(String login, String password) {
         return "grant_type=password&username=" + login + "&password=" + password;
     }
 }
