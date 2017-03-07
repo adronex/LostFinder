@@ -2,7 +2,6 @@ package by.lostFinder.oauth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -12,8 +11,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-
-@SpringBootApplication
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2AuthorizationServerConfiguration extends
@@ -25,15 +22,14 @@ public class OAuth2AuthorizationServerConfiguration extends
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    @Qualifier("authenticationManagerBean")
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManagerBean;
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
         endpoints
                 .tokenStore(tokenStore)
-                .authenticationManager(authenticationManager)
+                .authenticationManager(authenticationManagerBean)
                 .userDetailsService(userDetailsService)
                 .pathMapping("/oauth/token", "/api/login");
     }

@@ -4,10 +4,7 @@ import by.lostFinder.dto.ExternalOAuthDto;
 import by.lostFinder.dto.ExternalResponseDto;
 import by.lostFinder.oauth.external.CustomExternalOAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Default class description.
@@ -22,12 +19,12 @@ public class OAuthProcessController {
     @Autowired
     private CustomExternalOAuthService service;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/facebook")
+    @PostMapping(value = "/facebook")
     public ExternalOAuthDto getFacebookAccessToken(@RequestBody ExternalResponseDto dto) {
         return service.facebookProcess(dto.getCode(), dto.getRedirectUri(), dto.getClientId());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/google")
+    @PostMapping(value = "/google")
     public ExternalOAuthDto getGoogleAccessToken(@RequestBody ExternalResponseDto dto) {
         return service.googleProcess(dto.getCode(), dto.getRedirectUri(), dto.getClientId());
     }

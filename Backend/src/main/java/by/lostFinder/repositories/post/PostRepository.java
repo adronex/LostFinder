@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public interface PostRepository extends SimpleRepository<Post> {
 
     Page<Post> findByTitleOrDescriptionContainingIgnoreCase(String title, String description, Pageable pageable);

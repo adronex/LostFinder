@@ -26,11 +26,4 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/index.html");
     }
-
-    @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver multipartResolver(){
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSizePerFile(5242880); //5MB
-        return multipartResolver;
-    }
 }

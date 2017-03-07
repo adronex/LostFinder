@@ -19,18 +19,18 @@ public class PostController extends GenericController<PostService> {
         super(service);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    protected void save(@RequestBody @Valid PostDto dto) {
+    @PutMapping
+    public void save(@RequestBody @Valid PostDto dto) {
         service.save(dto);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private Post getById(@PathVariable("id") String id){
+    @GetMapping(value = "/{id}")
+    public Post getById(@PathVariable("id") String id){
         return service.getById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    protected Page<Post> getSearchResult(@RequestBody @Valid BaseFilterDto dto) {
+    @GetMapping
+    public Page<Post> getSearchResult(@Valid BaseFilterDto dto) {
         return service.getAll(dto.getPageableObject());
     }
 

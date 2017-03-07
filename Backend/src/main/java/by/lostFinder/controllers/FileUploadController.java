@@ -9,7 +9,7 @@ import java.io.IOException;
 @RequestMapping("/api/posts/images")
 public class FileUploadController {
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @PostMapping(value = "/upload")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody String upload(@RequestParam("file") MultipartFile file) throws IOException {
 
