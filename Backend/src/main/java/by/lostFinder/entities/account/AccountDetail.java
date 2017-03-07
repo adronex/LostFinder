@@ -9,17 +9,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "account_detail")
 public class AccountDetail extends IdEntity {
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "accountDetail")
+    @OneToOne(mappedBy = "details")
     private Account account;
 
     public AccountDetail(){}

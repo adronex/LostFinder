@@ -3,8 +3,10 @@ package by.lostFinder.dto.post;
 import by.lostFinder.entities.post.Post;
 import by.lostFinder.entities.post.PostType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostDto {
@@ -19,12 +21,12 @@ public class PostDto {
     private String title;
     @NotNull
     private LocationAreaDto locationArea;
-    @NotNull
-    private List<LocationDto> locations;
-    @NotNull
-    private List<HashTagDto> hashTags;
-    @NotNull
-    private List<ContactDto> contacts;
+    @NotEmpty
+    private List<LocationDto> locations = new ArrayList<>();
+    @NotEmpty
+    private List<HashTagDto> hashTags = new ArrayList<>();
+    @NotEmpty
+    private List<ContactDto> contacts = new ArrayList<>();
 
     @JsonIgnore
     public Post getNewEntity(){

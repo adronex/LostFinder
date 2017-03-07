@@ -12,7 +12,6 @@ public class HashTag extends IdEntity {
     protected String name;
 
     public HashTag(){
-
     }
 
     public HashTag(String name) {

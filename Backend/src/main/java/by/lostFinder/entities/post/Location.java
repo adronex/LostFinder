@@ -12,7 +12,6 @@ public class Location extends LocationEntity {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "post_id")
     private Post post;
 
     public Location() {

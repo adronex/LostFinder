@@ -34,7 +34,6 @@ public class Post extends IdEntity {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "account_id")
     private Account account;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "post")

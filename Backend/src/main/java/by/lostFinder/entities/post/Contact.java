@@ -15,7 +15,6 @@ public class Contact extends IdEntity {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
     private Post post;
 
     public Contact(){}

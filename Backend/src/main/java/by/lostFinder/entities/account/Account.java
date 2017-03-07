@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,18 +15,15 @@ import java.util.List;
 @Table(name = "account")
 public class Account extends IdEntity implements UserDetails {
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
-    private List<Post> posts;
+    private List<Post> posts = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "details_id")
-    private AccountDetail accountDetail;
+    private AccountDetail details;
 
     private String oauthId;
 
@@ -36,7 +34,7 @@ public class Account extends IdEntity implements UserDetails {
     Account(String email, AccountDetail detail, String oauthId) {
         this.oauthId = oauthId;
         this.email = email;
-        this.accountDetail = detail;
+        this.details = detail;
     }
 
     public void setPassword(String password) {
@@ -59,12 +57,12 @@ public class Account extends IdEntity implements UserDetails {
         this.posts = posts;
     }
 
-    public AccountDetail getAccountDetail() {
-        return accountDetail;
+    public AccountDetail getDetails() {
+        return details;
     }
 
-    public void setAccountDetail(AccountDetail accountDetail) {
-        this.accountDetail = accountDetail;
+    public void setDetails(AccountDetail details) {
+        this.details = details;
     }
 
     public String getOauthId() {
